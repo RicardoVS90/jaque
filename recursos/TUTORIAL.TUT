@@ -1,0 +1,1712 @@
+//Tutorial file
+
+TITLE "CHESS MOVES"
+
+BEGIN SUB-MODULE - "Review All Levels"
+
+BEGIN NAMES
+"Introduction"
+"Level 1:  The Basics"
+"Level 2:  Kings and Pawns"
+"Level 3:  Queens and Rooks"
+"Level 4:  Minor Piece Endings"L
+"Level 5:  Mating Configurations"
+"Level 6:  Basic Combinations"
+"Level 7:  Roots of Combinations"
+"Level 8:  Double Attacks"
+"Level 9:  Sacrifices"
+"Level 10: Strategy"
+END NAMES
+
+//===================================================================
+//First chapter:  Introduction
+//===================================================================
+BEGIN CHAPTER 0
+
+NOTATION ALGEBRAIC
+
+BOARD 64 WHITE
+"This tutorial takes you from simple positions to more complex strategic 
+situations in 10 levels."
+OK
+
+"At each level, you demonstrate mastery of the concepts by answering a 
+challenge question, where you make the move you think is the correct answer."
+OK
+
+"There are more than 200 positions in all.  Use this building-block method 
+at your own pace.  As a beginner, you can learn basics.  As you advance, 
+you can learn multi-move combinations."
+OK
+
+"You can also use Chess Tutor as a 'refresher course' over time, since 
+the positions are interesting as well as instructional."
+OK
+
+"When the 'Move' button is active, you can view a sequence of moves.  
+Click the Move button to see the next move.  After you view all moves 
+in the sequence, the Move button is inactive (ghosted)."
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+MOVELIST "e4 e5 Nf3 Nc6 Bb5"
+"Try clicking the Move button a few times and watch the first moves of the 
+Ruy Lopez opening."
+OK
+
+END CHAPTER
+
+//===================================================================
+//Second chapter:  Level 1:  The Basics
+//===================================================================
+BEGIN CHAPTER 1
+
+BOARD 64 WHITE 
+//"The Basics"
+//OK
+
+"What is checkmate?  What is stalemate?  What is zugzwang?"
+OK
+
+BOARD R3k3/8/4K3/40 BLACK
+"Start with this most basic checkmate."
+OK
+
+BOARD R3k3/8/4K3/32/1rr5 BLACK
+MOVELIST "Rb8 Rxb8 Rc8 Rxc8"
+"The Rooks can only delay checkmate two more moves with Rb8 and Rc8."
+OK
+
+BOARD R5k1/5ppp/8/b7/b7/8/6K1/1rr5 BLACK
+MOVELIST "Rb8 Rxb8 Rc8 Rxc8 Bd8 Rxd8 Be8 Rxe8"
+"The Rooks and Bishops can only delay checkmate four more moves."
+OK
+
+BOARD 5k2/8/4K3/32/R7 WHITE
+"Challenge #1:  What single move can White make to force mate on the 
+following move?  (Mate in 2)."
+CHALLENGE Rg1 "That's right!"
+OK
+
+"The correct move is 1. Rg1 Ke8   2. Rg8++"
+MOVELIST "Ke8 Rg8"
+OK
+
+BOARD 5K1k/6Pp/48 BLACK
+"A Pawn mate."
+OK
+
+BOARD 5K1k/5N1p/48 BLACK
+"A Knight mate."
+OK
+
+BOARD 5K1k/7p/40/2B3R1 WHITE
+"Either Bishop or Rook can mate:  1. Bb2++ or  1. Rg8++"
+OK
+
+BOARD R3K2k/7p/48 WHITE
+CHALLENGE Kf7 "That is correct!"
+"Challenge #2:  How does White mate?"
+MOVELIST "Kf7"
+OK
+
+BOARD 4k3/R7/3K4/40 WHITE
+"A mate often depends on forcing the opponent to make a move."
+OK
+
+MOVELIST "Rb7 Kf8 Ke6 Kg8 Kf6 Kh8 Kg6 Kg8 Rb8" 
+"Sometimes you simply wait:  1. Rb7! Kf8   2. Ke6 Kg8  The Black King can no 
+longer run away.  3. Kf6 Kh8   4. Kg6 Kg8   5. Rb8++"
+OK
+
+BOARD 8/4k3/R7/3K4/32 WHITE
+"The same procedure lets White push the opponent back another rank.  
+1. Rb6! Kf7   2. Ke5, etc."
+MOVELIST "Rb6 Kf7 Ke5"
+OK
+
+BOARD 6k1/R7/40/7K WHITE
+"Challenge #3:  What is the fastest mate for White?"
+CHALLENGE Kg2 "That's right!"
+OK
+
+MOVELIST "Kf8 Kf3 Ke8 Ke4 Kd8 Kd5 Kc8 Kc6 Kb8 Re7 Ka8 Kb6 Kb8 Re8" 
+"The correct sequence is to advance the King on the diagonal, since Black's 
+best defense is to move toward b8."
+OK
+
+BOARD 3k4/R7/2K5/40 WHITE
+MOVELIST "Rh7 Ke8 Rb7 Kd8 Ra7"
+"Now, by losing a move, White can bring about the basic mating sequence in 
+the previous positions.  1. Rh7 Ke8  2. Rb7 Kd8  3. Ra7."
+OK
+
+BOARD 24/4N3/8/7p/8/5K1k WHITE
+MOVELIST "Ng4 h2 Nf2"
+"Being forced to move when you would rather not is called 'zugzwang.'  
+Here, White forces Black to move a Pawn when Black would be safe without 
+moving.  1. Ng4 h2   2. Nf2++"
+OK
+
+BOARD 24/5N2/8/7p/5K2/7k WHITE
+MOVELIST "Ng3+ Kh2 Nf1+ Kh1"
+"If White could 'wait' it could mate.  But after:  1. Ng3+ Kh2   2. Nf1+ Kh1, 
+White has no 'waiting' move and Black draws."
+OK
+
+BOARD 4k3/4P3/4K3/40 WHITE
+MOVELIST "Kf6 Kd7"
+"If it's Black's move, it's stalemate.  If White moves, 1. Kf6(d6)   Kd7(f7), 
+Black loses."
+OK
+
+END CHAPTER
+
+BOARD 64 WHITE
+
+//===================================================================
+//Third chapter:  Level 2:  Kings and Pawns
+//===================================================================
+
+BEGIN CHAPTER 2
+
+BOARD 64 WHITE
+"What is 'the opposition?'  What are 'Pawn advantages?'  What is 'the square?'"
+OK
+
+BOARD 4k3/16/4PK2/32 WHITE
+"In Pawn endings, move the King in front of the passed pawn." 
+OK
+
+MOVELIST "Ke6 Kd8 Kf7"
+"1. Ke6!  Kd8(f8)   2. Kf7(d7) and the Pawn has a paved road to a Queen."
+OK
+
+BOARD 4k3/8/4P3/5K2/32 WHITE
+MOVELIST "Kf6 Kf8 e7 Ke8"
+"No matter who moves first, it's a draw.  If it is White's move:  1. Kf6  
+Kf8   2. e7+ Ke8  Draw as shown already.  Black to move would play 
+1. ... Ke7.  White must either stalemate the King or lose the Pawn."
+OK
+
+BOARD 24/2K1p3/4P1k1/24 WHITE
+"White must choose between d6 and d5 to attack the enemy Pawn." 
+OK
+
+MOVELIST "Kd6 Kf4 Kd5"
+"1. Kd6! Kf4   2. Kd5 and Black must leave its Pawn."
+OK
+
+BOARD 16/3k4/1p3p2/1P3P2/3K4/16 WHITE
+"The 'opposition' means being in a position to make the other King 'step 
+aside.'  1. Kd4! Kc6(e6)   2. Ke5(c5), winning a Pawn."
+OK
+
+BOARD 8/p7/1p5k/1P6/4K3/24 WHITE
+"Challenge #4:  How does White win?"
+CHALLENGE Kd5 "That is correct!"
+OK
+
+"The right idea is to advance to b7 and win the two Black Pawns."
+OK
+
+BOARD 8/p7/1p2k3/1P6/4KP2/24 WHITE
+MOVELIST "f5+ Kf6 Kd5"
+"If the White King's path is blocked, an 'outside' passed Pawn (f4) can open 
+it:  1. f5+ Kf6   2. Kd5 and White wins."
+OK
+
+BOARD 8/p7/1p2k3/1P4p1/4K3/5PP1/16 WHITE
+MOVELIST "f4 gxf4 gxf4"
+"Unlike the 'backward' Pawn at a7, White's f3 Pawn can move.  So you can 
+arrive at the preceding position:  1. f4! gxf4   2. gxf4"
+OK
+
+BOARD 8/p7/1p2k3/1P6/4KPp1/6P1/16 WHITE
+"White gets a 'protected passed Pawn' if Black played 1. ... g4 in the 
+previous position.  If Black plays ... Kxg3, then White can play f5 and go on 
+to Queen."
+OK
+
+BOARD 8/p7/1p6/1Pk5/4KPp1/6P1/16 BLACK
+MOVELIST "Kxb5 f5 Kc6"
+"The White Pawn at b5 is 'isolated' and can be won if not protected by the 
+White King.  If:  1. ... Kxb5   2. f5 Kc6! stops the White Pawn."
+OK
+
+BOARD 8/p7/1p6/2k2P2/4K1p1/6P1/16 WHITE
+"But if Black had played 2. ... Kc5?, Black can stop the Pawn only if the 
+Pawn advances alone."
+OK
+
+MOVELIST "f6 Kd6 f7 Ke7"
+"The White Pawn is lost."
+OK
+
+BOARD 8/p7/1p1k1P2/8/4K1p1/6P1/16 WHITE
+MOVELIST "Kf5 Kd7 Kg6"
+"The White King now supports the Pawn to the Queening square with:  
+4. Kf5! Kd7   5.Kg6."
+OK
+
+BOARD 2PPPP2/p1PPPP2/1pPPPP2/1kPPPP2/6p1/6P1/8/6K1 WHITE
+GHOST WHITE PAWN c5
+GHOST WHITE PAWN c6
+GHOST WHITE PAWN c7
+GHOST WHITE PAWN c8
+GHOST WHITE PAWN d5
+GHOST WHITE PAWN d6
+GHOST WHITE PAWN d7
+GHOST WHITE PAWN d8
+GHOST WHITE PAWN e5
+GHOST WHITE PAWN e6
+GHOST WHITE PAWN e7
+GHOST WHITE PAWN e8
+GHOST WHITE PAWN f6
+GHOST WHITE PAWN f7
+GHOST WHITE PAWN f8
+"The square formed by the diagonal c5-f8 is the area the Black King must get 
+into to stop the Pawn at f5."
+OK
+
+BOARD 2PPPP2/p1PPPP2/1pPPPP2/1kPPPP2/4K1p1/6P1/16 BLACK
+GHOST WHITE PAWN c5
+GHOST WHITE PAWN c6
+GHOST WHITE PAWN c7
+GHOST WHITE PAWN c8
+GHOST WHITE PAWN d5
+GHOST WHITE PAWN d6
+GHOST WHITE PAWN d7
+GHOST WHITE PAWN d8
+GHOST WHITE PAWN e5
+GHOST WHITE PAWN e6
+GHOST WHITE PAWN e7
+GHOST WHITE PAWN e8
+GHOST WHITE PAWN f6
+GHOST WHITE PAWN f7
+GHOST WHITE PAWN f8
+"Sometimes just 'getting into the square' is not good enough.  In this 
+position, because of the White King:  1. ... Kc6! is the right way; 
+1. ... Kc5? is wrong."
+OK
+
+BOARD 8/p7/1p6/1k3P2/4K1p1/6P1/16 BLACK
+MOVELIST "Kc6 f6 Kd7 Kf5 Ke8"
+"If 1. ... Kc6  2. f6 Kd7!  3. Kf5 Ke8, the Black King gains the square f8."
+OK
+
+BOARD 16/4k3/p7/1p2KPp1/1P4P1/16 WHITE
+MOVELIST "f5 Kf6 Kf4 a4 bxa4 b3 Ke4"
+"Here White must watch the 'square' formed by the diagonal b1-d3.  If 
+1. f5+ Kf6   2. Kf4? a4!   3. bxa4 b3, then Black can Queen."
+OK
+
+BOARD 16/4k3/p7/1p2KPp1/1P4P1/16 BLACK
+MOVELIST "a4 bxa4 b3 Kd3"
+"If it's Black's move:  1. ... a4   2. bxa4 b3   3. Kd3 and White wins the 
+Pawn."
+OK
+
+BOARD 24/p4k2/1p3Pp1/1P4P1/K7/8 WHITE
+"Can you identify the following?  1. Two isolated Pawns.  2. A protected 
+passed Pawn.  3. A backward Pawn."
+OK
+
+GHOST WHITE PAWN b3
+GHOST BLACK PAWN g4
+"The 'isolated' Pawns are b3 and g4."
+OK
+
+NOGHOST b3
+NOGHOST g4
+GHOST WHITE PAWN f4
+"The 'protected passed Pawn' is f4."
+OK
+
+NOGHOST f4
+GHOST BLACK PAWN a5
+"The 'backward Pawn' is a5."
+OK
+
+END CHAPTER   
+BOARD 64 WHITE
+
+//===================================================================
+//Fourth chapter:  Level 3:  Queens and Rooks
+//===================================================================
+
+BEGIN CHAPTER 3
+
+"When both sides Queen, Special King Positions, How the Rook attacks and 
+defends."
+OK
+
+BOARD 24/p4k2/1p3Pp1/1P4P1/K7/8 BLACK
+MOVELIST "Ke4 Kb2 Kf3 f5 Kg3 f6 Kh2 f7 g3 f8Q g2"
+"Black's only chance is to attack the g3 Pawn:  1. ... Ke4   2. Kb2 Kf3   
+3. f5 Kxg3   4. f6 Kh2   5. f7 g3   6. f8(Q) g2  Can White stop the Pawn?"
+OK
+
+BOARD 5Q2/16/p7/1p6/1P6/1K4pk/8 WHITE
+MOVELIST "Qf2 Kh1 Qh4 Kg1 Kc2"
+"1. Qf2! Kh1   2. Qh4+ Kg1   3. Kc2.  White systematically drives the King 
+in front of the Pawn and the White King keeps moving closer."
+OK
+
+BOARD 4Q3/40/K4pk1/8 WHITE
+MOVELIST "Qe2 Kh1 Qxf2"
+"But what if it's a Black Pawn on the f (or c) file?  Black has a 'stalemate' 
+defense:  1. Qe2 Kh1!   2. Qxf2 stalemate."
+OK
+
+BOARD 48/K3Qp2/7k WHITE
+MOVELIST "Kb2 Kg1 Qg4 Kh1 Qh3 Kg1 Qg3 Kh1"
+"What if the White King tries to approach?  2. Kb2 Kg1  Of course, this was 
+possible on the first move, too.  3. Qg4+ Kh1   4. Qh3+ Kg1   5. Qg3+ Kh1  
+Black avoids Kf1 and White can make no progress."
+OK 
+
+BOARD 8/7p/8/2K5/8/5k2/P7/8 BLACK
+MOVELIST "h5 a4 h4 a5 h3 a6 h2 a7 h1Q a8Q+ Kf4 Qxh1"
+"Even if Black moves first and queens first, White queens with check, 
+'skewering' the King and Queen.  1. ... h5   2. a4 h4   3. a5 h3 4. a6 h2   
+5. a7 h1(Q)   6. a8(Q)+ and   7. Qxh1."
+OK 
+
+BOARD K7/7p/24/5k2/1P6/8 WHITE
+MOVELIST "b4 h5 b5 h4 b6 h3 b7 h2 b8Q h1Q Qb7+ Kf4 Qxh1" 
+"White to move doesn't queen with check, but has a similar 'skewer' to 
+follow.  1. b4 h5   2. b5 h4   3. b6 h3   4. b7 h2   5. b8(Q) h1(Q)   
+6. Qb7+ and 7. Qxh1."
+OK
+
+BOARD 8/7p/8/4K1k1/16/1P6/8 WHITE
+MOVELIST "b4 h5 b5 h4 b6 h3 b7 h2 b8Q h1Q Qg8+ Kh4 Qh8+ Kg4 Qxh1"
+"Sometimes it takes another check to set up the skewer.  1. b4 h5   
+2. b5 h4   3. b6 h3   4. b7 h2   5. b8(Q) h1(Q)   6. Qg8+ Kh4 7Qh7(8)+ and 
+8. Qxh1."
+OK
+
+BOARD 24/5K2/16/Q1p5/3k4 WHITE
+MOVELIST "Ke4 c1Q Kd3 Qf4 Qc2 Ke1 Qe2" 
+"In a few cases, the Black Pawn cannot be captured before queening, yet is 
+thereafter defenseless to protect against mate:   1. Ke4! c1(Q)  
+2. Kd3 Qf4   3. Qc2+ Ke1   4. Qe2++"
+OK
+
+BOARD K7/2P5/8/2k5/16/2p5/8 BLACK
+"Challenge #5:  How does Black draw?"
+CHALLENGE Kb4 "That's right!"
+OK
+
+MOVELIST "c8Q Kb3"
+"1. ... Kb4.  Black draws, not with 1. ... c1(Q)   2. c8 (Q)+, but with 
+1. ... Kb4 (c4)  2. c8(Q) Kb3 and the Black King can't be prevented from 
+getting to a1, with the 'stalemate position.'"
+OK
+
+BOARD 5rk1/1P6/24/6p1/8/1KR5 WHITE
+MOVELIST "Rc8 g2 Rxf8+ Kg7 Rg8+ Kxg8 b8Q+ Kg7 Qg3"
+"How the Rook helps a Pawn to queen:   1. Rc8 g2   2. Rxf8+ Kg7   3. Rg8+!  
+Simplest, to end all opposition:   3. ... Kxg8   4. b8(Q)+ and 5. Qg3."
+OK
+
+BOARD 8/7k/1P6/8/6r1/8/K2R4/8 BLACK
+MOVELIST "Rb4"
+"For the defense, note how Black must get behind (not in front of) the Pawn:  
+1. ... Rb4!   (NOT 1. ... Rg7   2. Rc2!   3. Rc7.)"
+OK
+
+BOARD 8/6k1/4r3/1P6/8/K7/3R4/8 WHITE
+MOVELIST "Rf2 Re4 b6 Re6 Rb2"
+"The Rook can also cut off the enemy King's approach.  The White King can 
+support the Pawn's advance:   1. Rf2! Re4 (Trying to cut off the White 
+King.)   2. b6 Re6   3. Rb2, but not 3. b7 Ra6+ and 4. Rb6+, winning the Pawn."
+OK
+
+BOARD 1R6/1P3k2/32/1r6/4K3 WHITE
+MOVELIST "Rh8 Rxb7 Rh7+ Kg6 Rxb7"
+"The Rook sometimes can take advantage of being in front of the Pawn if the 
+Rook can check safely, or set up a skewer such as:  1. Rh8! Rxb7   2. Rh7+ 
+and   3. Rxb7"
+OK
+
+BOARD 1R6/1P1k2p1/8/6p1/6P1/1r5P/8/K7 WHITE
+MOVELIST "Rg8 Rxb7 Rxg7+ Kd8 Rxg5"
+"Or the Rook can give up the Pawn to win additional material:  1. Rg8! Rxb7   
+2. Rxg7+ and   3. Rxg5"
+OK
+
+BOARD 5K2/2k2P2/32/4r3/5R2 WHITE
+MOVELIST "Kg7 Rg2+ Kf6"
+"If the King can avoid checks, the Pawn will queen:  1. Kg7 Rg2+   2. Kf6"
+OK
+
+BOARD 3k1K2/5P2/32/6r1/4R3 WHITE
+MOVELIST "Re4 Kd7 Rd4+ Kc6 Ke7 Re2+ Kf6 Rf2+ Kg6 Rg2+ Kf5 Rf2+ Rf4"
+"The White Rook can also 'build a bridge' to end checks when the Rook can't 
+get behind the Pawn:   1. Re4 Kd7   2. Rd4+ Kc6  3. Ke7 Re2+   4. Kf6 Rf2+   
+5. Kg6 Rg2+   6. Kf5 Rf2+  7. Rf4 wins.  This is the 'Lucena' position."
+OK
+
+BOARD K7/P4k2/32/1r6/4R3 WHITE
+"Challenge #6:  How does White win?"
+CHALLENGE Rc1 "That's right!"
+OK
+
+//BOARD K7/P4k2/32/1r6/2R5 BLACK
+MOVELIST "Ke7 Rc8 Kd7 Rb8"
+"The Rook must get to b8.  1. Rc1 (or h1) Ke7   2. Rc8 Kd7  3. Rb8   After a 
+number of checks, the King will escape to c5  (NOT 2. Rc7+? Kd6
+3. Rb7 Rh2! and   4. Kb8? Rh8++)"
+OK
+
+END CHAPTER   
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Fifth chapter:  Level 4:  Minor Piece Endings
+//===================================================================
+
+BEGIN CHAPTER 4
+
+//"Minor Piece Endings"
+//OK
+
+BOARD 4r1k1/2P5/16/7B/16/1K6 WHITE
+MOVELIST "Bd8"
+"l. Bd8 wins, as the Bishop cuts off the Rook from the queening square."
+OK
+
+BOARD 6rk/2P5/3N4/32/1K6 WHITE
+MOVELIST "Nf7+ Kg7 Nd8"
+"1. Nf7+ Kg7   2. Nd8 wins.  Whereas,  1. c8(Q) wins the Rook, but only draws."
+OK
+
+BOARD 8/2P4k/16/K7/4n3/16 BLACK
+MOVELIST "Nd5 c8Q Nb6+ Kb5 Nxc8"
+"The Knight is a surprisingly good defender against a Pawn about to queen:   
+1. ... Nd5!   2. c8(Q) Nb6+ and   3. ... Nxc8"
+OK
+
+BOARD 7k/3P1n2/4N3/3K4/32 WHITE
+MOVELIST "Kc5 Kg8 Kb6 Kh8 Kc7 Kg8 Nd8 Ne5 Nc6 Nxd7"
+"It's difficult to drive a Knight away from the queening square:  
+1. Kc5 Kg8   2. Kb6 Kh8   3. Kc7 Kg8   4. Nd8 Ne5 and   5. ... Nxd7"
+OK
+
+BOARD 8/4PK1k/24/2n5/16 BLACK
+"The Knight alone can prevent King and Pawn from queening safely:"
+OK
+
+MOVELIST "Nb5 Ke6 Nc7 Kd6 Ne8 Kd7 Nf6"
+"1. ... Nb5! (NOT 1. ... Ne4   2. Ke6 followed by   3. Ke5, winning)   
+2. Ke6 ... (Otherwise, Nd6+)   2. ... Nc7+   3. Kd6 ... (If 3. Kd7 Nd5 
+wins the Pawn because of Nf6+)   3. ... Ne8+   4. Kd7 Nf6+ draw."
+OK
+
+"This strategy will not work with an enemy Rook Pawn, because the Knight 
+cannot move on both sides of the Pawn."
+OK
+
+BOARD 2b5/2P1K1k1/24/1B6/16 WHITE
+MOVELIST "Be6 Ba6 Kd8 Kf8 Bc8 Be2 Bb7 Bg4 Bc6"
+"The Bishop can be driven from the queening square, unlike the Knight.  
+1. Be6 Ba6   2. Kd8 Kf8   3. Bc8 Be2   4. Bb7 Bg4   5. Bc6, followed by Bd7."
+OK
+
+BOARD 2n5/4k3/1P6/16/2b1K3/2b1P3/8 WHITE
+MOVELIST "b7 Bd4 Kd2"
+"But the Knight is sometimes vulnerable on the back rank:  1. b7! Bd4+   
+2. Kd2! ... (NOT 2. Kxd4 Na7   3. Kc5 Nc6   4. Kxc6 Be4+.)  The Pawn has 
+two queening squares after the correct move to Kd2."
+OK
+
+BOARD 6k1/6b1/P4p2/4p3/24/6K1 BLACK
+"Challenge #7:  Can Black, on the move, stop the Pawn?  Show how."
+CHALLENGE Bf8 "That's right!"
+OK
+
+"The Bishop can stop the Pawn, with 1. ... Bf8 2. a7 Bc5+.  But not 
+1. ... Bh6 2. Kf2!"
+MOVELIST "a7 Bc5"
+OK
+
+BOARD 3n4/16/p7/P7/8/5KBk/8 WHITE
+MOVELIST "Bd5"
+"The Bishop is a dominating force against an inactive Knight:  1. Bd5!  
+The Knight is trapped and will be won by the King."
+OK
+
+BOARD 2k5/16/p7/P6n/7n/2BB4/3K4 WHITE
+MOVELIST "Be1 Nf3 Bf5"
+"The two Bishops are deadly on an open board:  1. Be1 Nf3  2. Bf5+, winning 
+a piece." 
+OK
+
+BOARD 8/4b3/2k2p1p/2p2Pp1/2K1N1P1/8/2P5/8 WHITE
+MOVELIST "c3"
+"In closed positions, with the Knight on a safe square and the opposing 
+Bishop on the same color as the Pawns, the Knight is often dominant:   
+1. c3! waiting."
+OK
+
+BOARD 8/4b3/2k2p1p/2p2Pp1/2K1N1P1/2P5/8/8 BLACK
+MOVELIST "Kb6 Kd5 Kb5 Ke6"
+"Even though Black is a Pawn up, Black must now either lose a Pawn by 
+moving the Bishop, or allow the White King to advance by moving the King.  
+A typical sequence might be:   1. ... Kb6   2. Kd5 Kb5   3. Ke6, winning."
+OK
+
+BOARD 8/6Pk/2P2n2/8/K5pp/8/4B3/8 WHITE
+"Challenge #8:  How does White win?"
+CHALLENGE c7 "1. c7.  That part is easy." 
+OK
+
+BOARD 8/2P3Pk/5n2/8/K5pp/8/4B3/8 BLACK
+MOVELIST "Nd5 g8Q Kxg8 Bc4"
+"Did you get:  1. c7 Nd5 (NOT 1. ... Nd7   2. Kb5(a5))?  2. g8(Q)+! Kxg8   
+3. Bc4!  The Knight has the power to fork; the Bishop to pin.  Note that   
+1. g8(Q)+ is wrong because of Nxg8   2. c7 Ne7."
+OK
+
+END CHAPTER   
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Sixth chapter:  Level 5:  Mating Configurations
+//===================================================================
+
+BEGIN CHAPTER 5 
+
+BOARD 64 WHITE
+//"Mating Configurations"
+//OK
+
+"Major piece mates.  Minor piece mates.  With pins and double-checks."
+OK
+
+BOARD rnbqkbnr/ppppp2p/8/5ppQ/24/4K3 WHITE
+"One of the basic checkmates in the opening, shown without the rest of the 
+White force.  The move Qh5+ (or Qh4+ by Black) is always dangerous when the 
+f Pawn is moved, even more-so when the g Pawn is also moved!"
+OK
+
+BOARD 3qk3/5Q2/16/2B5/16/4K3 WHITE
+"In schematic form, another basic checkmate in the opening.  Although it's 
+overly optimistic to aim for this mate in the first few moves, it often 
+occurs as a threat when 1. Qf3 or 1. Qh5 also attacks a Black piece -- 
+a double threat."
+OK
+
+BOARD 5rk1/7Q/24/3B4/8/4K3 WHITE
+"Against the castled Black King, this is a similar common threat (or 
+checkmate, as here).  Note that, if a Black Pawn were at g7, the King would 
+have a 'flight' at f7."
+OK
+
+BOARD 5rk1/3n3Q/8/6N1/24/4K3 WHITE
+"A White Knight at g5 also supports the same checkmate."
+OK
+
+MOVELIST "Qh5 Rd8 Qf7 Kh8 Qh7"
+"Note that Black has two common defenses to this type of mate, if the Queen 
+is at h5 threatening 2. Qh7++:   1. ... Nf6, guarding h7, or    1. ... Rf6, 
+giving the King a 'flight' at f8.  Note that   1. ... Rd8 fails because of   
+2. Qf7+ and   3. Qh7++"
+OK
+
+BOARD 5r1k/6p1/4Q1P1/32/4K3 WHITE
+MOVELIST "Qh3 Kg8 Qh7"
+"Advancing the g Pawn creates many threats against the castled King, 
+especially if it reaches g6:   1. Qh3+ Kg8   2. Qh7++"
+OK
+
+BOARD 3r1rk1/3n1pp1/24/3B3Q/8/6K1 BLACK
+"Challenge #9:  There are five ways to prevent the threatened checkmate at 
+h7.  You are Black.  What move also attacks a White piece?"
+CHALLENGE Nf6 "That is correct!"
+OK
+
+"The correct move is 1. ... Nf6, which attacks the Bishop at d3."
+OK
+
+BOARD 3q2k1/6Q1/3b4/24/1B6/4K3 WHITE
+"Another strong mating alliance is the Queen and Bishop teaming up on the 
+'long diagonal.'  The typical defenses are moving Bishop or Queen to f8."
+OK
+
+BOARD 6rk/8/7Q/32/4K3 WHITE
+"The Queen performs many elegant checkmates because of her ability to control 
+'flight' squares.  This mate is called the 'epaulette' mate if it occurs 
+toward the center of the board with another Black Rook next to the King."
+OK
+
+BOARD Q1k5/2pb4/40/4K3 WHITE
+"This check occurs often, if only as a threat, when the King castles on the 
+Queenside.  Castling Queenside is considered more risky than on the Kingside 
+because of greater territory to defend on the a file."
+OK
+
+BOARD 6kR/5pp1/40/4K2R WHITE
+"Doubled Rooks are more than twice as powerful as two Rooks operating 
+independently."
+OK
+
+BOARD 5rk1/6RR/40/4K3 WHITE
+"On rank 7, their natural home because that's where the enemy Pawns are, 
+Rooks that are doubled often threaten this mate."
+OK
+
+BOARD 7k/40/7R/4K1R1 WHITE
+"When the Rooks 'undouble' they usually catch the King in this clean mate.  
+Sacrifices clearing away the Pawns at g7 and h7 are aimed at this type of 
+checkmate."
+OK
+
+BOARD 4k3/5R1R/16/r7/r7/p7/K7 WHITE
+"Challenge #10:  Can you find a winning move for White?"
+CHALLENGE Rb7 "That is correct!"
+OK
+
+"Full points for 1. Rb7, which mates next move:  1. ... Ra8   2. Rh8++"
+OK
+
+"Moves like   1. Rc7 or   1. Rfg7 are answered by   1. ... Kd8 or Kf8."
+OK
+
+BOARD 5rk1/7p/8/5N2/16/1B6/4K3 WHITE
+MOVELIST "Nh6"
+"Control of the 'long diagonal' by a Bishop leads to many types of mates.  
+This one is elegant:   1. Nh6++  (NOT 1. Ne7+ Kf7)"
+OK
+
+BOARD 6rk/5Npp/40/4K3 WHITE
+"A famous Knight mate, the 'smothered.'"
+OK
+
+BOARD 3qkb2/3pp3/16/4N3/8/4Q3/4K3 WHITE
+"White has a choice of mates here.  You already saw   1. Qh5++.  But isn't 
+the smothered mate prettier?  1. Nd6++  Note the pin of the e Pawn."
+OK
+
+BOARD 2kr4/3b4/B7/8/5B2/16/4K3 WHITE
+"Another example of a splashy mate on a Queenside castled King.  Bishops 
+multiply in value with the extra space of the a file."
+OK
+  
+BOARD 7k/7p/16/2B5/8/1B6/4K3 WHITE
+"A mate that's repeated in many areas of the board.  This arrangement of the 
+Bishops is the closest equivalent to the doubling of the Rooks."
+OK
+
+BOARD 3qkb2/8/3p4/4N3/2B5/2N5/8/4K3 WHITE
+"Challenge #11:  Bishops and Knights sometimes perform heroically together.  
+What would you do as White?"
+CHALLENGE Bf7 "That's right!"
+OK
+
+MOVELIST "Ke7 Nd5"
+"In schematic form, this is the famous 'Legal's Mate.'  It emphasizes the 
+vulnerability of f7 (or f2 for White).  With a White Knight at c3, it's a 
+spectacular mate:  1. Bf7+ Ke7   2. Nd5++"
+OK
+
+BOARD 7k/7R/5N2/32/4K3 WHITE
+"Rook and minor pieces collaborate frequently in mates.  The Knight's 'magic 
+square' is f6 (or f3, c6, c3)."
+OK
+
+BOARD 6kR/5p2/32/1B6/4K3 WHITE
+"Bishop and Rook are especially dangerous with the Bishop on the famous 
+'long diagonal.'  The 'fianchettoed Bishop' at b2, b7, g7, or g2 is the 
+easiest way for a Bishop to control this diagonal."
+OK
+
+BOARD 2bkn3/2p5/32/3B4/3RK3 WHITE
+MOVELIST "Bg5"
+"The minor pieces often collaborate with 'double checks,' a chief feature of 
+which is that no enemy piece can interpose.  If there are no King flights, 
+it's mate, as here:  1. Bg5++"
+OK
+
+BOARD 6bk/4p1Np/32/1B6/4K3 WHITE
+MOVELIST "Ne6"
+"In a 'discovered check,' the leading piece (here the Knight) can often 
+perform other duties.  In this case the Knight 'shuts off' the Black Pawn:   
+1. Ne6++"
+OK
+
+BOARD 6nb/R4P1k/7q/32/4K3 WHITE
+"Challenge #12:  How does White use a discovered check to win (or mate)?"
+CHALLENGE f8N "That is correct!"
+OK
+
+"The correct promotion is:   1. f8(N)++  A double check!"
+OK
+
+BOARD 8/4kPQ1/4q3/32/6K1 WHITE
+MOVELIST "f8Q"
+"The double check with promotion to a Queen is murderous:  1. f8(Q)++  Note 
+that all double checks are the result of line openings, or 'discoveries.'"
+OK
+  
+BOARD 5rk1/5p2/6p1/8/2B5/8/2Q5/6K1 WHITE
+MOVELIST "Qxg6"
+"The King's position is often fatally weakened by a pin:   1. Qxg6+  This 
+idea occurs frequently, because the Bishop is often developed on the a2-g8 
+diagonal against a fianchettoed Bishop (Bishop developed at g7, here, but 
+then traded off)."
+OK
+
+BOARD 7k/5Q1n/6P1/8/7q/16/6K1 WHITE
+MOVELIST "g7"
+"Just when everything seems protected, a Pawn slips in to mate:   1. g7++  
+Pawns often mate when the enemy King is driven to the other side of the board."
+OK
+
+BOARD 24/6k1/4Q3/3B4/5B2/1K6 WHITE
+MOVELIST "Qh4"
+"It seems there are many ways to checkmate, but note that when the Queen 
+checks adjacent to the enemy King, only two additional squares must be 
+guarded -- two squares of the opposite color of the mating square:  1. Qh4++"
+OK
+
+BOARD 24/6k1/4Q3/3B4/5B2/1K6 WHITE
+"The Queen check at f5 leaves h6 unguarded.  The Queen check at g6 leaves f4 
+unguarded."
+OK
+
+BOARD 24/4k3/1Q6/4N3/4N3/1K6 WHITE
+"Challenge #13:  What's the fastest way to checkmate?"
+CHALLENGE Qe7 "That's right!"
+OK
+
+"The Black King seems to have many escapes, but a single move mates him in 
+the open board:   1. Qe7++"
+OK
+
+END CHAPTER 
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Seventh chapter:  Level 6:  Basic Combinations
+//===================================================================
+
+BEGIN CHAPTER 6
+
+BOARD 64 WHITE
+//"Basic Combinations"
+//OK
+
+"Forks and skewers.  Double attacks.  Pseudo combinations."
+OK
+
+BOARD 24/3r1k2/8/5K2/4P3/8 WHITE
+"The basic combinations all involve a double attack as the payoff.  They 
+often start with a double threat."
+OK
+
+MOVE e4
+"Here White is saved with a simple fork:  1. e4+.  In simplest terms, the 
+King and the Rook can't both move at the same time."
+OK
+
+BOARD 24/1q3k2/16/4N2R/6K1 WHITE
+MOVELIST "Nd4"
+"Here White has the luxury of two forks.  The Rook double-attack is also 
+called a 'skewer,' a name that's more vivid when a Bishop catches two enemy 
+pieces on a diagonal:  1. Nd4+" 
+OK
+
+BOARD 24/1q3k2/16/4N2R/6K1 WHITE
+MOVELIST "Rh5"
+"or   1. Rh5+ winning the Queen."
+OK
+
+BOARD 6k1/1rn5/8/2K5/32 WHITE
+MOVELIST "Kc6 Ra7 Kb6"
+"The King is a fighting piece in the ending because it double-attacks well:  
+1.Kc6 Ra7   2.Kb6."
+OK
+
+BOARD 7K/8/k1P5/7p/32 WHITE
+"In this famous endgame study by Richard Reti, the White King can't get 'in 
+the square' of the Black Pawn (formed by the diagonal d5-h1), but he can 
+simultaneously threaten to get in the square and to support his own Pawn."
+OK
+
+MOVELIST "Kg7 h4 Kf6 h3 Ke6"
+"1. Kg7 h4   2. Kf6...  First threat:  If the Pawn moves again, then 3. Ke6(7) 
+forces the White Pawn to Queen."
+OK
+
+BOARD 16/k1P2K2/8/7p/24 BLACK
+MOVELIST "Kb6 Ke5"
+"2. ... Kb6   3. Ke5 ...  Second threat:   4. Kd6 again threatens to mobilize 
+the Pawn.   3. ... Kxc6, and now:   4. Kf4 and White is in the square."
+OK
+
+BOARD 6k1/3p4/4pn2/8/2B1P3/2N5/8/6K1 BLACK
+"Pawn forks are common in the opening as a way of exchanging center Pawns or 
+reducing pressure."
+OK
+
+MOVELIST "Nxe4 Nxe4 d5"
+"1. ... Nxe4   2. Nxe4 d5, forking the pieces and winning one back.  Note that 
+White can also give up a piece at once (with Bxe6+).  It's a question of which 
+Pawn White wants to win back."
+OK
+
+BOARD 6k1/16/q2N4/B2P4/8/1PP5/3QK3 WHITE
+MOVELIST "c3"
+"The Black Queen has just checked at a5, apparently forking both the Bishop 
+at a4 and the Knight at d5."  
+OK
+
+"These are 'pseudo' forks, since:  1. c3 is a 'double defense' against the 
+check and loss of the Bishop and..." 
+OK
+
+BOARD 6k1/16/q2N4/B2P4/8/1PP5/3QK3 WHITE
+MOVELIST "Nc3"
+"...1. Nc3! is a triple defense:  Blocking the check, removing the Knight 
+from capture and guarding the Bishop."
+OK
+
+BOARD 6k1/16/2r5/2p5/2K1r3/16 WHITE
+"Another pseudo fork:   1. Kd4 apparently forks the Rooks, but the defense 
+is easy:   1. ... R (either) e5."
+OK
+
+BOARD 6k1/8/6n1/8/4B3/5r2/7K/8 BLACK
+MOVELIST "Ne5"
+"The White Bishop has apparently forked Knight and Rook.  Black could 
+play   1. ... Ne5, defending the Rook,..."
+OK
+
+BOARD 6k1/8/6n1/8/4B3/5r2/7K/8 BLACK
+MOVELIST "Rf6"
+"...but even better, so as not to lose the exchange (Rook for minor piece), 
+is   1. ... Rf6."
+OK
+
+BOARD 6k1/24/2r1n1P1/3P3K/16 BLACK
+MOVELIST "Ng5+ Kh4 Nf3 Kg3"
+"Some forks are very fragile indeed.  First, Black might try  1. ... Ng5+   
+2. Kh4! Nf3+   3. Kg3 and the fork holds." 
+OK
+
+BOARD 6k1/24/2r1n1P1/3P3K/16 BLACK
+MOVELIST "Nf2"
+"But   1. ... Nf2+  in turn forks the King and Pawn,..."
+OK
+
+BOARD 6k1/24/2r1n1P1/3P3K/16 BLACK
+MOVELIST "Rc3"
+"...or   1. ... Rc3  pins and wins the poor Pawn."
+OK
+
+BOARD 8/k1q3r1/1p2N3/p7/8/Q7/6P1/6K1 BLACK
+"Challenge #14:  Black's Queen and Rook are forked.  How does Black defend?"
+CHALLENGE Qg3 "That is correct!"
+OK
+
+MOVELIST "Qxg3 Rxg3"
+"The right idea is   1. ... Qg3! , which is both attack and defense:  if   
+2. Qxg3 Rxg3  removes everything from attack."   
+OK
+
+BOARD 8/k1q3r1/1p2N3/p7/8/Q7/6P1/6K1 BLACK
+MOVELIST "Rg3 Nxc7 Rxa3 Nb5"
+"But not   1. ... Rg3  because of another White fork:   2. Nxc7 Rxa3   
+3. Nb5+."
+OK
+
+BOARD 6K1/8/k1b1n2R/8/PP3P2/24 BLACK
+"All good moves contain more than one element:  Immediate threats, immediate 
+defenses, or threats of either."
+OK
+
+MOVELIST "Kb7 Rxe6 Bd5"
+"Here, White threatens the half-pinned pieces or forks with   2. b5+.  Black 
+defends by a move that unpins the Bishop and avoids the Pawn fork:  
+1. ... Kb7   2. Rxe6 Bd5.  Now White is pinned!"
+OK
+
+BOARD 6K1/8/k1b1n2R/8/PP3P2/24 WHITE
+"Note that   1. ... Bd5  at once loses to a further attack on the Knight:   
+2. f5."
+OK
+
+BOARD 5k2/N3n3/6RP/3K4/8/5r2/16 WHITE
+"Sharp tactics require experience, or a computer-like search of all 3-4 move 
+variations!"
+OK
+
+MOVELIST "Ke4 Ra3 Rf6 Kg8 h7 Kh8 Rf8 Kh7 Rf7"
+"Here White is forked, but holds on with short threats:  1. Ke4 Ra3
+(1...Nxg6 draws)
+2. Rf6+ Kg8 (NOT   2. Nb5 Ra4+)   3. h7+ Kh8 and wins because of Kh8.
+4. Rf8+ forces him to take at h7 and lose the Knight to the fork  5. Rf7+."
+OK
+
+BOARD rn2k1nr/pp1qbppp/8/1p1Np3/3P4/5P2/PPP2P1P/R1BQKB1R WHITE
+MOVELIST "Bxb5 Qxb5 Nc7"
+"Put this all in a game situation:   1. Bxb5! happens all the time in 
+positions like this:  The Black Queen is partially pinned and then forked 
+after   1. ... Qxb5  2. Nc7+.  It's a 'Royal' check if Queen, Knight and 
+Rook are all somewhere in the King's wheel."
+OK
+
+BOARD rnbqkbnr/ppp2ppp/8/3pP3/4P3/8/PPPP2PP/RNBQKBNR BLACK
+MOVELIST "Qh4 Ke2 Qxe4"
+"After two moves in the opening (King's Gambit), White is the victim of a 
+typical fork:   3. ... Qh4+   4. Ke2 Qxe4+, or,"
+OK
+
+BOARD rnb1kbnr/ppp2ppp/8/3pP3/4P2q/8/PPPP2PP/RNBQKBNR WHITE
+MOVELIST "g3 Qxe4 Ne2 Qxh1"
+"if   4. g3 Qxe4+, Black wins the Rook."
+OK
+
+BOARD rnbqkbnr/ppp3pp/8/3pN3/3Pp3/8/PPP2PPP/RNBQKB1R WHITE
+"Challenge #15:  A common opening situation:  How should White play?"
+CHALLENGE Qh5 "That's right!"
+OK
+
+MOVELIST "g6 Nxg6 Nf6 Qe5"
+"1. Qh5+ is the right start.  What about   1. ... g6?  You are right if you 
+saw   2. Nxg6.  The h Pawn is pinned, so that   2. ... hxg6   3. Qxh8."
+OK
+
+"If   2. ... Nf6, the Queen can either retreat to h4, keeping the pin, or 
+gain a move with   3. Qe5+, after which White wins the Rook."
+OK
+
+END CHAPTER   
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Eighth chapter:  Level 7:  Roots of Combinations
+//===================================================================
+
+BEGIN CHAPTER 7
+
+//"Roots of Combinations"
+BOARD 64 WHITE
+//OK
+
+"Pinned pieces.  Overworked pieces.  Restricted mobility."
+OK
+
+BOARD 3qk2r/4bppp/32/4QPPP/2B1R1K1 WHITE
+MOVELIST "Bg5 f6"
+"This is the schematic of a common opening pin, designed to keep
+the Black King from castling.   1. Bg5 is met by f6, but White may
+be able to play   1. Ba3, as here, winning the pinned piece."
+OK
+
+BOARD 1n2kb1r/3b1ppp/16/B7/8/5PPP/3R1RK1 WHITE
+MOVELIST "Rd3 Ke7 Re1 Kd8 Rxd7 Nxd7 Rd1"
+"Act on a pinned piece quickly!  Here White could try to 'double-up' with 
+1. Rd3, threatening Rfd1.  But then Black escapes with Ke7.  1. Rfe1+ Kd8! 
+also let Black get unpinned.  But:  1. Rxd7! Nxd7   2. Rd1 gets the piece."
+OK
+
+BOARD 3qk2r/3p1ppp/16/4n3/8/5PPP/3Q1RK1 WHITE
+MOVELIST "Qe2 Qe7 Re1 d5 f3"
+"Black has just taken at e4.  This schematic shows when a pin wins and when 
+it doesn't in this typical opening:   1. Qe2?  Qe7 defends successfully.  
+But:   2. Re1 d5   3. f3 wins the piece for a Pawn."
+OK
+
+BOARD 4k2r/3pqppp/8/4N3/5n2/8/5PPP/3QK2R WHITE
+MOVELIST "O-O Qxe5 Re1"
+"Sometimes the pinning piece gets pinned!   1. O-O Qxe5   2. Re1"
+OK
+
+BOARD r3k2r/pppqbppp/1n6/16/5Q2/PPP2PPP/RNB1R1K1 WHITE
+"Challenge #16:  How does White take advantage of the pinned Bishop at e7?"
+CHALLENGE Bg5 "That is correct!"
+OK
+
+MOVELIST "f6 Bf4"
+"At most, White can disrupt the Kingside Pawns with:   1. Bg5 f6  2. Bf4 when 
+White threatens two Queenside Pawns and can check on the a2-g8 diagonal when 
+Black castles."
+OK
+
+BOARD r3k2r/pppqbppp/1n6/16/5Q2/PPP2PPP/RNB1R1K1 WHITE
+MOVELIST "Qe2 O-O Qxe7 Rae8 Qxd7 Rxe1"
+"The idea of keeping the Black King in the center with   1. Qe2 backfires 
+after   1. ... O-O!   2. Qxe7 Rae8.  Now the Queen is pinned by the mate that 
+would occur after   3. Qxd7 Rxe1++."
+OK
+
+BOARD r1b1k2r/ppq2ppp/2p5/4P3/8/2N5/PP3PPP/2RQ1RK1 WHITE
+"Ideally, the Rooks are developed on the central files where they pose 
+threats to the opposing Queen and King."
+OK
+
+"White's lead in development allows   1. Nb5!, since the c6 Pawn is pinned.   
+1. ... Qxe5 is out, because of the common pin  2. Re1.  White's Knight will 
+check at d6, keeping the King from castling."
+OK
+
+BOARD 5rk1/1b2qppp/8/1Ppp4/Q2P4/2N5/5PPP/5RK1 WHITE
+MOVELIST "Qa3 Ra8 Na4 h6 Qxc5 Qxc5 Nc5"
+"White pins and wins the c5 Pawn with  1. Qa3 Ra8   2. Na4 h6.   3. Qxc5 both 
+attacks and defends.  On   3. ... Qxc5   4. Nxc5 (NOT dxc5)."
+OK
+
+BOARD 5rk1/5p2/6p1/7n/16/1B4P1/2K4R WHITE
+MOVELIST "g4 Nf4 Rh8"
+"A schematic of a typical Kingside pin:   1. g4 appears to win the Knight, 
+because of   1. ... Nf4   2. Rh8++."  
+OK
+
+BOARD 5rk1/5p2/6p1/7n/16/1B4P1/2K4R WHITE
+MOVELIST "g4 Ng7 Bf6"
+"But the Knight can defend with  1. ... Ng7.  After  2. Bf6, the Knight is 
+pinned along the diagonal and the Kingside is immobilized."
+OK
+
+BOARD 8/P7/8/5p2/4b2k/K1R4p/16 WHITE
+"White wins a piece for the a Pawn with  1. Rc8, but loses the game after  
+1. ... h2.  A pin forces the Queening of a Pawn."
+OK
+
+MOVELIST "Rc4 h2 Rxe4 fxe4 a8Q h1Q  Qh8"
+"1. Rc4 h2   2. Rxe4+ fxe4   3. a8(Q) h1(Q)   4. Qh8+ wins."
+OK
+
+BOARD 4kn2/3p1p2/3P4/5P2/2P5/2n5/7K/7R WHITE
+"The Rook is strong against two minor pieces when they have limited safe 
+haven in the endgame:   1. Rc1.  If the Knight goes to the a or e file, 
+Ra1 or Re1 wins it,  due to the direct pin on the e file and the threat 
+of mate if the Knight moves off the a file."
+OK
+
+BOARD r4rk1/ppp1bppp/5n2/3P2B1/4p3/2N5/PPP2PPP/R4RK1 BLACK
+"Challenge #17:  Does White win the e4 Pawn by pinning the defending Knight 
+with  1. Bg5?  How would you respond for Black?"
+CHALLENGE Nxd5 "That's right!"
+OK
+
+"The pin is illusory:  1. Bg5 Nxd5, attacking and defending at the same time."
+OK
+
+BOARD r4rk1/ppp1bppp/8/3n2B1/4p3/2N5/PPP2PPP/R4RK1 WHITE
+MOVELIST "Nxd5 Bg5 Nc7 Rc8" 
+"2. Nxd5 Bxg5   3. Nxc7 Rac8, where the Rook skewers the Knight and c2 Pawn." 
+OK
+
+BOARD r4rk1/ppp1bppp/8/3n2B1/4p3/2N5/PPP2PPP/R4RK1 WHITE
+MOVELIST "Bxe7 Nxe7 Nxe4" 
+"Best is   2. Bxe7 Nxe7   3. Nxe4, with an even game."
+OK
+
+BOARD 6k1/8/1n6/3p4/2r5/2NK4/16 WHITE
+MOVELIST "Nxd5"
+"Obviously, a pinned piece is immobilized.  Indirectly, an overworked piece 
+is also hobbled:   1. Nxd5!  The Knight at b6 cannot defend both c4 and d5 in 
+this schematic."
+OK
+
+BOARD 3r2k1/2q2ppp/2n5/3Q4/16/3R1PPP/6K1 WHITE
+MOVELIST "Qxc6 Qxc6 Rxd8"
+"The Black pieces seem to be working together, but the Queen is actually 
+overworked:   1. Qxc6! and all of a sudden the twice-guarded Rook at d8 is 
+unguarded after   1. ... Qxc6   2. Rxd8++."
+OK
+
+BOARD 3r2k1/2q2ppp/2n5/3Q4/16/3R1PPP/6K1 WHITE
+MOVELIST "Qxc6 Rxd2 Qe8"
+"Note that White must avoid the Black Queen after 1. ... Rxd2 and mate with   
+2. Qe8++ or be mated!"
+OK
+
+BOARD 5bk1/2q2ppp/2pN1n2/6N1/7Q/8/5PPP/6K1 WHITE
+MOVELIST "Ne8 Nxe8 Qxh7"
+"The Knight at f6 is the King's best defender, but is overworked by the 
+simple fork:  1. Ne8! Nxe8   2. Qxh7++ ...  As on other moves,   
+2. Nxf6+ mates next move."
+OK
+
+BOARD 2r3k1/b2q1ppp/6b1/16/1Q2P3/5PPP/2R2BK1 WHITE
+MOVELIST "Qa4"
+"A weak back rank must be defended along its length.  Hence, the number of 
+combinations based on pieces overworked in its defense:   1. Qa4!"
+OK
+
+BOARD 2r3k1/b2q1ppp/6b1/8/Q7/4P3/5PPP/2R2BK1 BLACK
+MOVELIST "Bf5 Rxc8 Qxc8 Qxa7"
+"White chooses this square carefully, since White now threatens  2. Qxa7 
+(in response, for example, to 1. ... Qb7).  1. ... Bf5 allows   2. Rxc8+, 
+followed by   3. Qxa7."
+OK
+
+BOARD 6k1/3q1ppp/8/Q3pb2/8/4P3/3rNPPP/5RK1 WHITE
+"Challenge #18:  Black has an overworked piece.  Show how White can take 
+advantage of it."
+CHALLENGE Nd4 "That is correct!"
+OK
+
+"After  1. Nd4, the Black Queen must guard both the Bishop at f5 and the mate 
+at d8.  The Rook must move to avoid   2. Qxd2."
+OK
+
+"The key move introduces the idea of 'cutting a line,' the file d7-d2.  
+For, if  1. ... exd4,   2. Qxd2 wins the exchange (Knight for Rook)."
+OK
+
+BOARD 1r4k1/5p1p/6pQ/7N/8/1r1PP3/1q6/5R1K WHITE
+MOVELIST "d4 gxh5 Rg1"
+"Pawns are great for cutting lines, since they are expendable!  Here  1. d4! 
+shuts off the Black Queen and threatens two mates.  1. ... gxh5 allows   
+2. Rg1+ and mate next."
+OK
+
+BOARD 7k/1P3pp1/7p/7R/P7/8/6PK/1r6 WHITE
+MOVELIST "Rb5"
+"The Rook, Knight, or Bishop can cut a line along the back rank to help a 
+Pawn to Queen (see Tutorial Level 4).  Here the Rook cuts a file with  
+1. Rb5, a common theme in the endgame."
+OK
+
+BOARD 4k3/1p6/pP5p/P1PR4/r7/16/6K1 WHITE
+MOVELIST "c6 bxc6 Rb5 axb5 b7"
+"Here White cuts a 'potential' line:  1. c6 bxc6  2. Rb5! axb5  3. b7 and 
+nothing can stop the Pawn from Queening."
+OK
+
+BOARD rn1q2r1/ppp4k/3p2p1/8/3Q4/1PB5/P4PPP/4R1K1 WHITE
+"Challenge #19:  White controls the long diagonal.  But how does White take 
+advantage of Black's stretched defenses?"
+CHALLENGE Re8 "That's right!"
+OK
+
+MOVELIST "Qg5 Qh8 Rxh8 Rxh8"
+"Both the Queen and the Rook are guarding e8, but are also trying to guard h4 
+and g7, respectively."
+OK
+
+"Hence:  1. Re8! Qg5 (After  1. ... Qxe8  2. Qh4++ or  1. ... Rxe8  2. Qg7++)  
+2. Qh8+! Rxh8   3. Rxh8 ++.  Note that   2. Rxg8 is too slow, in view of 
+2. ... Qc1+ with mate to follow!"
+OK
+
+END CHAPTER 
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Ninth chapter:  Level 8:  Double Attacks
+//===================================================================
+
+BEGIN CHAPTER 8
+
+BOARD 64 WHITE
+//"Double Attacks"
+//OK
+
+"Discovered checks.  Forcing threats.  Destroying defenders."
+OK
+
+BOARD 3qk3/3p1p2/8/4N3/4n3/8/3P1P2/3QK3 WHITE
+MOVELIST "Qe2 Nf6 Nc6"
+"This schematic illustrates a familiar position in the Petroff Defense.  
+Black has mistakenly played Nxe4:  1. Qe2 Nf6 (the worst idea)  2. Nc6+ 
+winning the Queen."  
+OK
+
+BOARD 3qk3/3p1p2/8/4N3/4n3/8/3P1P2/3QK3 WHITE
+MOVELIST "Qe2 f5 f3"
+"But if Black tries to hold the Knight at e4, with  1. ... f5 (d5), White 
+wins at least a Pawn with  2. f3."
+OK
+
+BOARD 1q3rk1/5p1p/6p1/8/4N3/2Q5/8/6K1 WHITE
+MOVELIST "Nf6 Kh8 Nd7 Kg8 Nb8 
+The 'hole' at f6 is an invitation to mayhem on the Black squares:  
+1. Nf6+ Kh8  2. Nd7+ wins the Queen."
+OK
+
+BOARD 1q3r1k/5p1p/5Np1/16/2Q5/8/6K1 WHITE
+MOVELIST "Ne8 f6" 
+"Note that   2. Ne8+ guarding g7 does not lead to mate at g7, because Black 
+simply interposes the Pawn   2. ... f6."
+OK
+
+BOARD 5rk1/6pp/8/6N1/8/7K/7Q/8 WHITE
+MOVELIST "Qa2 Kh8 Nf7 Kg8 Nh6 Kh8 Qg8 Rxg8 Nf7"
+"The best discovered check of all is a double check with a point:  Black 
+cannot interpose on the checking line, or capture the checking pieces."
+OK
+
+"Here is the famous smothered mate, which occurs frequently in practice, 
+mostly as a threat.  1. Qa2+ Kh8   2. Nf7+ Kg8   3. Nh6+ Kh8   4. Qg8+ Rxg8   
+5. Nf7++."
+OK
+
+BOARD 7k/5p1B/7Q/32/6K1 WHITE
+MOVELIST "Bg6 Kg8 Qh7 Kf8 Qxf7"
+"When the battery fires, the leading piece can choose artfully.  Here is a 
+typical mating sequence:  1. Bg6+ Kg8   2. Qh7+ Kf8   3. Qxf7++.  See the 
+point of choosing g6 on the first move?"
+OK
+
+BOARD 3qk2r/5ppp/8/2b5/2Bp2b1/5N2/5PPP/3Q1RK1 WHITE        
+"Sometimes the battery is directed against a minor piece trying to pin the 
+leading piece in the battery.  (See Level 6 for examples of other 'pseudo' 
+pins.)"
+OK
+
+MOVELIST "Bxf7 Kf7 Ne5 Kf8 Nxg4"
+"1. Bxf7+! Kxf7   2. Ne5+, followed by   3. N(Q)xg4.  Note that   2. Ng5+ is 
+a mistake, even with a White Bishop at c1 guarding that Knight.   2. ... Qxg5! 
+and both Queens are in take (can be captured)."
+OK
+
+BOARD 5rk1/3rpppp/16/3p4/3B1N2/8/3Q2K1 WHITE
+"Challenge #20:  How does White move immediately against the enemy King?"
+CHALLENGE Bxh7 "That is correct!"
+OK
+
+MOVELIST "Kh7 Ng5 Kg8 Qh5"
+"Bxh7+ is the start of many good mating attacks.  Nothing else is fast 
+enough.  If:  1. ... Kxh7    2.Ng5+ Kg8,   3. Qh5 is the idea.  Black can 
+defend with   2. ... Kg6."
+OK
+
+BOARD 3q1k2/r7/3p4/4p3/4P3/8/1PR5/1K5Q WHITE
+MOVELIST "Rc8 Qxc8 Qh8 Ke7 Qxc8"
+"The second stage in tactics is going beyond responding to setting up 
+combinations.  Here White sets up a skewer:  1. Rc8! Qxc8   2. Qh8+ Ke7   
+3. Qxc8."
+OK
+
+BOARD 1r1q2k1/1bpp1p1p/6p1/8/4N3/1Q6/3R1PPP/6K1 WHITE
+"White seems to have run out of attacking ideas and is two Pawns down.  
+A simple forking combination sets thing right:"
+OK
+
+MOVELIST "Rxd7 Qf8 Nf6 Kg7 Qc3"
+"1. Rxd7! Qf8 (NOT 1. ... Qxd7, because of 2. Nf6+)  2. Nf6+ ... (NOT   
+2. Ng5 Bd5!) and the weak back rank will cost White a move and the game.   
+2. ... Kg7 (NOT   2. ... Kh8)   3. Qxf7! and White will mate at h7 
+(See Level 5).  3. Qc3 ... "
+OK
+
+"The potential discovered checks give White a lasting initiative."
+OK
+
+END CHAPTER   
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Tenth chapter:  Level 9:  Sacrifices
+//===================================================================
+
+BEGIN CHAPTER 9
+
+BOARD 64 WHITE
+//"Sacrifices"
+//OK
+
+"Queen sacrifices.  The exchange sacrifice.  Pawns, minor pieces."
+OK
+
+BOARD 8/1bq2pkp/5pp1/16/Q3B2K/2r5/4R3 WHITE
+MOVELIST "Qf8 Kxf8 Bh6 Kg8 Re8"
+"Black's attack appears unanswerable, yet a Queen sacrifice sets up a 
+standard back-rank mate:   1. Qf8+! Kxf8   2. Bh6+ Kg8   3. Re8++.  It 
+can't be said enough:  Watch out for a weak back-rank!"
+OK
+
+BOARD 2k2brr/1ppbq3/2np4/1B6/Q7/4B3/6P1/1R3RK1 WHITE
+MOVELIST "Qa8 Nb8 Qxb7 Kxb7 Bxd7 Ka6 Bc8 Ka5 Bd2 Ka4 Rb4 Ka3 Ra1"
+"The Queenside is notorious for spectacular attacks on a castled King.  
+This is one of the prettiest:  The idea is to set up a discovered check.  
+1. Qa8+ Nb8   2. Qxb7+! Kxb7   3. Bxd7+ Ka6   4. Bc8+ Ka5   5. Bd2+ Ka4   
+6. Rb4+ and   7. Ra1++"
+OK
+
+BOARD 1r2k1r1/pbppnp1p/1bn2P2/8/Q7/B1PB1q2/P4PPP/3RR1K1 WHITE
+"One of the most famous positions in chess history is Anderssen's 'immortal' 
+game against Dufresne, 1852.  Black threatens mate, so every move must be a 
+check."
+OK
+
+MOVELIST "Rxe7 Nxe7 Qxd7 Kxd7 Bf5 Ke8 Bd7 Kd8 Bxe7"
+"1. Rxe7+! Nxe7   2. Qxd7+! Kxd7   3. Bf5+ Ke8   4. Bd7+ Kd8(f8)   
+5. Bxe7++.  Note also the interesting mate if   3. ... Kc6   4. Bd7++."
+OK
+
+BOARD r2qkbnr/ppp2p1p/3p2p1/4n3/2B1P1b1/2N2N2/PPPP1PPP/R1BQK2R WHITE
+"Challenge #21:  The Knight at f3 is pinned and the Bishop at c4 attacked.  
+What's White's best move?"
+CHALLENGE Nxe5 "That's right!"
+OK
+
+MOVELIST "Bxd1 Bxf7 Ke7 Nd5"
+"White wins a piece or checkmates with:  1. Nxe5! Bxd1   2. Bxf7+ Ke7   
+3. Nd5++.  Legal played this first in the 18th century."
+OK
+
+BOARD 2kr3r/pp5p/2p2p2/3n2pb/1P2N3/P7/5PPP/2BRR1K1 WHITE
+MOVELIST "Rxd5 cxd5 Nxf6 Bg6 Bxg5"
+"A well-posted Knight, such as the one at d5, is often worth a Rook.  White 
+takes the wheels off Black's position with   1. Rxd5! cxd5  2. Nxf6 Bg6   
+3. Bxg5.  Note the winning fork after   1. ... Rxd5   2. Nxf6."
+OK
+
+BOARD 2rq1rk1/1p2ppbp/p5p1/3Pp2n/5P1Q/2N2N2/PPP3P1/2KR3R BLACK
+"The exchange sacrifice (Rook for minor piece) often occurs at h5 against a 
+Kingside castled King, or at c3 against a Queenside castled King."
+OK
+
+MOVELIST "Rxc3 bxc3 Qa5 Kb2 e4"
+"Here Black comes first:   1. ... Rxc3   2. bxc3 Qa5.  Note that there is no 
+gain of material:  Simply a weakening of the King position and the frightful 
+threat of   3. ...  e4 after   3. Kb2."
+OK
+
+BOARD r2q1rk1/1p1n1p1p/p2p2p1/2pP4/2Pb4/2N5/PP2Q1PP/R1BR3K WHITE
+MOVELIST "Rxd4 cxd4 Ne4 Ne5 Bh6 Re8 Rf1"
+"General positional considerations, such as control of dark squares or better 
+Knight placement, often cry out for the exchange sacrifice:  1. Rxd4! cxd4   
+2. Ne4  with a complicated game:  If  2. ... Ne5, then  3. Bh6 and  4. Rf1."
+OK
+
+BOARD rn3k1r/p4ppp/3p4/1p6/1n1P4/8/PPP2PPP/R1B1KB1R WHITE
+"The threat to win the exchange with a fork by the Black Knight at b4 is a 
+common theme in the early endgame -- especially with Queens off the board."
+OK
+
+MOVELIST "Bf4 Nxc2 Kd2 Nxa1 Bxd6 Kg8 Bxb5"
+"Here White can try for more than pedestrian defense   (1. Kd1):  
+1. Bf4?! Nxc2+ (White gains a move if   1. ... Ke7   2. Kd2.)  2. Kd2 Nxa1   
+3. Bxd6+ Kg8   4. Bxb5 regaining the piece with a great lead in development."
+OK
+
+BOARD r4rk1/ppqn1p2/2p2p1p/4n2Q/2P5/1P4P1/PB4BP/3R1RK1 WHITE
+"Challenge #22:  White has the two Bishops.  Does White have a better move 
+than   1. Qxh6, regaining a Pawn and threatening   2. Rf5?"
+CHALLENGE Rxd7 "That is correct!"
+OK
+
+MOVELIST "Nxd7 Rxf6 Nxf6 Bxf6 Qd7 Qxh6"
+"The forceful way to end matters is:  1. Rxd7 Nxd7  2. Rxf6!  The second 
+exchange sacrifice denudes the King:  2. ... Nxf6   3. Bxf6 Qd7   4. Qxh6 
+with mate to follow."
+OK
+
+BOARD r1b1k2r/1p1nbppp/pq1ppn2/6B1/2BNP3/2N5/PPPQ1PPP/R3K2R WHITE
+MOVELIST "O-O Qxb2 Rab1 Qa3"
+"The b and g Pawns are the most vulnerable in the opening and are commonly 
+sacrificed to gain time."
+OK
+
+"Note that, typically, a Knight must be available at c3, c6, f3, or f6 to 
+support a Rook at b1, b8, g1, g8.  1. O-O Qxb2  2. Rab1 Qa3 with a lead in 
+development."
+OK
+
+BOARD rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR WHITE
+MOVELIST "Qg4 Nf6 Qxg7 Rg8 Qh6 Rg6 Qh4 Nxe4"
+"A standard French Defense.  Is g7 weak because the Black Bishop has moved?  
+1. Qg4 Nf6!   2. Qxg7 Rg8   3. Qh6 Rg6   4. Qh4 Nxe4, with a good game for 
+Black."
+OK
+
+BOARD 3qkb2/3npp2/3p4/4P3/8/3B1N2/8/3QK3 WHITE
+MOVELIST "e6 fxe6 Ng5"
+"Here is a schematic depiction of a frequent Pawn sacrifice on rank 6 or 3:  
+1. e6 fxe6  2. Ng5"
+OK
+
+"The idea in such positions is to delay the development of the Bishop and 
+establish weaknesses at e6 and f7."
+OK
+
+BOARD 5bk1/8/3rpp2/8/4P3/2N2P2/8/5RK1 WHITE
+MOVELIST "e5 fxe5 Ne4"
+"This schematic illustrates a Pawn sacrifice to gain a strong position for a 
+minor piece:  1. e5! fxe5  2. Ne4 and the Knight is strongly posted against 
+the Black Bishop."
+OK
+
+BOARD 8/7R/2r5/8/P3n3/8/3nk1PP/R5K1 BLACK
+MOVELIST "Nf3 gxf3 Rg6 Kh1 Nf2"
+"Minor piece sacrifices (Knights and Bishops) open doors to mating attacks.  
+Even if a mate is prevented, the attacker can often recover 2-3 Pawns because 
+of the exposed position of the King."
+OK
+
+"Here the attack comes out of the blue; a famous Karpov mate in three:  
+1. Nf3+! gxf3   2. Rg6+ Kh1   3. Nf2++"
+OK
+
+BOARD 6k1/7p/4p3/1p1n1pp1/8/7K/Pr5P/3Q4 BLACK
+MOVELIST "Rg2 Kxg2 Ne3 Kg1 Nxd1"
+"A quiet rook sacrifice threatens mate in a most unusual way and a deadly 
+fork shows that it's really no sacrifice at all:  1. ... Rg2!   
+2. Kxg2  Ne3+   3. ... Nxd1"
+OK
+
+BOARD r5rk/5Q1p/p4P2/qp1p4/3B4/1P5P/P4P2/R3b2K WHITE
+"When a piece merely has to clear a line or a square to create a strong 
+threat, it becomes a 'desperado' -- one who cares nothing for its life, 
+only for choosing the right square."
+OK
+
+MOVELIST "Qe8 Raxe8 f7 Rg7 fxe8Q"
+"1. Qe8! Raxe8   2. f7+ Rg7   3. fxe8 (Q)++.  The Queen move prevents Raf8, 
+which is why  1. Qf8 is wrong."
+OK
+
+BOARD 6k1/40/4B3/2Q2nK1 WHITE
+"Now start from the elements of a famous combination.  See how a World 
+Champion visualizes a winning sequence of moves:  1. ... Ng3 extricates the 
+Knight from danger and threatens the fork   2. ... Nxe7+."
+OK
+
+BOARD 4r1k1/4qppp/3P4/16/4P1P1/4BP2/2Q2nK1 BLACK
+MOVELIST "Nxg3"
+"As the position builds up in reverse slow motion, notice that even though 
+the Black Queen is in take   1. ... Nxg3! is an 'in between' move 
+(zwischenzug) that says, 'Pardon me, but I'll take a Pawn first instead of 
+dealing with my Queen.'"
+OK
+
+BOARD 1rb1r1k1/p1p1qppp/2pb4/2P5/8/4P1P1/PB2BP1n/R1QN1RK1 BLACK
+MOVELIST "Nxf1 cxd6 Nxg3"
+"Two moves further back, this is how Karpov viewed his game against Timman.  
+Black can play:  1. ... Nxf1! c5xd6  2. Nxg3!"
+OK
+
+BOARD 1rb1r1k1/p1p1qppp/2pb4/2P5/8/4P1P1/PB2BP1n/R1QN1RK1 BLACK
+MOVELIST "Bxc5 Kh2"
+"Black could, of course, play   1. ... Bxc5.  But then the pin is off the 
+g3 Pawn and White simply takes the Knight at h2.  The zwischenzug is a 
+suspension of reality that makes combinations possible."
+OK
+
+BOARD 1rb1r1k1/p1p1qppp/2pb4/8/2P3n1/4P1P1/PB2BP1P/R1QN1RK1 BLACK
+MOVELIST "Nxh2 Kxh2 Qh4 Kg1 Bxg3 fxg3 Qxg3 Kh1 Re6"
+"Here is the position after White's 15th move in this Montreal, 1979 game 
+(see Classic Game 131).  Black had to visualize the previous position to 
+play the piece sacrifice:  1. ... Nxh2!   2. Kxh2."
+OK
+
+"White makes a zwischenzug, instead of the prosaic   2. Kxh2 Qh4+   
+3. Kg1 Bxg3!   4. fxg3 Qxg3+   5. Kh1 Re6, when White will soon be mated."
+OK
+
+BOARD 1rb1r1k1/p1p1qppp/2pb4/8/2P3n1/4P1P1/PB2BP1P/R1QN1RK1 BLACK
+MOVELIST "Nxh2 c5 Nxf1 cxd6 Nxg3"
+"The Karpov - Timman game went as follows:  1. ... Nxh2   2. c5 Nxf1   
+3. cxd6 Nxg3"
+OK
+
+BOARD r1b2rk1/pp1p1pbp/6p1/8/2PBq3/8/PP2BPPP/R2QK2R WHITE
+MOVELIST "Bxg7 Qxg2 Qd4 Qxh1 Kd2 Qxa1 Qf6 d6 Bh6"
+"White is ahead in development, but appears to be about to lose a 
+Pawn -- the usual 'poisoned' Pawn at g2.  1. Bxg7 Qxg2?  Black sees only  
+2. Bf3 Re8+, remaining a Pawn up.  2. Qd4! Qxh1+  3. Kd2 Qxa1  4. Qf6!"
+OK
+
+"Now there's nothing to do about  5. Bh6 and mate to follow."
+OK
+
+"A famous 'double Rook' sacrifice by the former Women's World Champion, 
+Nona Gaprindashvili."
+OK
+
+BOARD r4rk1/1b2bppp/ppq1p3/2ppB2n/5P2/1P1BP3/P1PPQ1PP/R4RK1 WHITE
+"The 'double Bishop' sacrifice is always possible when the King's natural 
+defender, the Knight, is lured away and a Rook can readily move to rank 3."
+OK
+
+MOVELIST "Bxh7 Kxh7 Qxh5 Kg8 Bxg7 Kxg7 Qg4 Kh7 Rf3" 
+"1. Bxh7+ ... (Instead of 1. Qxh5 g6) and Black can organize a defense.  1. 
+... Kxh7   2. Qxh5+ Kg8   3. Bxg7! Kxg7   4. Qg4+ Kh7   5. Rf3, with mate to 
+follow.  This was Emanual Lasker's first memorable victory, Amsterdam, 1889."
+OK
+
+BOARD 8/p3q1kp/1p2Pnp1/3pQ3/2pP4/1nP3N1/1B4PP/6K1 WHITE
+"Challenge #23:  White has an advanced Pawn.  How does White dislodge the 
+Black Queen?"
+CHALLENGE Ba3 "That is correct!"
+OK
+
+MOVELIST "Qxa3"
+"1. Ba3! Qxa3  White's pieces have few other moves!"
+OK
+
+BOARD 8/p5kp/1p2Pnp1/3pQ3/2pP4/qnP3N1/6PP/6K1 WHITE
+"Challenge #24:  How does White move the Pawn to the queening square?"
+CHALLENGE Nh5 "That is correct!"
+OK
+
+MOVELIST "gxh5 Qg5 Kf8 Qxf6 Kg8 e7" 
+"If you tried  2. Qc7+, you would be rewarded with a mate after  
+2. ... Kf1.  But Black escapes with   2. ... Kh6.  Also,   2. e7 is met 
+immediately by  2. ... Kf7.  So:  2. Nh5+! gxh5  3. Qg5+ Kf8  4. Qxf6+ Kg8  
+5. e7."
+OK
+
+"After several checks, the White King was safe and Black, Capablanca, 
+resigned to Botwinnik (see Classic Game 82)."
+OK
+
+END CHAPTER  
+BOARD 64 WHITE
+OK
+
+//===================================================================
+//Eleventh chapter: Level 10:  Strategy 
+//===================================================================
+
+BEGIN CHAPTER 10
+
+//"Strategy"
+BOARD 64 WHITE
+//OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Pawns and Strong Points.  Development and Control.  Transitions."
+OK
+
+MOVE e4 
+MOVE e5
+"Chess strategy begins with the initial moves of the game.  Here both sides 
+play to open the lines for their Bishops and Queens.  By playing the double 
+move instead of e3 or e6, they keep the potential line of the Queens' Bishops 
+also open."
+OK
+
+MOVE Nf3
+MOVE Nc6
+"Since the Knights have fewer options than Bishops, it's generally better to 
+develop them first.  In the opening or middle game, the first rule is to keep 
+all possible options open!"
+OK
+
+MOVELIST "Nxe5 Qe7 Nf3 Qxe4 Be2"
+"2. ... f6 would have been poor because of  3. Nxe5 Qe7 (NOT 3. ...  fxe5  
+4. Qh5+ and White soon wins material or checkmates)  4. Nf3 Qxe4+  5. Be2 
+and White has a big lead in development."
+OK
+
+"2. ... Bd6 would also have restricted Black's development, blocking the 
+d Pawn and impeding the Queen's Bishop."
+OK
+
+BOARD r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R WHITE
+MOVELIST "Bb5 a6"
+"White threatens to undermine the Knight's defense of the e Pawn.  However, 
+it is immune as long as White's e Pawn is also vulnerable.  For example:  
+3. Bxc6 dxc6  4. Nxe5 Qe7, regaining the Pawn."
+OK
+
+BOARD r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R WHITE
+MOVELIST "Ba4 Nf6"
+"By continuing to develop normally, Black keeps the balance in the center 
+(the squares d4, d5, e4, e5)."
+OK
+
+"A move like  3. ... Qf6 is premature, because the Queen can do little 
+damage this early in the game and is easily harried by minor pieces:  
+4. Nc3, threatening  5. Nd5." 
+OK
+
+BOARD r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R WHITE
+MOVE 0-0 
+"White's e4 Pawn is 'protected' by the rapid mobilization of the Rook, 
+in castling.  If:   5. ... Nxe4   6. Re1 f5   7. d3 ... and Black's e5 Pawn 
+will fall."  
+OK
+
+MOVELIST "d6 d4 Bg4"
+"White usually plays  6. d4 here, because the Knight will be pinned on the e 
+file if  6. ... exd4."
+OK
+
+BOARD r2qkb1r/1pp2ppp/p1np1n2/4p3/B2PP1b1/5N2/PPP2PPP/RNBQ1RK1 WHITE
+"Challenge #25:  How does White get a better Pawn position?"
+CHALLENGE Bxc6 "That's right!"
+OK
+
+"The idea is  7. Bxc6+."
+OK
+
+MOVELIST "bxc6 dxe5 Bxf3 Qxf3 dxe5 Rd1 Bd6 Bg5 Rb8"
+"7. ... bxc6.   8. dxe5.  To avoid losing a Pawn, Black must now play   
+8. ... Bxf3  9. Qxf3  dxe5.  Black's Queenside Pawns are now weak (the a 
+Pawn isolated and the c Pawns doubled).  White now mobilizes rapidly:  
+10. Rd1 Bd6  11. Bg5 Rb8"
+OK
+
+BOARD 1r1qk2r/2p2ppp/p1pb1n2/4p1B1/4P3/5Q2/PPP2PPP/RN1R2K1 WHITE
+"Challenge #26:  White controls more space and has a better Pawn structure.  
+How should White guard b2?"
+CHALLENGE Nd2 "That is correct!"
+OK
+
+"12. Nd2.  If  12. ... Rxb2, then  13. Nc4 Rxc2  14. Qd3 would win the 
+exchange.  The Rook is badly placed after  13. ... Rb5  14. a4 Rc5.  
+15. Qd3, followed by  16. Be3."
+OK
+
+MOVELIST "O-O Nc4 Re8"
+"Black chooses to get the King to safety rather than take the Pawn at b2.  
+But now the d6 square is seriously threatened:  12. ... O-O  13. Nc4 Re8"
+OK
+
+"The most difficult challenge of chess is to work out a plan of action in 
+a fairly level position."
+OK
+
+"Is the Black King position weak enough that  14. Rd3, followed by  15. Qf5 
+and  16. Rg3 might succeed?  Or should White go after the weak a Pawn with  
+14. Qc3 and  15. Qa5?"
+OK
+
+BOARD 1r1qr1k1/2p2ppp/p1pb1n2/4p1B1/2N1P3/5Q2/PPP2PPP/R2R2K1 WHITE
+MOVE Rd3
+"14. Rd3 ... Here is a good example of keeping options open.  This move 
+threatens to double the Rooks on the d file.  14. Qc3 shows that the Knight 
+is not always pinned:  14. Nxe4!"
+OK
+
+"Challenge #27:  How does Black defend against  15. Rad1?"
+CHALLENGE Re6 "That's right!"
+OK
+
+"Now Black threatens to get free, finally, with  15. ... h6."
+OK
+
+"Rapid development, open lines and early castling are often rewarded in 
+bright combinations."
+OK
+
+BOARD 3rkb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R WHITE
+"Here, White has sacrificed a piece to trap the Black King in the center, 
+in a state of cramped but apparent solidity."
+OK
+
+MOVELIST "Rxd7 Rxd7 Rd1 Qe6 Bxd7 Nxd7 Qb8 Nxb8 Rd8"
+"(For the full game, see Classic Game 4.)  White first reduces the 
+defenders:  1. Rxd7! Rxd7   2. Rd1 Qe6  3. Bxd7+ Nxd7  4. Qb8+! Nxb8  
+5. Rd8++.  This brief instruction ends with an immortal game of Paul Morphy."
+OK
+
+END CHAPTER

@@ -256,17 +256,17 @@ class Recursos:
         return out
 
     @staticmethod
-    def portada() -> Image.Image | None:
-        """Portada propia de Jaque; se puede reemplazar con
+    def portada():
+        """(imagen, es_la_de_jaque). Se puede reemplazar con
         ~/.local/share/jaque/portada.png (o .jpg)."""
         base = Path.home() / ".local" / "share" / "jaque"
-        for p in (base / "portada.png", base / "portada.jpg", base / "portada.jpeg",
-                  Path(__file__).resolve().parent / "datos" / "portada.png"):
+        propia = Path(__file__).resolve().parent / "datos" / "portada.png"
+        for p in (base / "portada.png", base / "portada.jpg", base / "portada.jpeg", propia):
             if p.exists():
                 try:
                     im = Image.open(p)
                     im.load()
-                    return im.convert("RGB")
+                    return im.convert("RGB"), p == propia
                 except Exception:
                     pass
-        return None
+        return None, False

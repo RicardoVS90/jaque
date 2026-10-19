@@ -255,7 +255,7 @@ class VentanaPrincipal(QMainWindow):
 
         self.capt = {chess.WHITE: QLabel(), chess.BLACK: QLabel()}
         for c in (chess.BLACK, chess.WHITE):
-            self.capt[c].setMinimumHeight(34)
+            self.capt[c].setMinimumHeight(52)
             v.addWidget(self.capt[c])
 
         self.tabla = QTableWidget(0, 3)
@@ -747,19 +747,39 @@ class VentanaPrincipal(QMainWindow):
             for t, n in inicial.items():
                 faltan += [t] * max(0, n - len(self.board.pieces(t, color)))
             faltan.sort(key=lambda t: -[1, 3, 3, 5, 9][t - 1] if t <= 5 else 0)
-            alto = 30
+            alto = 48
             dpr = self.devicePixelRatioF()
-            pms = [self.tablero.pixmap_pieza(color, t, alto) for t in faltan]
-            ancho = sum(pm.width() / dpr * 0.75 for pm in pms) + 20
+            disp = max(200, self.capt[not color].width() - 8)
+            grupos = []
+            for t in faltan:
+                if grupos and grupos[-1][0] == t:
+                    grupos[-1][1].append(self.tablero.pixmap_pieza(color, t, alto))
+                else:
+                    grupos.append((t, [self.tablero.pixmap_pieza(color, t, alto)]))
+
+            def medir(solape, hueco):
+                x = 0.0
+                for _, pms in grupos:
+                    for k, pm in enumerate(pms):
+                        x += pm.width() / dpr * (solape if k < len(pms) - 1 else 1.0)
+                    x += hueco
+                return x
+            solape, hueco = 0.72, 10.0
+            while medir(solape, hueco) > disp and solape > 0.3:
+                solape -= 0.04
+                hueco = max(3.0, hueco - 1)
+            ancho = medir(solape, hueco) + 4
             lienzo = QPixmap(int(max(ancho, 10) * dpr), int(alto * dpr))
             lienzo.setDevicePixelRatio(dpr)
             lienzo.fill(Qt.transparent)
             from PySide6.QtGui import QPainter
             p = QPainter(lienzo)
-            x = 0
-            for pm in pms:
-                p.drawPixmap(int(x), int(alto - pm.height() / dpr), pm)
-                x += pm.width() / dpr * 0.75
+            x = 0.0
+            for _, pms in grupos:
+                for k, pm in enumerate(pms):
+                    p.drawPixmap(int(x), int(alto - pm.height() / dpr), pm)
+                    x += pm.width() / dpr * (solape if k < len(pms) - 1 else 1.0)
+                x += hueco
             p.end()
             # mostrar junto al bando que capturó
             self.capt[not color].setPixmap(lienzo)
@@ -963,11 +983,24 @@ def main(argv=None):
 
     splash = None
     if "--sin-portada" not in argv:
-        portada = rec.portada()
+        portada, de_jaque = rec.portada()
         if portada is not None:
             scr = app.primaryScreen().availableGeometry()
             alto = int(scr.height() * 0.55)
             q = pil_a_qimage(portada).scaledToHeight(alto, Qt.SmoothTransformation)
+            if de_jaque:
+                from PySide6.QtGui import QPainter
+                pq = QPainter(q)
+                pq.setRenderHint(QPainter.TextAntialiasing)
+                fv = QFont("DejaVu Serif")
+                fv.setPixelSize(max(12, round(q.height() * 0.036)))
+                fv.setLetterSpacing(QFont.PercentageSpacing, 140)
+                pq.setFont(fv)
+                pq.setPen(QColor(226, 200, 160))
+                y = round(q.height() * 0.80)
+                pq.drawText(0, y, q.width(), round(q.height() * 0.08),
+                            Qt.AlignHCenter | Qt.AlignTop, f"versión {__version__}")
+                pq.end()
             splash = QSplashScreen(QPixmap.fromImage(q))
             splash.showMessage("cargando…  ", Qt.AlignBottom | Qt.AlignRight, QColor(236, 224, 205))
             splash.show()

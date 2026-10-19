@@ -570,14 +570,39 @@ class Tablero(QWidget):
             self.jugada_hecha.emit(mv)
 
     def _elegir_coronacion(self, casilla):
-        m = QMenu(self)
-        m.setStyleSheet("QMenu{font-size:15px} QMenu::item{padding:6px 18px 6px 8px}")
-        acc = {}
+        """Ventana grande con las cuatro piezas para elegir la coronación."""
+        from PySide6.QtCore import QSize
+        from PySide6.QtWidgets import QDialog, QHBoxLayout, QLabel, QToolButton, QVBoxLayout
+        lado_casilla = self.width() / 9
+        icono = int(max(72, min(150, lado_casilla * 1.1)))
+        d = QDialog(self, Qt.Popup | Qt.FramelessWindowHint)
+        d.setStyleSheet("QDialog{background:#2a1f17; border:2px solid #c4924a; border-radius:10px}"
+                        "QToolButton{background:#3a2b1f; border:1px solid #5a4430; border-radius:8px;"
+                        "color:#ecdcc4; font-size:16px; padding:6px}"
+                        "QToolButton:hover{background:#6b4d30; border-color:#e8c070}"
+                        "QLabel{color:#e8c070; font-size:18px; font-weight:bold}")
+        v = QVBoxLayout(d)
+        v.setContentsMargins(16, 12, 16, 16)
+        t = QLabel("Coronar como…")
+        t.setAlignment(Qt.AlignCenter)
+        v.addWidget(t)
+        fila = QHBoxLayout()
+        fila.setSpacing(12)
+        elegido = {"tipo": None}
         for tipo, n in [(chess.QUEEN, "Dama"), (chess.ROOK, "Torre"),
                         (chess.BISHOP, "Alfil"), (chess.KNIGHT, "Caballo")]:
-            a = QAction(self.icono_pieza(self.board.turn, tipo), n, m)
-            m.addAction(a)
-            acc[a] = tipo
-        bx, by = self._bxy(casilla)
-        pt = self._a_pantalla(bx + 0.5, by + 0.5).toPoint()
-        return acc.get(m.exec(self.mapToGlobal(pt)))
+            b = QToolButton()
+            b.setIcon(self.icono_pieza(self.board.turn, tipo, icono))
+            b.setIconSize(QSize(icono, icono))
+            b.setText(n)
+            b.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+            b.setCursor(Qt.PointingHandCursor)
+            b.clicked.connect(lambda _=False, t=tipo: (elegido.__setitem__("tipo", t), d.accept()))
+            fila.addWidget(b)
+        v.addLayout(fila)
+        d.adjustSize()
+        # centrada sobre el tablero
+        g = self.mapToGlobal(self.rect().center())
+        d.move(g.x() - d.width() // 2, g.y() - d.height() // 2)
+        d.exec()
+        return elegido["tipo"]

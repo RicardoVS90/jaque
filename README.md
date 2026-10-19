@@ -1,4 +1,4 @@
-# Jaque 0.3
+# Jaque 0.4
 
 Ajedrez en español para Linux, con **Stockfish** como motor, gráficos escalados
 a 1920×1080, 2560×1440 o lo que tenga tu monitor, tutor, partidas clásicas
@@ -8,26 +8,20 @@ Proyecto personal de Ricardo, para uso propio.
 
 ## Instalación (Debian 13 / KDE)
 
-Poné el ISO del CD en la misma carpeta que `instalar.sh` (o dejalo en
-`~/Descargas`) y ejecutá:
+Todo viene dentro de un solo archivo: programa, gráficos, sonidos, lecciones,
+partidas y traducciones. **No hace falta el ISO.**
 
 ```bash
-cd jaque
-./instalar.sh                    # busca el ISO solo
-./instalar.sh /ruta/al/cd.iso    # o indicándolo
+bash Jaque-0.4.0-instalador.run
 ```
 
-El instalador:
+El instalador copia todo a `~/.local/share/jaque`, instala Stockfish y
+`python3-venv` si faltan (pide tu contraseña), reutiliza el entorno de Python
+si ya existe (si no, lo crea: esa única parte necesita internet), recorta las
+piezas de antemano y agrega el comando `jaque` y la entrada en el menú de KDE.
+Para actualizar a una versión nueva, se ejecuta el instalador nuevo encima.
 
-1. instala Stockfish y `python3-venv` si faltan (pide tu contraseña);
-2. crea (o reutiliza) el entorno de Python en `~/.local/share/jaque/venv`;
-3. **prepara los gráficos y sonidos una sola vez** en
-   `~/.local/share/jaque/recursos` (unos 6 MB) y recorta las piezas de
-   antemano. Después de esto el ISO ya no hace falta: lo podés borrar;
-4. agrega el comando `jaque`, el ícono y la entrada en el menú de KDE.
-
-Si el instalador no encuentra el ISO, Jaque te lo pide una única vez al abrirlo.
-Para rehacer el paquete: menú Opciones → *Volver a preparar gráficos y sonidos*.
+Para desinstalar:  `bash Jaque-0.4.0-instalador.run --desinstalar`
 
 ## Tu propia portada
 

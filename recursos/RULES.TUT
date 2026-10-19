@@ -1,0 +1,1992 @@
+TITLE "CHESS BASICS"
+
+BEGIN NAMES
+"Introduction"
+"The Chessmen - Introduction"
+"The King"
+"The Queen"
+"The Rook"
+"The Bishop"
+"The Knight"
+"The Pawn"
+"The Chessmen - Summary"
+"Check and Checkmate"
+"Stalemate"
+"Special Moves: En Passant"
+"Special Moves: Castling"
+"Special Moves: Promotion"
+"Algebraic Notation"
+"Long Algebraic Notation"
+"Coordinate Notation"
+"Descriptive Notation"
+"Correspondence Notation"
+END NAMES
+
+//===========================================================================
+//First chapter:  Introduction
+//===========================================================================
+BEGIN CHAPTER 0
+
+NOTATION ALGEBRAIC
+
+"This tutorial explains the basic rules and moves of chess.  If you already 
+know chess basics, see Chess Tutor to learn about play strategies."
+OK
+
+"Press the 'Spacebar' to move ahead  after you read a screen.  Try it now."
+OK
+
+"If you are using a mouse, you may also click on the 'OK' button to move on 
+to the next screen."
+OK
+
+"Click on the 'Cancel' button or press the 'Esc' key to exit the tutorial."
+OK
+
+"You play chess on an 8 x 8 board of light and dark squares."
+OK
+
+"Always turn the board so that a light square is in the lower right corner."
+OK
+
+"<Light on Right> is an easy way to remember this."
+OK
+
+"Rows on the chessboard are called RANKS (1 to 8).  
+These Pawns are all on rank 4."
+BOARD 32/PPPPPPPP WHITE
+OK
+
+"Columns on the chessboard are called FILES (a to h).  These Pawns are all 
+on the d-file."
+BOARD 3P4/3P4/3P4/3P4/3P4/3P4/3P4/3P4 WHITE
+OK
+
+"Hint:  RANK and ROW both start with R.  This is an easy way to remember 
+rank and file."
+BOARD 64 WHITE
+OK
+
+"Chess is a war between two opposing armies:  White and Black."
+OK
+
+"Each army has a King, a Queen, two Rooks, two Bishops, two Knights, and 
+eight Pawns."
+OK
+
+"Start by setting-up the White army on your side of the board."
+OK
+
+"Put one Rook at each end of rank 1.  The Rook looks like a castle or tower."
+OK
+
+"The rook's castle shape comes from the Farsi Indian pieces which represented 
+the tower carried by the elephant."
+BOARD 56/R6R WHITE
+OK
+
+"Next to each Rook, place a Knight.  The Knights look like horses."
+OK
+
+"The Knight was originally called faras in Arabic, meaning horse.  In Europe, 
+the name of the horse evolved to the name of it's rider, the Knight."
+BOARD 56/RN4NR WHITE
+OK
+
+"Add a Bishop next to each Knight.  The Bishop has a notch in his hat."
+OK
+
+"There are two empty squares left on the near rank.  The Queen is placed on 
+the square that matches its color."
+BOARD 56/RNB2BNR WHITE
+OK
+
+"'Queen on Color' is an easy way to remember where the Queen goes.  (White 
+Queen on a White square).  Or... 'The dress matches the shoes.' "
+BOARD 56/RNBQ1BNR WHITE
+OK
+
+"The King goes on the last empty square."
+OK
+
+"At the front of the army go the Pawns, or foot soldiers.  Put one Pawn 
+directly in front of each piece."
+BOARD 56/RNBQKBNR WHITE
+OK
+
+"Now turn the board around and set up Black's pieces.  Black's pieces always 
+start on rank 8."
+BOARD 48/PPPPPPPP/RNBQKBNR WHITE
+OK
+
+"Two Black Rooks..."
+BOARD RNBQKBNR/PPPPPPPP/48 BLACK
+OK
+
+"Two Black Knights..."
+BOARD RNBQKBNR/PPPPPPPP/40/r6r BLACK
+OK
+
+"Two Black Bishops..."
+BOARD RNBQKBNR/PPPPPPPP/40/rn4nr BLACK
+OK
+
+"Queen on Color!  (Black Queen on Black Square)"
+BOARD RNBQKBNR/PPPPPPPP/40/rnb2bnr BLACK
+OK
+
+"The Black King"
+BOARD RNBQKBNR/PPPPPPPP/40/rnbq1bnr BLACK
+OK
+          
+"Pawns in front of pieces."
+BOARD RNBQKBNR/PPPPPPPP/40/rnbqkbnr BLACK
+OK
+
+"White always makes the first move in a game.  Rotate the board so that 
+White's pieces are in front."
+BOARD RNBQKBNR/PPPPPPPP/32/pppppppp/rnbqkbnr BLACK
+OK
+
+"Now you're ready to play Chess!"
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+OK
+
+"Starting with White, each side takes turns moving."
+MOVELIST "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6"
+OK
+
+"You are allowed to move only ONE piece on each turn."
+BOARD 64 WHITE
+OK
+
+END CHAPTER
+//==========================================================================
+//"The Pieces - Introduction"
+//==========================================================================
+
+BEGIN CHAPTER 1
+
+"There are 6 different chess pieces..."
+BOARD 64 WHITE
+OK
+
+"Kings,"
+BOARD 4k3/48/4K3 WHITE
+OK
+
+"Queens,"
+BOARD 3q3/48/3Q4 WHITE
+OK
+
+"Rooks,"
+BOARD r6r/48/R6R WHITE
+OK
+ 
+"Knights,"
+BOARD 1n4n1/48/1N4N1 WHITE
+OK
+ 
+"Bishops,"
+BOARD 2b2b2/48/2B2B2 WHITE
+OK
+ 
+"and Pawns."
+BOARD 8/pppppppp/32/PPPPPPPP/8 WHITE
+OK
+
+"Each piece has its own way of moving on the chessboard."
+OK
+
+"To play chess, you must learn how each piece moves."
+BOARD 64 WHITE
+OK
+
+END CHAPTER
+//==========================================================================
+//"The King"
+//==========================================================================
+
+BEGIN CHAPTER 2
+
+//"The King"
+BOARD 4k3/48/4K3 WHITE
+"The King is the most important chess piece." 
+OK
+ 
+"If you CHECKMATE your opponent's King, you WIN!!" 
+OK
+
+"If your King is checkmated, you lose!"
+OK
+
+"In a checkmate, the King is not captured.  Instead, you win if you could 
+capture your opponent's King on your next move and there is no move your 
+opponent can make to prevent that from happening."
+OK
+
+"After seeing how the other pieces move, you will return to the subject of 
+checkmate."
+OK
+
+"First, look at how the King moves."
+OK
+
+"The King can move one square in any direction.  (The ghost Kings show the 
+squares to which this White King can legally move.)"
+BOARD 40/3KKK2/3KKK2/3KKK2 WHITE
+GHOST WHITE KING e3
+GHOST WHITE KING f3
+GHOST WHITE KING f2
+GHOST WHITE KING f1
+GHOST WHITE KING e1
+GHOST WHITE KING d1
+GHOST WHITE KING d2
+GHOST WHITE KING d3
+OK
+
+"Important Rule #1:  You may never move one of your pieces (even the King) 
+to a square occupied by another of your pieces."
+OK
+
+"For example, the White King on e2 can move to every square EXCEPT f2, which 
+is occupied by another White piece (a Pawn)."
+BOARD 40/3KKK2/3KKP2/3KKK2 WHITE
+GHOST WHITE KING e3
+GHOST WHITE KING f3
+GHOST WHITE KING f1
+GHOST WHITE KING e1
+GHOST WHITE KING d1
+GHOST WHITE KING d2
+GHOST WHITE KING d3
+OK
+
+"Important Rule #2:  If an OPPOSING piece occupies a square to which you can 
+move, you can CAPTURE the opposing piece by moving to that square, and 
+removing your opponent's piece from the board."
+OK
+
+"For example, the White King can capture the Black Pawn on e3 because the 
+White King can move to that square."
+BOARD 40/3KpK2/3KKP2/3KKK2 WHITE
+GHOST WHITE KING f3
+GHOST WHITE KING f1
+GHOST WHITE KING e1
+GHOST WHITE KING d1
+GHOST WHITE KING d2
+GHOST WHITE KING d3
+OK
+
+"King takes (captures) Pawn."
+BOARD 40/4p3/4KP2/8 WHITE
+MOVE Ke3
+OK
+
+"Although the King is the most important piece, it is also one of the weakest, 
+because it can't move very far in a single turn."
+BOARD 32/3KKK2/3KKK2/3KKK2/8 WHITE
+GHOST WHITE KING e4
+GHOST WHITE KING f4
+GHOST WHITE KING f3
+GHOST WHITE KING f2
+GHOST WHITE KING e2
+GHOST WHITE KING d2
+GHOST WHITE KING d3
+GHOST WHITE KING d4
+OK
+
+"To win the game, the King must rely on the rest of his army."
+OK
+
+END CHAPTER
+//==========================================================================
+//"The Queen"
+//==========================================================================
+
+BEGIN CHAPTER 3
+
+"The Queen"
+BOARD 3q4/48/3Q4 WHITE
+OK
+
+"The Queen can move horizontally along ranks,"
+BOARD 32/QQQQQQQQ/24 WHITE
+GHOST WHITE QUEEN a4
+GHOST WHITE QUEEN b4
+GHOST WHITE QUEEN c4
+GHOST WHITE QUEEN e4
+GHOST WHITE QUEEN f4
+GHOST WHITE QUEEN g4
+GHOST WHITE QUEEN h4
+OK
+
+"vertically on files,"
+BOARD 3Q4/3Q4/3Q4/3Q4/3Q4/3Q4/3Q4/3Q4 WHITE
+GHOST WHITE QUEEN d1 
+GHOST WHITE QUEEN d2
+GHOST WHITE QUEEN d3
+GHOST WHITE QUEEN d5
+GHOST WHITE QUEEN d6
+GHOST WHITE QUEEN d7
+GHOST WHITE QUEEN d8
+OK
+
+"or along either diagonal."
+BOARD 7Q/Q5Q1/1Q3Q2/2Q1Q3/3Q4/2Q1Q3/1Q3Q2/Q5Q1 WHITE
+GHOST WHITE QUEEN a1
+GHOST WHITE QUEEN b2
+GHOST WHITE QUEEN c3
+GHOST WHITE QUEEN e5
+GHOST WHITE QUEEN f6
+GHOST WHITE QUEEN g7
+GHOST WHITE QUEEN h8
+GHOST WHITE QUEEN a7
+GHOST WHITE QUEEN b6
+GHOST WHITE QUEEN c5
+GHOST WHITE QUEEN e3
+GHOST WHITE QUEEN f2
+GHOST WHITE QUEEN g1
+OK
+
+"The Queen cannot move OVER another piece (of either color).  Here the White 
+Queen is blocked by the White Pawn on f4, and cannot reach g4 or h4."
+BOARD 32/QQQQQP2/24 WHITE
+GHOST WHITE QUEEN b4
+GHOST WHITE QUEEN c4
+GHOST WHITE QUEEN a4
+GHOST WHITE QUEEN e4
+OK
+
+"This Black Pawn blocks the White Queen as well."
+BOARD 8/3p4/3Q4/3Q4/QQQQQP2/24 WHITE
+GHOST WHITE QUEEN d5
+GHOST WHITE QUEEN d6
+GHOST WHITE QUEEN b4
+GHOST WHITE QUEEN c4
+GHOST WHITE QUEEN a4
+GHOST WHITE QUEEN e4
+OK
+
+"Like the King, the Queen may capture the Black Pawn by moving to the square 
+it occupies (but no farther)."
+OK
+
+"Queen takes Pawn."
+BOARD 8/3p4/16/3Q1P2/24 WHITE
+MOVE Qd7
+OK
+
+"The Queen is the most powerful piece because of her ability to attack so 
+many squares simultaneously."
+
+BOARD 3Q4/Q2Q2Q1/1Q1Q1Q2/2QQQ3/QQQQQQQQ/2QQQ3/1Q1Q1Q2/Q2Q2Q1 WHITE
+GHOST WHITE QUEEN a1
+GHOST WHITE QUEEN b2
+GHOST WHITE QUEEN c3
+GHOST WHITE QUEEN e5
+GHOST WHITE QUEEN f6
+GHOST WHITE QUEEN g7
+GHOST WHITE QUEEN h8
+GHOST WHITE QUEEN a7
+GHOST WHITE QUEEN b6
+GHOST WHITE QUEEN c5
+GHOST WHITE QUEEN e3
+GHOST WHITE QUEEN f2
+GHOST WHITE QUEEN g1
+GHOST WHITE QUEEN a4
+GHOST WHITE QUEEN b4
+GHOST WHITE QUEEN c4
+GHOST WHITE QUEEN e4
+GHOST WHITE QUEEN f4
+GHOST WHITE QUEEN g4
+GHOST WHITE QUEEN h4
+GHOST WHITE QUEEN d1
+GHOST WHITE QUEEN d2
+GHOST WHITE QUEEN d3
+GHOST WHITE QUEEN d5
+GHOST WHITE QUEEN d6
+GHOST WHITE QUEEN d7
+GHOST WHITE QUEEN d8
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"The Rook"
+//==========================================================================
+
+BEGIN CHAPTER 4
+
+"The Rook"
+BOARD r6r/48/R6R WHITE
+OK
+
+"The Rook moves horizontally along ranks,"
+BOARD 32/RRRRRRRR/24 WHITE
+GHOST WHITE ROOK a4
+GHOST WHITE ROOK b4
+GHOST WHITE ROOK c4
+GHOST WHITE ROOK e4
+GHOST WHITE ROOK f4
+GHOST WHITE ROOK g4
+GHOST WHITE ROOK h4
+OK
+
+"and vertically along files."
+BOARD 3R4/3R4/3R4/3R4/3R4/3R4/3R4/3R4 WHITE   
+GHOST WHITE ROOK d1
+GHOST WHITE ROOK d2
+GHOST WHITE ROOK d3
+GHOST WHITE ROOK d5
+GHOST WHITE ROOK d6
+GHOST WHITE ROOK d7
+GHOST WHITE ROOK d8
+OK
+
+BOARD 16/3p4/3R4/RRRRRRRR/3R4/3R4/3R4 WHITE
+GHOST WHITE ROOK d5
+GHOST WHITE ROOK a4
+GHOST WHITE ROOK b4
+GHOST WHITE ROOK c4
+GHOST WHITE ROOK e4
+GHOST WHITE ROOK f4
+GHOST WHITE ROOK g4
+GHOST WHITE ROOK h4
+GHOST WHITE ROOK d3
+GHOST WHITE ROOK d2
+GHOST WHITE ROOK d1
+"The Rook cannot move OVER another piece (of either color).  Here the White 
+Rook is blocked by the Black Pawn on d6 and cannot reach d7 or d8."
+OK
+
+"When blocked by an OPPONENT's piece, the Rook may capture it by moving to 
+the square it occupies."
+OK
+
+BOARD 16/3p4/8/3R4/24 WHITE
+MOVE Rd6
+"Rook takes Pawn."
+OK
+
+BOARD 3R4/3R4/3R4/3R4/RRRRRRRR/3R4/3R4/3R4 WHITE
+GHOST WHITE ROOK d1
+GHOST WHITE ROOK d2
+GHOST WHITE ROOK d3
+GHOST WHITE ROOK d5
+GHOST WHITE ROOK d6
+GHOST WHITE ROOK d7
+GHOST WHITE ROOK d8
+GHOST WHITE ROOK a4
+GHOST WHITE ROOK b4
+GHOST WHITE ROOK c4
+GHOST WHITE ROOK e4
+GHOST WHITE ROOK f4
+GHOST WHITE ROOK g4
+GHOST WHITE ROOK h4
+"Like the Queen, the Rook is a strong piece because of its ability to attack 
+several squares simultaneously."
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"The Bishop"
+//==========================================================================
+
+BEGIN CHAPTER 5
+
+"The Bishop"
+BOARD 2b2b2/48/2B2B2 WHITE
+OK
+
+BOARD 7B/B5B1/1B3B2/2B1B3/3B4/2B1B3/1B3B2/B5B1 WHITE
+GHOST WHITE BISHOP a1
+GHOST WHITE BISHOP b2
+GHOST WHITE BISHOP c3
+GHOST WHITE BISHOP e5
+GHOST WHITE BISHOP f6
+GHOST WHITE BISHOP g7
+GHOST WHITE BISHOP h8
+GHOST WHITE BISHOP a7
+GHOST WHITE BISHOP b6
+GHOST WHITE BISHOP c5
+GHOST WHITE BISHOP e3
+GHOST WHITE BISHOP f2
+GHOST WHITE BISHOP g1
+"The Bishop moves along either diagonal."
+OK
+
+"Notice that the Bishop always moves to squares of the same color as the one 
+it starts on."
+OK
+
+"This White Bishop is restricted to diagonals made up of DARK squares."
+OK
+      
+BOARD b7/1b5b/2b3b1/3b1b2/4b3/3b1b2/2b3b1/1b5b BLACK 
+GHOST BLACK BISHOP b1
+GHOST BLACK BISHOP c2
+GHOST BLACK BISHOP d3
+GHOST BLACK BISHOP f5
+GHOST BLACK BISHOP g6
+GHOST BLACK BISHOP h7
+GHOST BLACK BISHOP a8
+GHOST BLACK BISHOP b7
+GHOST BLACK BISHOP c6
+GHOST BLACK BISHOP d5
+GHOST BLACK BISHOP f3
+GHOST BLACK BISHOP g2
+GHOST BLACK BISHOP h1
+"This Black Bishop is restricted to diagonals made up of LIGHT squares."
+OK
+
+"Each side begins the game with two Bishops:  One that moves on light squares 
+and one that moves on dark squares."
+BOARD 2b2b2/48/2B2B2 WHITE
+OK
+
+BOARD 2b2b2/8/7B/6B1/5B2/B3B3/1B1B4/2B2B2 WHITE
+GHOST WHITE BISHOP b2
+GHOST WHITE BISHOP a3
+GHOST WHITE BISHOP d2
+GHOST WHITE BISHOP e3
+GHOST WHITE BISHOP f4
+GHOST WHITE BISHOP g5
+GHOST WHITE BISHOP h6
+"White's DARK-diagonal Bishop"
+OK
+
+BOARD 2b2b2/8/B7/1B6/2B5/3B3B/4B1B1/2B2B2 WHITE
+GHOST WHITE BISHOP g2
+GHOST WHITE BISHOP h3
+GHOST WHITE BISHOP e2
+GHOST WHITE BISHOP d3
+GHOST WHITE BISHOP c4
+GHOST WHITE BISHOP b5
+GHOST WHITE BISHOP a6
+"White's LIGHT-diagonal Bishop"
+OK
+
+BOARD 2b2b2/1b1b4/b3b3/5b2/6b1/7b/8/2B2B2 BLACK
+GHOST BLACK BISHOP b7
+GHOST BLACK BISHOP a6
+GHOST BLACK BISHOP d7
+GHOST BLACK BISHOP e6
+GHOST BLACK BISHOP f5
+GHOST BLACK BISHOP g4
+GHOST BLACK BISHOP h3
+"Black's LIGHT-diagonal Bishop"
+OK
+
+BOARD 2b2b2/4b1b1/3b3b/2b5/1b6/b7/8/2B2B2 BLACK
+GHOST BLACK BISHOP g7
+GHOST BLACK BISHOP h6
+GHOST BLACK BISHOP e7
+GHOST BLACK BISHOP d6
+GHOST BLACK BISHOP c5
+GHOST BLACK BISHOP b4
+GHOST BLACK BISHOP a3
+"Black's DARK-diagonal Bishop"
+OK
+
+"Like the Queen, the Bishop cannot move over another piece."
+BOARD 56/5B2 WHITE
+OK
+
+BOARD 32/2r5/3B3B/4B1B1/5B2 WHITE 
+GHOST WHITE BISHOP g2
+GHOST WHITE BISHOP h3
+GHOST WHITE BISHOP e2
+GHOST WHITE BISHOP d3
+"Here the Black Rook blocks the White Bishop from reaching b5 and a6."
+OK
+
+"As usual, if the blocking piece belongs to the opposing color, the Bishop 
+can capture it simply by moving to that square."
+OK
+
+BOARD 32/2r5/16/5B2 WHITE
+MOVE Bc4
+"Bishop takes Rook."
+OK
+
+BOARD 7B/B5B1/1B3B2/2B1B3/3B4/2B1B3/1B3B2/B5B1 WHITE
+GHOST WHITE BISHOP a1
+GHOST WHITE BISHOP b2
+GHOST WHITE BISHOP c3
+GHOST WHITE BISHOP e5
+GHOST WHITE BISHOP f6
+GHOST WHITE BISHOP g7
+GHOST WHITE BISHOP h8
+GHOST WHITE BISHOP a7
+GHOST WHITE BISHOP b6
+GHOST WHITE BISHOP c5
+GHOST WHITE BISHOP e3
+GHOST WHITE BISHOP f2
+GHOST WHITE BISHOP g1
+"Because it attacks fewer squares and is restricted to light or dark squares, 
+the Bishop is a weaker piece than the Queen or Rook."
+OK
+
+END CHAPTER 
+
+//==========================================================================
+//"The Knight"
+//==========================================================================
+
+BEGIN CHAPTER 6
+
+"The Knight"
+BOARD 1n4n1/48/1N4N1 WHITE
+OK
+
+"The Knight makes L-shaped moves.  Two squares along a rank or file, and then 
+one square at a right angle."
+BOARD 32/3N4/24 WHITE
+OK
+
+"For example, two squares along rank 4,"
+BOARD 32/3N4/24 WHITE
+OK
+
+"and one square at a right angle along the b-file.  (It could also move to 
+b5.)"
+SLIDE d4 b4
+OK
+
+"Or, two squares along a file,"
+SLIDE b4 b3
+OK
+
+"and then one square along rank 5.  (It could also move to a5.)"
+SLIDE b3 b5
+OK
+
+SLIDE b5 c5
+"Here are all the squares that a Knight on d4 can reach."
+OK
+
+BOARD 16/2N1N3/1N3N2/3N4/1N3N2/2N1N3/8 WHITE
+GHOST WHITE KNIGHT c6
+GHOST WHITE KNIGHT e6
+GHOST WHITE KNIGHT c2
+GHOST WHITE KNIGHT e2
+GHOST WHITE KNIGHT f5
+GHOST WHITE KNIGHT f3
+GHOST WHITE KNIGHT b5
+GHOST WHITE KNIGHT b3
+"Notice that the Knight always lands on a square of a different color from 
+the one on which it starts."
+OK
+
+"The Knight is special:  It jumps OVER pieces."
+OK
+
+BOARD 16/2r1N3/1N3N2/3N4/1P3N2/2N1N3/8 WHITE
+GHOST WHITE KNIGHT e6
+GHOST WHITE KNIGHT c2
+GHOST WHITE KNIGHT e2
+GHOST WHITE KNIGHT f5
+GHOST WHITE KNIGHT f3
+GHOST WHITE KNIGHT b5
+"As always, you cannot move the Knight to a square containing another piece 
+of the same color (such as b3)."
+OK
+
+"But you can capture an opponent's piece on the destination square."
+OK
+
+BOARD 16/2r5/8/3N4/1P6/8 WHITE
+MOVE Nc6
+"Knight takes Rook."
+OK
+
+BOARD 1N1N4/N3N3/2N5/N3N3/1N1N4/24 WHITE
+GHOST WHITE KNIGHT d8
+GHOST WHITE KNIGHT b8
+GHOST WHITE KNIGHT b4
+GHOST WHITE KNIGHT d4
+GHOST WHITE KNIGHT a5
+GHOST WHITE KNIGHT a7
+GHOST WHITE KNIGHT e5
+GHOST WHITE KNIGHT e7
+"The Knight, like the Bishop, is considered less powerful than the Queen or 
+Rook.  Even though it attacks fewer squares than a Bishop, its jumping 
+ability makes it a valuable piece."
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"The Pawn"
+//==========================================================================
+
+BEGIN CHAPTER 7
+
+"The Pawn"
+BOARD 8/pppppppp/32/PPPPPPPP/8 WHITE
+OK
+
+"All White Pawns start from rank 2."
+BOARD 48/PPPPPPPP/8 WHITE
+OK
+
+"All Black Pawns start from rank 7."
+BOARD 8/pppppppp/48 WHITE
+OK
+
+BOARD 8/pppppppp/32/PPPPPPPP/8 WHITE
+"Pawns always move toward the opposite side of the board."
+OK
+
+"From its starting square, a Pawn may travel one or two squares forward."
+OK
+
+"Two squares..."
+MOVE e4
+OK
+
+MOVE d6
+"One Square..."
+OK
+
+MOVE f3
+"One Square..."
+OK
+
+MOVE e5
+"Two squares..."
+OK
+
+"The first time a Pawn is moved, it's the player's choice."
+OK
+
+"A Pawn that has moved, like the one on f3,..."
+OK
+
+MOVE f4
+"...may only move one square forward per move."
+OK
+
+BOARD 24/4r3/4P3/24 WHITE
+"Unlike other pieces, the Pawn cannot capture an opposing piece that lies in 
+its path."
+OK
+
+"Here, the White Pawn cannot capture the Black Rook."
+OK
+
+BOARD 24/5p2/4NQR1/24 WHITE
+"A Pawn can only capture a piece on one of the two squares diagonally in 
+front of it."
+OK
+
+"Here, the Black Pawn can capture either the White Rook or White Knight,"
+OK
+
+"but not the White Queen."
+OK
+
+BOARD 24/5p2/4NQR1/24 WHITE
+SLIDE f5 e4
+"Pawn takes Knight."
+OK
+
+BOARD 64 WHITE
+"Pawns are the least valuable piece.  But don't throw them away 
+thoughtlessly.  A single Pawn can sometimes mean the difference between 
+winning and losing!"
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Summary of piece movement"
+//==========================================================================
+
+BEGIN CHAPTER 8
+
+BOARD 64 WHITE
+"Here is a quick summary of the chess pieces."
+OK
+
+"Important Rule #1:  You may never move one of your pieces to a square 
+occupied by another of your pieces."
+OK
+
+"Important Rule #2:  If an OPPOSING piece occupies a square to which you can 
+move, you can CAPTURE the opposing piece by moving to that square, and removing 
+your opponent's piece from the board."
+OK
+
+"The King moves one square in any direction."
+BOARD 24/3KKK2/3KKK2/3KKK2/16 WHITE
+GHOST WHITE KING d5
+GHOST WHITE KING e5
+GHOST WHITE KING f5
+GHOST WHITE KING d4
+GHOST WHITE KING f4
+GHOST WHITE KING d3
+GHOST WHITE KING e3
+GHOST WHITE KING f3
+OK
+
+BOARD 3Q3Q/Q2Q2Q1/1Q1Q1Q2/2QQQ3/QQQQQQQQ/2QQQ3/1Q1Q1Q2/Q2Q2Q1 WHITE
+GHOST WHITE QUEEN a4
+GHOST WHITE QUEEN b4
+GHOST WHITE QUEEN c4
+GHOST WHITE QUEEN e4
+GHOST WHITE QUEEN f4
+GHOST WHITE QUEEN g4
+GHOST WHITE QUEEN h4
+GHOST WHITE QUEEN d1
+GHOST WHITE QUEEN d2
+GHOST WHITE QUEEN d3
+GHOST WHITE QUEEN d5
+GHOST WHITE QUEEN d6
+GHOST WHITE QUEEN d7
+GHOST WHITE QUEEN d8
+GHOST WHITE QUEEN a1
+GHOST WHITE QUEEN b2
+GHOST WHITE QUEEN c3
+GHOST WHITE QUEEN e5
+GHOST WHITE QUEEN f6
+GHOST WHITE QUEEN g7
+GHOST WHITE QUEEN h8
+GHOST WHITE QUEEN a7
+GHOST WHITE QUEEN b6
+GHOST WHITE QUEEN c5
+GHOST WHITE QUEEN e3
+GHOST WHITE QUEEN f2
+GHOST WHITE QUEEN g1
+"The Queen moves along ranks, files, and diagonals."
+OK
+
+BOARD 3R4/3R4/3R4/3R4/RRRRRRRR/3R4/3R4/3R4 WHITE
+GHOST WHITE ROOK a4
+GHOST WHITE ROOK b4
+GHOST WHITE ROOK c4
+GHOST WHITE ROOK e4
+GHOST WHITE ROOK f4
+GHOST WHITE ROOK g4
+GHOST WHITE ROOK h4
+GHOST WHITE ROOK d1
+GHOST WHITE ROOK d2
+GHOST WHITE ROOK d3
+GHOST WHITE ROOK d5
+GHOST WHITE ROOK d6
+GHOST WHITE ROOK d7
+GHOST WHITE ROOK d8
+"The Rook moves along ranks and files."
+OK
+
+BOARD 7B/B5B1/1B3B2/2B1B3/3B4/2B1B3/1B3B2/B5B1 WHITE
+GHOST WHITE BISHOP a1
+GHOST WHITE BISHOP b2
+GHOST WHITE BISHOP c3
+GHOST WHITE BISHOP e5
+GHOST WHITE BISHOP f6
+GHOST WHITE BISHOP g7
+GHOST WHITE BISHOP h8
+GHOST WHITE BISHOP a7
+GHOST WHITE BISHOP b6
+GHOST WHITE BISHOP c5
+GHOST WHITE BISHOP e3
+GHOST WHITE BISHOP f2
+GHOST WHITE BISHOP g1
+"The Bishop moves along light or dark diagonals."
+OK
+
+BOARD 16/2N1N3/1N3N2/3N4/1N3N2/2N1N3/8 WHITE
+GHOST WHITE KNIGHT c6
+GHOST WHITE KNIGHT e6
+GHOST WHITE KNIGHT c2
+GHOST WHITE KNIGHT e2
+GHOST WHITE KNIGHT f5
+GHOST WHITE KNIGHT f3
+GHOST WHITE KNIGHT b5
+GHOST WHITE KNIGHT b3
+"The Knight makes L-shaped moves.  Two squares along a rank or file, then 
+one square at a right angle."
+OK
+
+BOARD 24/3P4/3P4/24 WHITE
+GHOST WHITE PAWN d5
+"Pawns normally move one square towards the opposite side of the board, 
+except when capturing."
+OK
+
+BOARD 24/2P1P3/3P4/24 WHITE
+NOGHOST d5
+GHOST BLACK PAWN c5
+GHOST BLACK PAWN e5
+"Pawns move forward, but capture DIAGONALLY!  All other pieces capture the 
+same way they move."
+OK
+
+BOARD 32/4P3/4P3/4P3/8 WHITE
+GHOST WHITE PAWN e3
+GHOST WHITE PAWN e4
+"The FIRST time it moves, a Pawn may travel one or two squares forward."
+OK
+
+BOARD 64 WHITE
+"Except for special moves (castling, promotion, and en passant captures), 
+that's all there is to know about moving the various chess pieces."
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Check and Checkmate"
+//==========================================================================
+
+BEGIN CHAPTER 9
+
+//"Check and Checkmate"
+BOARD 64 WHITE
+//OK
+
+BOARD 1n2k2/16/7r/8/4K3/8/5Q2 WHITE
+"If it's your turn to move, and your King could be captured on your 
+opponent's next move, you are IN CHECK."
+OK
+
+MOVE Qb5
+"Check"
+OK
+
+"Here, the White Queen threatens to capture the Black King, so Black is in 
+check."
+OK
+
+"If your King is in check, your very next move MUST remove the threat."
+OK
+
+"There are 3 ways to remove a threat to your King."
+OK
+
+"1) Move your King to a square that is not under attack by your opponent."
+OK
+
+SLIDE e8 f8
+"Or..."
+OK
+
+SLIDE f8 e8
+"2) Capture the threatening piece with one of your pieces."
+OK
+
+SLIDE h5 b5
+"Or..."
+OK
+
+SLIDE b5 h5
+BOARD 1n2k3/16/1Q5r/8/4K3/16 BLACK
+"3) Block the threat by moving one of your other pieces."
+OK
+
+MOVE Nd7
+"If you cannot move, capture, or block, you are CHECKMATED and you lose the 
+game."
+OK
+
+"Here is a very simple example (known as the Fool's Mate)."
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+MOVELIST "f3 e5 g4 Qh4"
+OK
+
+"Checkmate, Black wins!"
+OK
+
+"White cannot move the King out of check, capture Black's Queen, or block the 
+Black Queen's attack on e1, so White is checkmated and Black wins."
+OK
+
+"The object of the game is to checkmate your opponent, while avoiding 
+checkmate yourself."
+OK
+
+BOARD 4k3/40/7r/4K3 WHITE
+"By the way, you are not allowed to move INTO check.  In other words, you 
+cannot make a move that lets your opponent capture your King."
+OK
+
+"For example, the White King cannot move to e2, d2, or f2."
+OK
+
+"All those moves would let Black's Rook capture the White King immediately.  
+White would be giving up by making such a move."
+OK
+
+"If you are certain that you cannot win, you may RESIGN rather than wait for 
+your opponent to checkmate you.  This says to your opponent, OK, you win!"
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Stalemate"
+//==========================================================================
+
+BEGIN CHAPTER 10
+
+//"Stalemate"
+BOARD 64 WHITE
+//OK
+
+"A STALEMATE occurs when the side to move is not in check AND all possible 
+moves place that side in check."
+OK
+
+"Since it is illegal to move into check, the side to move cannot move.  BUT, 
+the side to move is not in check, so it's not checkmate."
+OK
+
+"The result:  STALEMATE, which is considered to be a draw (neither side 
+wins)."
+OK
+
+BOARD 8/6R1/24/5K2/7k/8 WHITE
+"Here's an example.  (Assume it is White's turn to move.)"
+OK
+
+"White starts by making a bad move."
+OK
+
+MOVE Rg2
+"Check"
+OK
+
+"Black is in check, so must move out of the way."
+OK
+
+MOVE Kh1
+"White now makes another bad move."
+OK
+
+MOVE Kf2
+"It is now Black's turn.  The only possible moves (King to h2 or g1) would 
+put the King in check, which is illegal."
+OK
+
+"Since Black cannot move, but is not in check, it is a Stalemate."
+OK
+
+"Black was lucky.  White SHOULD have won this game with King and Rook against 
+King."
+OK
+
+BOARD 8/6R1/24/5K2/7k/8 WHITE
+"Here's how:"
+OK
+
+"White starts by moving..."
+OK
+
+MOVE Rg3
+"Black's only legal move is..."
+OK
+
+MOVE Kh1
+"White responds with..."
+OK
+
+MOVE Rh3
+"Check!"
+OK
+
+"Again, Black has only one legal move..."
+OK
+
+MOVE Kg1
+"Here's the tricky part:  White needs to waste one move so that Black will be 
+forced into a desired position (this is called temporizing)."
+OK
+
+"White temporizes with..."
+OK
+
+MOVE Rh4
+"Black is forced to move..."
+OK
+
+MOVE Kf1
+"And now White wins with..."
+OK
+
+MOVE Rh1
+"Checkmate!"
+OK
+
+"A good chess player must understand checkmate AND stalemate.  In the 
+previous example, Black avoided a certain loss because White did not see 
+the possibility of a stalemate."
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"En Passant"
+//==========================================================================
+
+BEGIN CHAPTER 11
+ 
+BOARD 64 WHITE
+//"Special Moves:  En Passant"
+//OK
+
+"En Passant is a special type of capture move for Pawns ONLY."
+OK
+
+BOARD 8/5p2/16/4P3/24 WHITE
+"Suppose you just moved your White Pawn to e5"
+OK
+
+MOVE e5
+"and your opponent moves a Pawn two squares forward to f5, landing next to 
+you."
+OK
+
+MOVE f5
+"In this case, you can capture the Black Pawn EN PASSANT (in passing), 
+by moving your Pawn diagonally behind Black's pawn on your very next move."
+OK
+
+BOARD 16/5P2/40 WHITE
+"Pawn takes Pawn, en passant"
+OK
+
+"You may capture en passant ONLY when your opponent moved a Pawn two squares 
+forward on the previous move."
+OK
+
+"Here is an example of Black capturing White's Pawn en passant."
+BOARD 32/1p6/8/P7/8 WHITE
+OK
+
+MOVE a4
+"White just moved a Pawn two squares forward."
+OK
+
+"And the Black Pawn captures on the very next move by moving diagonally 
+behind the White Pawn."
+BOARD 40/p7/16 WHITE
+OK
+
+BOARD 64 WHITE
+"This is a useful move when your opponent tries to sneak a Pawn past yours 
+by moving two squares."
+OK
+
+"But remember:  If you wish to capture en passant, you must do so on your 
+very next move."
+OK
+
+END CHAPTER
+ 
+//==========================================================================
+//"Castling"
+//==========================================================================
+
+BEGIN CHAPTER 12
+
+//"Special Moves:  Castling"
+BOARD 64 WHITE
+//OK
+ 
+"Castling is a special move involving the King and either Rook."
+BOARD 56/R3K2R WHITE
+OK
+
+BOARD 56/R1K1K1RR WHITE
+GHOST WHITE KING g1
+GHOST WHITE KING c1
+"Castling moves two pieces.  First, move the King two squares toward the Rook."
+OK
+
+BOARD 56/R3K1RR WHITE
+SLIDE e1 g1
+"Then put the Rook on the other side of the King."
+OK
+
+SLIDE h1 f1
+"You can castle with either Rook."
+OK
+
+BOARD 56/R1K1K1KR WHITE
+GHOST WHITE KING g1
+GHOST WHITE KING c1
+"Here the King castles with the other Rook"
+OK
+
+BOARD 56/R3K2R WHITE
+MOVE O-O-O
+"If the King moves toward the nearer Rook (on the King's side of the board),"
+OK
+
+BOARD 56/R3K2R WHITE
+GHOST WHITE KING g1
+MOVE O-O
+"it is called CASTLING KINGSIDE (written O-O)."
+OK
+
+BOARD 56/R1K1K2R WHITE
+GHOST WHITE KING c1
+"If the King moves toward the other Rook (on the Queen's side of the board),"
+OK
+
+BOARD 56/R3K2R WHITE
+MOVE O-O-O
+"it is called CASTLING QUEENSIDE (written O-O-O)."
+OK
+
+BOARD 56/R3K2R WHITE
+"To be legal, the King and Rook must not have moved from their starting 
+squares,"
+OK
+
+"the squares between the King and Rook must be unoccupied,"
+OK
+
+"the King cannot be in check"
+OK
+
+"and the square that the King passes over cannot be under attack.  
+Of course, the King can never be moved INTO check, so the destination 
+can't be under attack either."
+OK
+
+"It is usually a good idea to castle early in the game, as it protects the 
+King and gives the Rook a chance to control the center files."
+OK
+
+END CHAPTER
+ 
+//==========================================================================
+//"Promotion"
+//==========================================================================
+
+BEGIN CHAPTER 13
+
+//"Special Moves:  Promotion"
+BOARD 64 WHITE
+//OK
+
+BOARD 1k6/p7/32/4P3/K7 WHITE
+"When a Pawn reaches the opposite side of the Board,"
+OK
+
+MOVE e4 
+MOVE a5 
+MOVE e5 
+MOVE Kb7 
+MOVE e6 
+MOVE Kb6 
+MOVE e7 
+MOVE a4
+MOVE e8Q
+"it must be PROMOTED to a Queen, Rook, Bishop, or Knight."
+OK
+
+"Normally, you choose to promote your Pawn to a Queen."
+OK
+
+BOARD 6R1/p4P1k/4B2p/32/4K3 WHITE
+"Promoting a pawn to a piece other than a Queen is called UNDERPROMOTION."
+OK
+
+"Here, White underpromotes a Pawn to a Knight to achieve checkmate."
+OK
+
+"Checkmate."
+MOVE f8N
+OK
+
+BOARD 4k3/24/p7/16/4K3 BLACK
+"Because of promotion, an opponent's Pawn that is unopposed is a dangerous 
+threat."
+OK
+
+"Here, the White King is too far away to capture the Black Pawn."
+MOVELIST "a3 Kd1 a2 Kc1 a1Q"
+OK
+
+"Black can now win the game with ease."
+OK
+
+"Remember:  Only Pawns can be promoted.  This makes Pawns more valuable 
+than they seem at first glance.  A promotion can instantly change the 
+balance of power in a game."
+OK
+
+"By the way:  You may promote a Pawn to a Queen even if you already have 
+one (or more) on the board.  It is possible (but extremely unlikely) to 
+promote all eight of your Pawns to other pieces."
+BOARD 64 WHITE 
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Algebraic Notation"
+//==========================================================================
+
+BEGIN CHAPTER 14
+
+//"Algebraic Notation"
+BOARD 64 WHITE
+//OK
+
+"Algebraic Notation is the generally accepted method of writing down the 
+moves in a chess game."
+OK
+
+"It is easy to learn and will increase your enjoyment of chess."
+OK
+
+"To describe a move in algebraic notation, start by writing down the letter 
+of the piece that is moving."
+OK
+
+BOARD 40/4K3/16 WHITE
+"K for a King"
+OK
+
+BOARD 40/4Q3/16 WHITE
+"Q for a Queen"
+OK
+
+BOARD 40/4R3/16 WHITE     
+"R for a Rook"
+OK
+
+BOARD 40/4B3/16 WHITE     
+"B for a Bishop"
+OK
+
+BOARD 40/4N3/16 WHITE      
+"N for a Knight"
+OK
+
+BOARD 40/4P3/16 WHITE     
+"If a Pawn is moving, don't write down anything."
+OK
+
+"Then, write down the file (a - h) and rank (1 - 8) of that piece's 
+destination square."
+OK
+
+"See how this might work for the first few moves of a real game."
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+OK
+
+"White opens by moving the Pawn to square e4.  So you write:"
+OK
+
+MOVE e4
+"e4"
+OK
+
+"Black responds by moving the Pawn to square e5.  So you write:"
+OK
+
+MOVE e5
+"e5"
+OK
+
+"White moves the Knight to square f3.  So you write:"
+OK
+
+MOVE Nf3
+"Nf3"
+OK
+
+"Then Black moves the Knight to square c6.  So you write:"
+OK
+
+MOVE Nc6
+"Nc6"
+OK
+
+"White attacks by moving the Bishop to b5.  So you write:"
+OK
+
+MOVE Bb5
+"Bb5"
+OK
+
+"Black threatens that Bishop by moving the Pawn from a7 to a6:"
+OK
+
+MOVE a6
+"a6"
+OK
+
+"and White moves the Bishop out of harm's way:"
+OK
+
+MOVE Ba4
+"Ba4"
+OK
+
+"Black takes this opportunity to develop the other Knight:"
+OK
+
+MOVE Nf6
+"Nf6"
+OK
+
+"Algebraic notation uses 'x' to indicate a capture."
+OK
+
+"For example, if you use the White Bishop to capture the Black Knight on 
+square c6, you write:"
+OK
+
+"Bxc6"
+MOVE Bc6
+OK
+
+"When a Pawn makes a capture, you also write down the file on which it 
+starts:"
+OK
+
+"dxc6 (the Pawn started on the d-file)"
+MOVE dxc6
+OK
+
+"Going back to the game, White moves the d-Pawn one square forward:"
+OK
+
+"d3"
+MOVE d3
+OK
+
+"and Black responds by checking with the Bishop:"
+OK
+
+MOVE Bb4
+"Check."
+OK
+
+"When a move places the other side in check, put a '+' at the end.  So you 
+write this move as:"
+OK
+
+"Bb4+"
+OK
+
+"Sometimes, identical pieces can move to the same square."
+OK
+
+BOARD r1bqk2r/1pp2ppp/p1p2n2/4p3/1b2P3/3P1N2/PPPN1PPP/RNBQK2R WHITE
+GHOST WHITE KNIGHT d2
+"For example, White can remove the threat to the King by moving a Knight 
+to d2."
+OK
+
+"Unfortunately, Nd2 doesn't tell you which White Knight moved.  
+(Was it the Knight on f3 or the Knight on b1?)"
+OK
+
+"When identical pieces can move to the same square, algebraic notation does 
+the following:"
+OK
+
+"If both pieces start on the SAME file, put the starting rank (1 - 8) right 
+after the name of the piece."
+OK
+
+"Otherwise, put the starting file (a - h) right after the name of the piece."
+OK
+
+"In this case, the two White Knights are on DIFFERENT files.  So you write:"
+OK
+
+BOARD r1bqk2r/1pp2ppp/p1p2n2/4p3/1b2P3/3P1N2/PPP2PPP/RNBQK2R WHITE
+MOVE Nfd2
+"Nfd2 (starting file after the piece name)"
+OK
+
+"Castling Kingside is written O-O.  Castling Queenside is written as O-O-O:"
+OK
+
+MOVE O-O
+"O-O (Black castles Kingside)"
+OK
+
+MOVE O-O
+"O-O (White castles Kingside)"
+OK
+
+BOARD 2k5/4P3/R7/32/4K2R WHITE
+"When a promotion occurs, write the letter of the new piece at the end of 
+the move:"
+OK
+
+MOVE e8Q
+"e8Q+ (the new Queen checks the Black King)"
+OK
+
+MOVE Kc7
+"Kc7"
+OK
+
+"When a move causes checkmate, write an extra '+' at the end of it:"
+OK
+
+MOVE Rh7
+"Rh7++"
+OK
+
+"Now you know how to read and understand chess games recorded with Algebraic 
+Notation.  To learn more about chess strategies, check out the Chess Tutor."
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Long Algebraic Notation"
+//==========================================================================
+
+BEGIN CHAPTER 15
+
+//"Long Algebraic Notation"
+BOARD 64 WHITE
+//OK
+
+"Long algebraic notation is based on normal algebraic, which is described in 
+the preceding tutorial chapter."
+OK
+
+"In long algebraic notation, the starting square is written for each move 
+along with the destination square."
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Here's a sample game using long algebraic notation:"
+OK
+
+MOVE e4
+"e2-e4"
+OK
+
+MOVE e5
+"e7-e5"
+OK
+
+MOVE Nf3
+"Ng1-f3"
+OK
+
+MOVE Nc6
+"Nb8-c6"
+OK
+
+MOVE Bb5
+"Bf1-b5"
+OK
+
+MOVE a6
+"a7-a6"
+OK
+
+MOVE Ba4
+"Bb5-a4"
+OK
+
+MOVE Nf6
+"Ng8-f6"
+OK
+
+MOVE Bc6
+"Ba4xc6"
+OK
+
+MOVE dxc6
+"d7xc6"
+OK
+                                                          
+MOVE d3
+"d2-d3"
+OK
+
+MOVE Bb4
+"Bf8-b4+"
+OK
+
+MOVE Nd2
+"Nf3-d2"
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Coordinate Notation"
+//==========================================================================
+
+BEGIN CHAPTER 16
+
+//"Coordinate Notation"
+BOARD 64 WHITE
+//OK
+
+"Coordinate notation is the easiest notation to learn.  This notation is also 
+called Computer Notation."
+OK
+
+"To record a move in coordinate notation, write down the starting square of 
+the move followed by the destination square."
+OK
+
+"Castling moves can be recorded using the algebraic method (O-O), or by using 
+the starting and destination squares of the king.  For example, when white 
+castles kingside, the move can be recorded as e1-g1 or O-O."
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Here's a sample game using coordinate notation:"
+OK
+
+MOVE e4
+"e2-e4"
+OK
+
+MOVE e5
+"e7-e5"
+OK
+
+MOVE Nf3
+"g1-f3"
+OK
+
+MOVE Nc6
+"b8-c6"
+OK
+
+MOVE Bb5
+"f1-b5"
+OK
+
+MOVE a6
+"a7-a6"
+OK
+
+MOVE Ba4
+"b5-a4"
+OK
+
+MOVE Nf6
+"g8-f6"
+OK
+
+MOVE Bc6
+"4xc6 or a4-c6.  In coordinate notation, the 'x' for captures is optional."
+OK
+				
+MOVE dxc6
+"d7xc6"
+OK
+
+MOVE d3
+"d2-d3"
+OK
+
+MOVE Bb4
+"f8-b4+ or f8-b4.  In coordinate notation, the '+' for checks is optional."
+OK
+
+MOVE Nd2
+"f3-d2"
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Descriptive Notation"
+//==========================================================================
+
+BEGIN CHAPTER 17
+
+//"Descriptive Notation"
+BOARD 64 WHITE
+//OK
+
+"Although algebraic notation is now the preferred system of recording moves 
+in virtually all chess magazines, tournaments and recent books, the 
+descriptive system should be known by any serious chess enthusiast."
+OK
+
+"With few exceptions, chess literature in English and Spanish prior to the 
+1980s is in descriptive notation."
+OK
+
+"As in algebraic notation, pieces are identified by letter:  K for King, 
+Q for Queen, B for Bishop, and N for Knight.  Unlike algebraic, the Pawn 
+is also identified by letter:  P."
+OK
+
+BOARD 56/R7 WHITE
+"The squares are identified from the point of view of either White or Black.  
+When White is moving, the rows are numbered from the bottom of the board to 
+the top of the board with 1 through 8."
+OK
+
+MOVE Ra8
+"The White Rook just moved from row 1 to row 8."
+OK
+
+BOARD r7/56 BLACK
+"When Black is moving, the rows are numbered from the top of the board to 
+the bottom."
+OK
+
+MOVE R8a1
+"The Black rook (from Black's point of view) just moved from row 1 to row 8."
+OK
+
+BOARD 64 WHITE
+"The columns are named after the pieces that occupy the first row in the 
+initial position."
+OK
+
+BOARD R7/R7/R7/R7/R7/R7/R7/R7 WHITE
+"This column is called the Queen's Rook column, or QR."
+OK
+
+BOARD 1N6/1N6/1N6/1N6/1N6/1N6/1N6/1N6 WHITE
+"This column is called the Queen's Knight column, or QN."
+OK
+
+BOARD 2B5/2B5/2B5/2B5/2B5/2B5/2B5/2B5 WHITE
+"Queen's Bishop:  QB."
+OK
+
+BOARD 3Q4/3Q4/3Q4/3Q4/3Q4/3Q4/3Q4/3Q4 WHITE
+
+"Queen:  Q."
+OK
+
+BOARD 4K3/4K3/4K3/4K3/4K3/4K3/4K3/4K3 WHITE
+"King:  K."
+OK
+
+BOARD 5B2/5B2/5B2/5B2/5B2/5B2/5B2/5B2 WHITE
+"King's Bishop:  KB."
+OK
+
+BOARD 6N1/6N1/6N1/6N1/6N1/6N1/6N1/6N1 WHITE
+"King's Knight:  KN."
+OK
+
+BOARD 7R/7R/7R/7R/7R/7R/7R/7R WHITE
+"And King's Rook:  KR."
+OK
+
+BOARD 32/1B6/24 WHITE
+"In this example, the White Bishop is on Queen's Knight 4, or QN4."
+OK
+
+BOARD 64 WHITE
+"With descriptive notation, every attempt is made to avoid redundancy 
+(some say clarity as well).  For example, if one Knight can move to KB4 
+and the other Knight cannot move to either KB4 or QB4, then the move is 
+recorded as N-B4, not N-KB4."
+OK
+
+BOARD 40/2N5/4N3/6N1 WHITE
+GHOST WHITE KNIGHT e2
+"If both Knights can move to the same square (K2 for example), the moves are 
+distinguished by specifying which Knight is to make the move:  King's Knight 
+or Queen's Knight: KN-K2 or QN-Q2."
+OK
+
+BOARD 64 WHITE
+"A capture is indicated by the abbreviation of the capturing piece, an x 
+and the abbreviation of the captured piece.  Rook takes Bishop is recorded 
+as RxB."
+OK
+
+"If more than one Rook can capture a Bishop, the capturing piece is further 
+identified by King or Queen:  KRxB or QRxB."
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Here's a sample game using descriptive notation:"
+OK
+
+MOVE e4
+"P-K4"
+OK
+
+MOVE e5
+"P-K4 (from Black's point of view!)"
+OK
+
+MOVE Nf3
+"N-KB3"
+OK
+
+MOVE Nc6
+"N-QB3"
+OK
+
+MOVE Bb5
+"B-N5 (only one Bishop can move to KN5 or QN5)."
+OK
+
+MOVE a6
+"P-QR3"
+OK
+
+MOVE Bc6
+"BxN (only one Bishop can capture a knight)."
+OK
+
+MOVE dxc6
+"QPxB (QP instead of QNP)."
+OK
+
+MOVE d3
+"P-Q3"
+OK
+
+MOVE Bb4
+"B-N5ch (checks are indicated by ch)."
+OK
+
+MOVE Nc3
+"N-B3"
+OK
+
+MOVE Nf6
+"N-B3"
+OK
+
+MOVE O-O
+"O-O"
+OK
+
+END CHAPTER
+
+//==========================================================================
+//"Correspondence Notation"
+//==========================================================================
+
+BEGIN CHAPTER 18
+ //"Correspondence Notation"
+BOARD 64 WHITE
+//OK
+
+"International correspondence notation is designed to avoid language problems 
+(like different alphabets) when players from different countries compete by 
+mail."
+OK
+
+"Each square is designated by a two digit number.  The first number replaces 
+the file letter (a-h).  So, a is replaced by 1, b is 2, c is 3 and so on."
+OK
+
+"The second digit is the rank number, 1-8."
+OK
+
+BOARD 56/K7 WHITE
+"In correspondence notation, the lower left square (a1) is 11..."
+OK
+
+BOARD K7/56 WHITE
+"the upper left square (a8) is 18..."
+OK
+
+BOARD 7K/56 WHITE
+"the upper right square (h8) is 88..."
+OK
+
+BOARD 56/7K WHITE
+"and the lower right square (h1) is 81..."
+OK
+
+BOARD 64 WHITE
+"There is no punctuation in correspondence notation.  e2-e4 is 5254."
+OK
+
+"Castling moves are recorded using the king starting and destination 
+squares.  When white castles kingside (O-O), the move is 5171."
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Here's a sample game using correspondence notation:"
+OK
+
+MOVE e4
+"5254"
+OK
+
+MOVE e5
+"5755"
+OK
+
+MOVE Nf3
+"7163"
+OK
+
+MOVE Nc6
+"2836"
+OK
+
+MOVE Bb5
+"5125"
+OK
+
+MOVE a6
+"1716"
+OK
+
+MOVE Ba4
+"2514"
+OK
+
+MOVE Nf6
+"7866"
+OK
+
+MOVE Bc6
+"1436"
+OK
+
+MOVE dxc6
+"4736"
+OK
+
+MOVE d3
+"2223"
+OK
+
+MOVE Bb4
+"6854"
+OK
+
+MOVE Nfd2
+"6342"
+OK
+
+BOARD 64 WHITE
+"For pawn promotions, the first two digits represent the starting square of 
+the pawn.  The third digit is the destination file (1-8).  The new piece is 
+represented by the fourth digit:  1 for Queen, 2 for Rook, 3 for Bishop and 
+4 for Knight."
+OK
+
+BOARD n1r5/kP6/p1b5/q6p/5p2/6P1/1R3P1P/6K1 WHITE
+"In this position, white's mating move..."
+OK
+
+"(b7xc8N++) is recorded in correspondence notation as 2734."
+MOVE bxc8N
+OK
+
+END OF MODULE
+
+//START SUB-MODULE
+

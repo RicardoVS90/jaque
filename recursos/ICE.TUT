@@ -1,0 +1,2819 @@
+/l/ SOFTWARE TOOLWORKS TUTORIAL by GM Yasser Seirawan, ICE
+
+TITLE "CHESS STRATEGY"
+
+BEGIN NAMES
+"Chapter 1 Planning Concepts"
+"Chapter 2 Principles of Piece Coordination"
+"Chapter 3 Pawn Structure and Rook Development"
+"Chapter 4 Rook and Pawn Strategy"
+"Chapter 5 Open Files, Rook and Pawn Strategy"
+"Chapter 6 Pawn Structure and Bishop Development"
+"Chapter 7 Pawn Structure and Knight Development"
+"Chapter 8 Minor Piece and Pawn Strategy"
+"Chapter 9 Effective Play based on Pawn Structure"
+"Chapter 10 Game Example"
+END NAMES
+
+BEGIN CHAPTER 0
+
+BOARD 64 WHITE
+CLRHIGH
+"The most difficult, yet basic problem that confronts all chess players is 
+coming up with the right plan for a given position."
+OK
+
+"At the beginner level, the concept of a plan simply doesn't exist."
+OK
+
+"The beginner casts his eye about the chess board, looking lovingly at his 
+well-manicured Knights, his pointed Bishop and all powerful Queen."
+OK
+
+"With a sudden gleam he thrusts a pawn forward! No! Ooops! Wrong pawn. He 
+tries another. Phew! That one was legal."
+OK
+
+"When it's his turn to move again, disregarding all threats to his position, 
+he proudly moves his Rook. Such daring! Such wit!"
+OK
+
+"His opponent deftly captures another piece of the beginner's army." 
+OK
+
+"This denuding goes on until the beginner is mercilessly savaged, at which 
+point the players set up the pieces and the whole process is repeated."
+OK
+
+"If the above sounds like you, don't grieve. This tutorial was made for you!"
+OK
+
+"The first way you can improve your game is by learning to look at the whole 
+board. Now look at the starting position:"
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+"Imagine yourself on an ancient battlefield with equally matched armies ready 
+to fight. With differently skilled weaponry, it is important to see the whole 
+battle as it takes place."
+OK
+
+"With common foot soldiers, cannon, cavalry and archers, each movement has to 
+be coordinated."
+OK
+
+"A supply line may become vulnerable and a would-be hero is vanquished."
+OK
+
+"Trading an archer for a few foot soldiers may seem sensible, but what if the 
+opposing army's archer picks off a number of your foot soldiers from a 
+distance without loss?"
+OK
+
+"Perhaps the decision wasn't as good as you thought."
+OK
+
+"From the starting position, it is clear that battles can begin at once all 
+over the board."
+OK
+
+"Just as our ancient battle analogy suggests, it is very useful to know 
+the terrain of the battle. All the dips and curves of the land. In the 
+following diagram"
+BOARD 64 WHITE
+OK
+
+"we have the eight-by-eight chessboard. The chessboard is divided in a 
+variety of ways which helps us understand the terrain."
+OK
+
+"The board is divided into eight ranks and eight files. The bottom first 
+row of squares is the first rank. The second row of squares is the second 
+rank and so on."
+NEWHIGH a1b1c1d1e1f1g1h1
+OK
+
+"From the lower left corner square to the top of the board is a file.  
+Starting from the left and working our way over to the right of the board, 
+the files are listed as the a-file, b-file, etc."
+NEWHIGH a1a2a3a4a5a6a7a8
+OK
+
+"By breaking up the chess board into ranks and files, each square is given 
+its own coordinates. The lower left corner square is therefore referred to 
+as the a1-square."
+NEWHIGH a1
+OK
+
+"Next to it, the b1-square."
+NEWHIGH b1
+OK
+
+"The upper left corner square is the a8-square."
+NEWHIGH a8
+OK
+
+"The upper right corner square is the h8-square."
+NEWHIGH h8
+OK
+
+"As a good exercise, identify all the highlighted squares in this diagram."
+NEWHIGH c6d4g7h2
+OK
+
+"By drawing imaginary lines around the board you can divvy-up the board into 
+all types of quadrants and sectors."
+CLRHIGH
+OK
+
+"Drawing an imaginary line between the fourth and fifth ranks neatly divides 
+the chessboard in half, with thirty-two squares for each side."
+NEWHIGH a1a2a3a4b1b2b3b4c1c2c3c4d1d2d3d4e1e2e3e4f1f2f3f4g1g2g3g4h1h2h3h4
+OK
+
+"These thirty-two squares each belong to the White and Black army. White has 
+his space, Black has his space."
+OK
+
+"When one player controls or attacks one of his opponent's squares this is 
+called gaining space."
+OK
+
+"It stands to reason that, as we control more and more squares of the board, 
+our opponent will have less room to move and become more restricted. The 
+effort to control space is a time-honored strategy."
+OK
+
+"At the start of the battle the King and Queen are placed next to one another."
+CLRHIGH
+DIAGRAM "Ke1,Qd1 v Ke8,Qd8" WHITE
+OK
+
+"Being the most important pieces, their flanks to the left and right are named 
+after them."
+OK
+
+"Thus, drawing an imaginary line between the c- and d-files and the f- and 
+e-files creates a Kingside and a Queenside.  White's Kingside is the area 
+from f1-f4-h4-h1-f1."
+NEWHIGH f1f2f3f4g1g2g3g4h1h2h3h4
+DIAGRAM "Ke1" BLACK
+OK
+
+"Black's Kingside area is a mirror image of White's. Thus, Black's Kingside 
+is the area from f8-f5-h5-8-f8."
+NEWHIGH f5f6f7f8g5g6g7g8h5h6h7h8
+DIAGRAM "Ke8" WHITE
+OK
+
+"White's Queenside is the area from c1-c4-a4-a1-c1."
+NEWHIGH a1a2a3a4b1b2b3b4c1c2c3c4
+DIAGRAM "Qd1" WHITE
+OK
+
+"Black's Queenside is the area from c8-c5-a5-a8-c8."
+NEWHIGH a5a6a7a8b5b6b7b8c5c6c7c8
+DIAGRAM "qd8" WHITE
+OK
+
+"Both players tend to castle with their Kings, stowing them to safety on 
+either the King- or Queenside. Learning which side is safer will become 
+crucial to your King's survival!"
+CLRHIGH
+BOARD 64 WHITE
+OK
+
+"The center files are the e- and d-files."
+NEWHIGH d1d2d3d4d5d6d7d8e1e2e3e4e5e6e7e8
+OK
+
+"Some authors consider these central files to belong to the Kingside or 
+Queenside. I do not. It's easier to understand the chess board if you think 
+of the e- and d-files as belonging to the center."
+OK
+
+"The central files are most often controlled by the Rooks. After the opening 
+is over, we are all sagely advised to 'control the center with our Rooks.'"
+OK
+
+"The four central squares in the middle of the board, e4,e5,d4,d5 are the 
+key central squares. A great amount of the action takes place around them.  
+They make marvelous outposts, particularly for the Knights."
+NEWHIGH d4d5e4e5
+OK
+
+"The player who effectively controls these squares is usually in charge of 
+the game."
+OK
+
+"Besides ranks, files, flanks and center squares, another way to look at the 
+board is along its diagonals. The long diagonals a1-h8 and a8-h1 run right 
+through the center of the board."
+NEWHIGH a1b2c3d4e5f6g7h8a8b7c6d5e4f3g2h1
+OK
+
+"Bishops love to control these diagonals, while being deployed to the Kingside 
+or Queenside."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+"Find b3, d5, a7, g4, h1 on an empty board."
+OK
+
+NEWHIGH b3d5a7g4h1
+OK
+
+CLRHIGH
+DIAGRAM "Be1, Kd1 v Kd8,a7" WHITE
+"Challenge:  Move the Bishop to the long diagonal."
+CHALLENGE Bc3 "That's right."
+OK
+
+"Bc3."
+OK
+
+DIAGRAM "Ng1, Kd1 v Kd8,a7" WHITE
+"Challenge:  Play the move that controls the greatest number
+of central squares."
+CHALLENGE Nf3 "You are correct!"
+OK
+
+"Nf3."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Two :  Coordination"
+//=======================================================================
+
+BEGIN CHAPTER 1
+BOARD 64 WHITE
+CLRHIGH
+
+"The first and foremost thing that the aspiring chess player must understand 
+is that chess is a game of coordination."
+OK
+
+"Chess is a team game. Your pieces and your pawns are your team. In fact, 
+they are your army. You are their leader!"
+OK
+
+"Once this association is clearly understood,  you will realize the need for 
+coordinated actions. If your army is not working as a team, having an overall 
+plan of action, you will lose."
+OK
+
+"Further, you will not even have a clue as to why you are losing. You will 
+continue to be savaged by better-skilled army captains."
+OK
+
+"The Principles Have Been Proven"
+OK
+
+"Chess is well over 1,400 years old. It has been said that there are more 
+books on chess than on any other sport. While this may be hard to prove, the 
+point is well-taken. There has been a huge amount of written wisdom on chess."
+OK
+
+"A lot of this wisdom can be boiled-down to a few well-honed principles of 
+play - principles that you should know and take to heart."
+OK
+
+"The most important principles of play are those for the opening. Let's face 
+it, if you don't know how to open the game, you're liable to be crushed."
+OK
+
+"The following principles don't guarantee safety, but will act as a guide. 
+They are:"
+OK
+
+"1)  Open the game with a center pawn."
+OK
+
+"2)  Develop your Knights before your Bishops."
+OK
+
+"3)  Don't move your Queen too soon in the opening."
+OK
+
+"4)  Castle early in order to protect your King."
+OK
+
+"5)  Develop your Rooks to central or open files."
+OK
+
+"6)  Look to develop an attack after you have fully mobilized your pieces."
+OK
+
+"7)  Capture towards the center."
+OK
+
+"8)  If you violate the above, your opponent will swiftly deal with you!"
+OK
+
+"These Opening Principles, taken as a whole, all talk about planning and 
+coordination."
+OK
+
+"You aim to control the center, mobilize and then, with coordinated motion, 
+you go for the thrust and win."
+OK
+
+"By using and understanding these opening principles, you will stop being a 
+beginner. You may even win a few games."
+OK
+
+"You are now ready for your next step on the road to real chess understanding. 
+How to plan!  This tutorial will demonstrate how to plan from any type of 
+position."
+OK
+
+"Planning is based upon the concepts of strategy. Strategy is mobilizing and 
+guiding your pieces to their optimal squares to do battle."
+OK
+
+"Learning strategy consists of asking oneself simple questions such as, 
+'What is my Rook doing there?  Is there a better square for my Rook?'  
+Or, 'Uh, oh, my King is feeling the heat. Time to get out of here. Should 
+I castle Kingside or Queenside?'"
+OK
+
+"Our strategic decisions are based on a number of factors: King safety, 
+tactics inherent in the position, the control of space, the pawn structure 
+and other considerations."
+OK
+
+"This tutorial will focus on the strategic concept of the pawn structure 
+and using space."
+OK
+
+"What does the term 'pawn structure' mean?  Some chess teachers also use 
+the term 'pawn skeleton,' which is more illustrative."
+OK
+
+"What both of these terms mean is that, if you strip the position of pieces 
+and leave only the pawns on the board, you will clearly see how to plot your 
+strategy."
+OK
+
+"The pawn structure, or pawn skeleton, reveals lots of things. Firstly, it 
+tells us whether a position is open or closed."
+OK
+
+"Open positions feature lots of sharp tactics, closed positions feature 
+maneuvering games."
+OK
+
+"Pawn structures reveal all sorts of other important goodies, too. These 
+insights include, open files, open ranks, open diagonals, outposts, locked 
+formations, fractured pawns, including pawn islands, isolated pawns, backward 
+pawns, split pawns, doubled pawns and dangerous pawns, passed pawns, protected 
+passed pawns, as well as pawn chains, base pawns, weak squares and many other 
+insights."
+OK
+
+"Maybe these terms are unfamiliar to you now, but before too long, you'll know 
+them like good neighbors."
+OK
+
+"Taking the starting position and removing all the pieces reveals the pawn 
+skeleton."
+DIAGRAM "a2,b2,c2,d2,e2,f2,g2,h2 v a7,b7,c7,d7,e7,f7,g7,h7" WHITE
+OK
+
+"By removing all the pieces from the position, we get the bare bones at the 
+start of the game."
+OK
+
+"Remembering the ancient battlefield analogy, it stands to reason that if an 
+'opening' of the ranks can be forced upon the opponent, then our army could 
+flood into that breach and quickly capture the opponent's pieces or, even 
+worse, the King! What do I mean?"
+OK
+
+"The open file"
+OK
+
+"Removing both White and Black d-pawns and we move on to the next example."
+DIAGRAM "a2,b2,c2,e2,f2,g2,h2 v a7,b7,c7,e7,f7,g7,h7" WHITE
+OK
+
+"This diagram features an open d-file. The d-file is open because there are 
+no pawns on it."
+OK
+
+"Why are open files important?  Well, can you think of any piece that will 
+benefit by sitting on an open file?  If you said Rook or Queen, reward 
+yourself with a cookie and send me one too."
+OK
+
+"Rooks Love Open Files. This strategic principle only stands to reason. 
+Look at the next example."
+OK
+
+DIAGRAM "a2,b2,c2,e2,f2,g2,h2,Ra1 v a7,b7,c7,e7,f7,g7,h7,Ra8" WHITE
+"Both sides have the same seven pawns as before. I've just added a 
+Rook to each side."
+OK
+
+"If it were White's turn to move, he should do himself an important strategic 
+favor and move his a1-Rook to the d1-square as quickly as possible."
+OK
+
+MOVE Rd1
+"Why?  Because, on the d1-square, White's Rook would be mobilized or developed 
+to a position which would allow penetration into the opponent's camp."
+OK
+
+"From Black's perspective, he should try to use the same idea, too."
+OK
+
+MOVE Rd8
+"If he could play ...Ra8-d8, then Black's Rook would be developed on the open 
+d-file and he would be primed to shoot down the d-file and invade White's 
+position."
+OK
+
+DIAGRAM "f2,g2,h2,Ke1 v Bg3,Ke8" WHITE
+"Challenge:  All else being equal, which recapture by white is better?"
+CHALLENGE hxg3 "That's right."
+OK
+
+"hxg3."
+OK
+
+DIAGRAM "a2,b2,c3,d4,e3,f2,g2,Ra1,Ke2 v a7,b7,c6,d5,e6,f7,g7,Ra8,Ke7" WHITE
+"Challenge:  What is a desirable move for White?"
+CHALLENGE Rh1 "Correct!"
+OK
+
+"Rh1."
+OK
+
+DIAGRAM "a2,b2,c3,d4,e3,f2,g2,Ra1,Ke2 v a7,b7,c6,d5,e6,f7,g7,Ra8,Ke7" BLACK
+"Challenge:  For Black?"
+CHALLENGE Rh8 "That is right!"
+OK
+
+"Rh8."
+OK
+
+DIAGRAM "a2,b2,c2,e4,f2,g2,h3,Rd1,Kg1 v a7,b7,c6,e6,f7,g7,h7,Re8,Kg8" WHITE
+"Challenge:  Now that White has gained control of the open file,
+what next?"
+CHALLENGE Rd7 "Excellent!"
+OK
+
+"Rd7."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Three"
+//=======================================================================
+
+BEGIN CHAPTER 2
+
+BOARD 64 WHITE
+CLRHIGH
+
+"As we have fun altering the pawn skeleton, we have to use different terms to
+better understand the transformations that take place. Let's alter the pawn
+skeleton a little more to reveal the idea of an open file even better."
+OK
+
+"Here is the same diagram with a slight change. The c2-pawn
+has moved a file over to become a d2-pawn."
+DIAGRAM "a2,b2,d2,e2,f2,g2,h2,Ra1 v a7,b7,c7,e7,f7,g7,h7,Ra8" WHITE
+OK
+
+"Are there any open files?"
+OK
+
+"There are no files that are clear of all pawns. Thus, the answer is no, 
+there are no open files."
+OK
+
+"From White's perspective, he has a half open c-file. What this means is 
+that White has no pawns sitting on the c-file. This makes the c-file open 
+to White.  Since Black has a c7-pawn, the c-file is closed to Black."
+OK
+
+"The presence of only one pawn means that the c-file is half open. White 
+should move his Rook from a1-c1, grabbing his half open file."
+OK
+
+MOVE Rc1
+"Although the Rook isn't as powerful on a half open file as it is on an 
+open file, White has to make due. Not every position has an open file. 
+In this case, White's Rook is best placed on the c-file."
+OK
+
+DIAGRAM "a2,b2,d2,e2,f2,g2,h2,Rc1 v a7,b7,c7,e7,f7,g7,h7,Ra8" BLACK
+"What about Black?  The same principle applies for him too."
+OK
+
+MOVE Rd8
+"From his perspective, his half open file is the d-file. By playing 
+...Ra8-d8, Black mobilizes his Rook to his best file in this position."
+OK
+
+DIAGRAM "a2,b2,d2,e2,f2,g2,h2,Rc1 v a7,b7,c7,e7,f7,g7,h7,Rd8" WHITE
+"Can you tell me why a Rook is more powerful on an open file than on a half 
+open file?"
+OK
+
+"The answer has to do with the Rook's ability to penetrate. On an open file 
+the Rook has the option of penetrating the enemy's camp through all possible 
+squares."
+OK
+
+"On a half open file the number of possible penetration squares is 
+immediately reduced."
+OK
+
+DIAGRAM "a2,b2,d4,e3,f2,g2,h2,Ra1 v a7,b5,c6,d5,f7,g7,h7,Ra8" WHITE
+"Here is a pawn skeleton with Rooks that is very similar to the previous 
+diagram. But the pawn structure has changed. What is different?"
+OK
+
+"By comparing these two diagrams we can learn some very valuable insights 
+into pawn structures. We can also learn how Rooks can outplay one another."
+OK
+
+"What are the open files? There are none."
+OK
+
+"What are the half open files?  White's half open file is the c-file. Black's 
+half open file is the e-file."
+OK
+
+"In the previous diagram, Black's half open file was the d-file. What has 
+changed?  The e7-pawn has moved to the d5-square."
+OK
+
+"The result is that the d-file has become clogged with the d4 and d5-pawns, 
+while the e-file has been half opened to Black's Rook."
+OK
+
+"Do you notice how White's f2, e3, and d4 pawns are linked together?  
+They form a chain. Pawns that are linked together are called pawn chains. 
+In this pawn chain, which pawn is the base pawn?"
+OK
+
+"The base pawn is the f2-pawn. The base pawn is quite important, since it is 
+the foundation upon which the entire pawn chain rests."
+OK 
+
+"The strength or weakness of the pawn chain is determined by the base pawn. 
+If it is strong, the pawn chain will remain powerful and intact. If weak, 
+the entire chain is in danger of collapse."
+OK
+
+"Let's now turn to Black's pawn structure. His pawn chain of b5, c6 and 
+d5-pawns has an unfortunate disadvantage."
+OK
+
+"His base pawn is the c6-pawn, which sits on White's half open file. 
+This means that White's Rook will shift over to the half open c-file 
+and put a lot of pressure on Black's c6-pawn."
+OK
+
+"If the base pawn falls to the moves 1.Rc1 and 2.Rxc6, you can bet that 
+the next move will be 3.Rc5. Then Black's pawn chain will be wiped out, 
+as the b5 and d5-pawns both lack protection."
+OK
+
+"Look again at this diagram. With the limited information we now know, we 
+can already perceive that White should start with the move"
+OK
+
+"1.Rc1! "
+MOVE Rc1
+OK
+
+DIAGRAM "a2,b2,d4,e3,f2,g2,h2,Rc1 v a7,b5,c6,d5,f7,g7,h7,Ra8" BLACK
+"I reward this move with an exclamation mark to note the excellence of 
+the move."
+OK
+
+"White understands that, by bringing his Rook to the half open file, he 
+firstly develops his Rook and secondly puts pressure on Black's pawn 
+structure, forcing him to respond."
+OK
+
+"Black, aware that his pawn chain is in immediate danger, is quick to 
+respond with"
+OK 
+
+"1...Rc8"
+MOVE Rc8
+OK
+
+"This marks a concession. Both army leaders know that Black's Rook would 
+prefer to go to the half open e-file, but, Black has no time!"
+OK
+
+"If he were to play 1...Re8 in order to defend his c6-pawn with 2...Re6, 
+he would be too late!" 
+OK
+
+"After 1.Rc1! Re8? (I place a question mark after this move to denote it as 
+a mistake.) 2.Rxc6, White carries out his operation and wins Black's base 
+pawn. Soon the rest of Black's pawn chain would fall."
+OK
+
+"Black's decision to play ...b7-b5 has weakened his pawn structure."
+OK
+
+"Thus, the moves 1.Rc1! and 1...Rc8 have been played. This brings us to our 
+next example."
+OK
+
+DIAGRAM "a2,b2,d4,e3,f2,g2,h2,Rc1 v a7,b5,c6,d5,f7,g7,h7,Rc8" WHITE
+"Here, we can see that Black's c8-Rook is tied down to the defense of his 
+c6-pawn. Now why is this?"
+OK
+
+"The problem with the c6-pawn is that it can't be protected by another pawn. 
+The pawns that flank the c6-pawn, the b5 and d5-pawns have both shot past the 
+c6-pawn. The result is that the c6-pawn has been left behind."
+OK
+
+"In chess parlance, the c6-pawn is identified as a backward pawn. Backward 
+pawns tend to be weak, because they need the protection of other pieces."
+OK
+
+"That is, such pawns as backward pawns can't count upon the protection of 
+other pawns. As a result, backward pawns are a liability for their owners!"
+OK
+
+"Several other points about the this pawn structure should be 
+clarified."
+OK
+
+"The first thing is that White's pawns are separated into two pawn islands. 
+What do I mean?  Well a file, in this case the c-file, separates White's pawns 
+into two distinct groups."
+OK
+
+"The first group, the a2 and b2-pawns, forms its own pawn island. The second 
+group, the d4, e3, f2, g2, h2-pawns, forms the second larger pawn island."
+OK
+
+"This concept of different pawn islands is important. The more pawn islands a 
+player has, the weaker his position becomes."
+OK
+
+"Once again, the reason for this is that pawns - being the weakest team 
+members - require protection. If our pawn islands are broken up into smaller 
+and smaller groups, their need for protection increases."
+OK
+
+"Sometimes our ability to protect them doesn't equal their need!"
+OK
+
+"Black also has two pawn islands. The a7,b5,c6 and d5-pawns make one. The f7, 
+g7, h7-pawns make up the second."
+OK
+
+"In the question of Black's first pawn island, it is important to note that 
+Black's a7-pawn, while not touching or in connection with the b5-pawn, is 
+still a part of the pawn island."
+OK
+
+"If Black didn't have a b-pawn, the a7-pawn would constitute a pawn island 
+of its own."
+OK
+
+"By looking at the pawn islands of a given position, a principle on how to 
+play that particular position becomes clear. The player with more pawn 
+islands will have more difficulties in the ending than his opponent will."
+OK
+
+"Remember that pawns and pawn islands require protection. As more pieces are 
+exchanged, our ability to protect our pawns becomes less and less. Soon the 
+player with more pawn islands will have more to worry about."
+OK
+
+"From this diagram, how can White further activate his Rook?  His Rook is 
+sitting on the half open c-file, doing a good job. Just because a piece is 
+performing a task doesn't mean it can't be improved!"
+OK
+
+"White realizes that he would like to penetrate his opponent's position with 
+his Rook, but, since there are no open files, he has to find another way."
+OK
+
+"What about the idea of bringing the Rook up to the third rank and then 
+moving across to the a-file?  White could then pressure Black's pawn 
+structure from a different direction. How to carry out this operation?"
+OK
+
+"The immediate plan of 1.Rc3 intending Rc3-a3 hitting the a7-pawn has a 
+drawback."
+OK
+
+SLIDE c1 c3 
+SLIDE a7 a5 
+SLIDE c3 a3 
+SLIDE a5 a4
+"If 1.Rc3 a5! 2.Ra3 a4! Black's a7-pawn is no longer a weakness."
+OK
+
+"Black's a-pawn has now connected itself to the head of the a4, b5, c6-pawn 
+chain. In two moves White has given up his pressure on Black's c6-base pawn 
+while allowing Black to strengthen his pawn structure."
+OK
+
+DIAGRAM "a2,b2,d4,e3,f2,g2,h2,Rc1 v a7,b5,c6,d5,f7,g7,h7,Rc8" WHITE
+"Instead of these moves, White tries another tack. He begins with"
+OK
+
+"1.b4! "
+SLIDE b2 b4
+OK
+
+"By playing this move first, White prevents Black from moving his pawn to 
+the a4-square. A possible line might go"
+OK
+
+"1... f5 2.Rc3 Rc7 3.Ra3"
+SLIDE f7 f5
+SLIDE c1 c3
+SLIDE c8 c7
+SLIDE c3 a3
+OK
+
+"This maneuver is known as a Rook lift."
+OK
+
+"Literally, the Rook is lifted from the back rank up a file in order to move 
+across a free rank. White's Rook lift will allow White to mobilize his Rook 
+and move it to a more powerful position."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Four"
+//=======================================================================
+
+BEGIN CHAPTER 3
+
+BOARD 64 WHITE
+CLRHIGH
+
+DIAGRAM "a2,b4,d4,e3,f2,g2,h2,Ra3 Kg1 v a7,b5,c6,d5,f5,g7,h7,Rc7 Kg8" BLACK
+"Black realizes that his Rook doesn't wield nearly the
+influence of his opponent's. So he tries to activate his Rook by playing"
+OK
+
+"1...Re7"
+MOVE Re7
+OK
+
+"White realizes that Black has moved his Rook to his
+half-open file, where it is ideally placed for further operations.
+Not wishing to allow Black even a hint of counterplay,
+White tries to tie Black up. White plays Rc3."
+MOVE Rc3
+OK
+
+"Rc3, attacking Black's c6-pawn, demonstrates
+the concept of controlling a half open file."
+OK
+
+DIAGRAM "a2,b4,d4,e3,f2,g2,h2,Ra3 Kg1 v a7,b5,c6,d5,f5,g7,h7,Re7 Kg8" WHITE
+MOVE Ra6
+"By playing 2.Ra6, White's Rook is now increasing its influence. The
+White Rook on a6 attacks both the a7 and c6-pawns."
+OK
+
+"In order to protect both pawns, Black is forced to retrace his steps and
+play"
+OK
+
+"2...Rc7"
+MOVE Rc7
+OK
+
+"Black's c7-Rook is completely tied down to the defense of
+his pawns. If Black runs out of pawn moves and is forced to move his Rook,
+he will have to choose which pawn will fall; his c6-base pawn or the a7-pawn."
+OK
+
+"This Rook interplay was made possible by the insightful way in which White
+approached this position and moved his Rook."
+OK
+
+"What made this plan possible?  The pawn structure." 
+OK
+
+"Is this plan original? Not at all! Rook lifts occur very often. They don't 
+always work; only when the pawn structure or the tactics of a given position 
+justifies the idea."
+OK
+
+"These first few diagrams reinforce the idea that Rooks would prefer 
+positions with lots of open files. Then they would know exactly where 
+to go. Precisely! Rooks need open files."
+OK
+
+"However, if there are lots of open files, deciding which one to choose 
+may not be so easy."
+OK
+
+DIAGRAM "a2,b2,c4,e4,f2,g2,h2,Ra1,Rh1 v a7,b7,c5,e5,f7,g7,h7,Ra8,Rh8" WHITE
+"This is a nice clean position. By now, you should know that both 
+sides are going to be locked in a mortal struggle to control the open d-file."
+OK
+
+"If you were playing White, you might win with the brilliant strokes 1.Rad1, 
+2.Rd7, 3.Rhd1 and so on. Or if you were Black 1...Rad8, 2...Rd2 and 3...Rhd8 
+would be equally effective."
+OK
+
+"To the victor go the spoils. Thus, the race is on: 1.Rad1 or" 
+OK
+
+"1.Rhd1"
+SLIDE h1 d1
+OK
+ 
+"and now 1...Rad8 or"
+OK
+
+"1...Rhd8,"
+SLIDE h8 d8
+OK
+
+"is quickly played, opposing White's control of the open d-file. Well, 
+so much for the race."
+OK
+
+"What does White do now?  He would love to force Black to play ...Rd8xd1, 
+ceding control over the d-file. But, from the diagram position, this can't 
+be done."
+OK
+
+"White decides to go for a Rook lift. He plays"
+OK
+
+"2.Rd5!"
+SLIDE d1 d5
+OK
+
+"By attacking both the c5 and e5-pawns, Black is forced to clarify the 
+position. The d5-square is an outpost in the position."
+OK
+
+"An outpost is a square that can't be attacked by an enemy pawn. The best 
+outposts are those squares that we control."
+OK
+
+"Here, White's outpost is the d5-square. None of Black's pawns defend the 
+square, while two of White's pawns, at c4 and e4, attack the d5-square."
+OK
+
+"For the same reasons, Black's outpost is the d4-square. If White had waited 
+to play 2.Rd5!, Black would quickly move 2...Rd4!"
+OK
+
+"Throughout your chess career, outposts and understanding which squares 
+constitute outposts will be a critical part of mastering chess strategy."
+OK
+
+"A critical principle to understand is this: As pawns move forward, the 
+unprotected squares that they leave behind become potential outposts for 
+the enemy army."
+OK
+
+"After the move 2.Rd5! we move to the next diagram." 
+OK
+
+"Black is faced with a crisis that he must resolve. If the d5-Rook is not 
+captured, Black faces the potential loss of either his c5 or e5-pawn."
+OK
+
+"Black also faces a more deadly threat. Here, White threatens to play 1.Rad1 
+doubling his Rooks on the open d-file."
+OK
+
+"The doubling of the Rooks is a key stratagy with Rooks. This doubling of 
+power, is also known as creating a battery."
+OK
+
+"Batteries are powerful, because they often force an opponent into making a 
+pawn weakness or other concessions."
+OK
+
+"When a Queen is present, a Rook might work with her to double up and form a 
+battery."
+OK
+
+"Also, when a Queen is present, she might even triple up on an open file."
+OK
+
+"Black cannot allow White's Rook to roost on the d5-outpost. 
+Also, he doesn't want to face the possible consequences of"
+OK
+
+"1...f6 2.Rad1!"
+DIAGRAM "a2,b2,c4,e4,f2,g2,h2,Ra1,Rd5 v a7,b7,c5,e5,f7,g7,h7,Rd8,Ra8" WHITE
+SLIDE a1 d1
+OK
+
+"(This move is even stronger than 2.Rxc5 which wins a pawn but gives up 
+control of the open d-file.)"
+OK
+
+"2...Rxd5 3.Rxd5!"
+SLIDE d8 d5
+SLIDE d1 d5
+OK
+
+"Although White has not yet won a pawn, he is master of the situation. 
+Black's Rook is helpless to prevent penetration to the d7-square."
+OK
+
+"This conquest of the opponent's seventh and eighth rank is the ultimate 
+mission of any Rook. From these ranks, a Rook can perform the maximum damage."
+OK
+
+"After 1...Rxd5, White can recapture by 2.cxd5, following the sage principle 
+of, 'Capture towards the center.'  In this case 4.exd5 would also be 
+reasonable, but, by playing 4.cxd5, White gains a greater influence in the 
+center."
+OK
+
+"Your reasons for not capturing towards the center should be very specific. 
+Keep in mind that, in most cases, you will want to capture towards the center."
+OK
+
+"A new position is created."
+DIAGRAM "a2,b2,d5,e4,f2,g2,h2,Ra1 v a7,b7,c5,e5,f7,g7,h7,Ra8" WHITE
+OK
+
+"Visually, it seems this position is fairly balanced. It is not. White has a 
+near-decisive advantage."
+OK
+
+"The pawn structure tells us that White has a passed pawn. The d5-pawn is a 
+passed pawn because its path to promotion is not blocked by a Black pawn."
+OK
+
+"Also, its march up the board cannot be stopped by a Black pawn."
+OK
+
+"As chess great Aaron Nimzovitch said, 'A passed pawn is a criminal who 
+should be put under lock and key.'  Yes, but who will play guard? A piece. 
+Thus an important, powerful member of our team is forced to play guard to a 
+lesser player."
+OK
+
+"This means that the d5-pawn, a passed pawn, has grown in value. Once he was 
+equal to other pawns, but now a piece will have to be assigned to watch him."
+OK
+
+"Analysing this pawn structure also gives us an additional secret."
+OK
+
+"The d5-pawn is a protected passed pawn. The fact that it is protected by the 
+e4-pawn, raises the status of the d5-pawn even more."
+OK
+
+"A passed pawn would quickly promote itself if not watched by an opposing 
+piece."
+OK
+
+"But suppose that White didn't have an e4-pawn. Then the piece that is 
+assigned to stop the passed pawn from promotion might simultaneously attack 
+the passed pawn, too."
+OK
+
+"Just as Black has to tie down a piece to stop the passed pawn from promoting, 
+White might have to tie a piece down to the passed pawn's defense!"
+OK
+
+"Thus protected passed pawns are mightier than a passed pawn."
+OK
+
+"From the position in this diagram, we know that White's half-open file is 
+the c-file. Plenty of reason for White to put his Rook there."
+OK
+
+"White might play 1.Rc1 and then attempt a Rook lift. He might even try 
+1.Rc1 and try the pawn sacrifice 2.b4 in order to blast his way down to 
+the seventh rank."
+OK
+
+"From Black's perspective, life is bleak. His counterplay is supposed to be 
+his half open d-file. But, what's the solace there?  White's d5-pawn is in 
+such a dominating position that all of Black's counterplay along the d-file 
+is effectively snuffed out."
+OK
+
+"This diagram is exactly the same as the previous one with one subtle 
+difference. White's c4-pawn has been moved back to the c2-square. This 
+small difference of the pawn structure can create a profound change of 
+the plan."
+DIAGRAM "a2,b2,c2,e4,f2,g2,h2,Ra1,Rh1 v a7,b7,c5,e5,f7,g7,h7,Ra8,Rh8" WHITE
+OK
+
+"We know that White begins 1.Rhd1 and Black responds 1...Rhd8 challenging the 
+open d-file. Which Rook lift to make?  Should we try 2.Rd3 or 2.Rd5?"
+SLIDE h1 d1
+SLIDE h8 d8
+OK
+
+"Those of you who tried 2.Rd3 give yourself a slap for failing to understand 
+the consequences of your action. For those who thought 2.Rd5! was still best, 
+give yourselves a cookie and send me one too."
+OK
+
+"2.Rd3? Rxd3 3.cxd3"
+SLIDE d1 d3
+SLIDE d8 d3
+SLIDE c2 d3
+OK
+
+"Instead of having a passed pawn, White has created a backward d3-pawn."
+OK
+
+SLIDE a8 d8 
+SLIDE a1 c1 
+SLIDE b7 b6 
+SLIDE c1 c3 
+SLIDE d8 d4
+"Black, being no fool, would immediately place his Rook on his half open 
+d-file with 1...Rd8! and after 2.Rc1 b6 3.Rc3 Rd4! it is Black's Rook that 
+occupies an important outpost."
+OK
+
+"Note that from his outpost, Black's Rook has far more influence than White's."
+OK
+
+DIAGRAM "a2,b2,c2,e4,f2,g2,h2,Ra1,Rd1 v a7,b7,c5,e5,f7,g7,h7,Ra8,Rd8" WHITE
+SLIDE d1 d5 
+SLIDE d8 d5 
+SLIDE e4 d5"
+"In the previous diagram, White should have played 1.Rd5! Rxd5 2.exd5 which 
+moves us to"
+OK
+
+DIAGRAM "a2,b2,c2,d5,f2,g2,h2,Ra1 v a7,b7,c5,e5,f7,g7,h7,Ra8" BLACK
+"Note the important difference between the two diagrams. White has created a 
+passed d5-pawn. But, it is not yet a protected passed pawn. Black to play 
+chooses"
+OK
+
+"1...c4!"
+MOVE c4
+OK
+
+"This move cuts the d5-pawn off from protection by the c2-pawn. Black's Rook 
+will have to stop the d5-pawn from promotion, but he will simultaneously be 
+attacking the d5-pawn. A likely continuation is"
+OK
+
+"2.Rd1 Rd8 3.d6"
+MOVE Rd1
+MOVE Rd8
+SLIDE d5 d6
+OK
+
+"White has advanced his passed d-pawn a rank, which gives his d1-Rook more 
+influence than Black's d8-Rook. Depending upon the other factors in the 
+position, Black might be able to save the game."
+OK
+
+"The difference between the two diagrams, the pawn being on c2 as opposed to 
+the c4-square, considerably changed the plans in the position."
+OK
+
+"The final strategical observation to be made here is that Rooks don't like 
+blocking passed pawns."
+OK
+
+"A Rook that stands in front of a passed pawn is only there because he has 
+to be. He would prefer to be wreaking havoc upon the opponent's army, not 
+all bottled up as a baby sitter."
+OK
+
+"These diagrams show us that all Rooks, while having been created equal, can 
+overpower one another based on the pawn structure."
+OK
+
+DIAGRAM "h6,g4,Kg1 v f7,g6,Kg8" WHITE
+"Challenge:  In this position, what would White play?"
+CHALLENGE g5 "Good move!"
+OK
+
+"g5."
+OK
+
+DIAGRAM "h6,g4,Kg1 v f7,g6,Kg8" BLACK
+"Challenge:  What would Black play to cross up this idea?"
+CHALLENGE g5 "You are correct!"
+OK
+
+"g5."
+OK
+
+BOARD "2r1k3/2r2p2/4p1p1/1p1pP2p/pP1P1P2/P5P1/4K2P/1RR5" WHITE
+//DIAGRAM "a3,b4,d4,e5,f4,g3,h2,Rc1,Rb1,Ke2 v 
+//a4,b5,d5,e6,f7,g6,h5,Rc8,Rc7,Ke8" WHITE
+"Challenge:  Black has doubled on the c-file. What can White do to
+neutralize this advantage?"
+CHALLENGE Rc5 "Very good!"
+OK
+
+"After Rc5, Black is forced to capture on c5 (Rc7xc5)."
+MOVE Rc5
+OK
+
+BOARD "2r1k3/5p2/4p1p1/1prpP2p/pP1P1P2/P5P1/4K2P/1R6" WHITE
+//DIAGRAM "a3,b4,d4,e5,f4,g3,h2,Rb1,Ke2 v
+//a4,b5,d5,e6,f7,g6,h5,Rc8,Rc5,Ke8" WHITE
+"Challenge: How should White recapture?"
+CHALLENGE bxc5 "That right."
+OK
+
+"bxc5. Who is better after this?"
+OK
+
+"White"
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Five"
+//=======================================================================
+
+BEGIN CHAPTER 4
+
+BOARD 64 WHITE
+CLRHIGH
+
+"Are all open files the same?  The question itself implies that the answer is
+no. And indeed that is the case. Some files are better than others."
+OK
+
+DIAGRAM "a2,b2,c2,f2,g2,h2 v a7,b7,c7,f7,g7,h7" WHITE
+"Here there are two open files. The e- and d-files. Which one
+is better for a Rook?  We don't have enough information to tell and the e-
+and d-files appear to be of equal value."
+OK
+
+DIAGRAM "a2,b2,c2,f2,g2,h2,Rf1,Kg1 v a7,b7,c7,f7,g7,h7,Rf8,Kg8" WHITE
+"If we were to add a pair of Rooks and Kings, we would have a position like
+this."
+OK
+
+"Now that a few more pieces have been introduced, we can indeed make a
+choice. If it was White to move, he should chose 1.Rd1, grabbing the open
+d-file. The reason will soon be made clear."
+OK
+
+"After 1...Re8, Black counters by grabbing the open e-file."
+OK
+
+"White's next move explains his decision on move one. He plays 2.Kf1!,
+the purpose of which is to stop Black from penetrating with his Rook."
+OK
+
+"Black, however, cannot prevent similar penetration. Black could still play
+2...Kf8! meeting 3.Rd7 with 3...Re7 in order to stop White's Rook from
+causing havoc."
+OK
+
+"Let's see this same idea in a more effective setting."
+OK
+
+DIAGRAM "a2,b2,e3,f2,g2,h2,Rf1,Kg1 v a7,b7,e6,f7,g7,h7,Rf8,Kg8" WHITE
+"With White to move, he has the choice of moving his 
+Rook to the open c or d-file. Which to choose?  Best is "
+OK
+
+MOVE Rc1
+"1.Rc1! "
+OK
+
+"grabbing the c-file. Now after"
+OK
+
+MOVE Rd8
+"1...Rd8?!"
+OK
+
+"(I put this sign ?! to denote the meaning 'dubious move'. When you see this 
+sign, it means that the player has a better choice of moves.), grabbing the 
+d-file, White plays"
+OK
+
+MOVE Kf1
+"2.Kf1, preparing to penetrate Black's position with his Rook. Black plays"
+OK
+
+MOVE Kf8
+"2...Kf8, returning the favor. White now plays"
+OK
+
+MOVE Rc7
+"3.Rc7, penetrating Black's camp. Now"
+OK
+
+MOVE Rd2
+"3...Rd2 can be met by "
+OK
+
+MOVE Rxb7
+"4.Rxb7, winning a pawn and eventually the game."
+OK
+
+DIAGRAM "a2,b2,e3,f2,g2,h2,Rf1,Kg1 v a7,b7,e6,f7,g7,h7,Rf8,Kg8" WHITE
+"Let's return to the previous diagram. What would have happened had White 
+chosen"
+OK
+
+MOVE Rd1
+"1.Rd1?"
+OK
+
+MOVE Rc8
+MOVE Kf1
+MOVE Kf8
+MOVE Rd7
+"Then 1... Rc8! 2.Kf1 Kf8 3.Rd7."
+OK
+
+"Has White made the same progress as before?"
+OK
+
+MOVELIST "Rc1 Ke2 Rc2"
+"No! Black now has the clever response 3...Rc1+! 4.Ke2 Rc2+ "
+OK
+
+"and, in order to avoid losing a pawn, White has to retreat with 5...Rd2, 
+blocking the check."
+OK
+
+"These diagrams teach us some important strategical points about open files:"
+OK
+
+"1)  Open files are meaningful if the penetration squares aren't protected.  
+In the previous diagram, although Black's Rook took the open e-file, White 
+neutralized his control by moving his King to the f1-square. Black's Rook 
+couldn't penetrate White's camp."
+OK
+
+"2)  Given the choice of which open file to take, it is usually better to 
+take the one that is farthest from potential defenders."
+OK
+
+"In the previous diagram, White grabbed the c-file. This open file was the one 
+that was furthest from Black's King, which is a potential defender of the 
+open file."
+OK
+
+"In my explanation , I called Black's first move, 1...Rd8, a dubious move. Did 
+you guess why?  The answer is because Black continued on a course that led to 
+disaster."
+OK
+
+DIAGRAM "a2,b2,e3,f2,g2,h2,Rc1,Kg1 v a7,b7,e6,f7,g7,h7,Rf8,Kg8" BLACK
+"Now, it is clear that White is prepared to penetrate to the 
+seventh rank. The best way to neutralize this plan is by" 
+OK
+
+MOVE f5
+"1...f5 "
+OK
+
+"in order to prepare ...Rf8-f7. Thus 2.Rc7 Rf7 gets White nowhere.  White 
+changes his plan and begins by centralizing his King with"
+OK
+
+MOVE Kf1
+"2.Kf1"
+OK
+
+"Black plays"
+OK
+
+MOVE Rf7
+"2...Rf7! "
+OK
+
+"Black is now prepared to play ...Rf7-d7 and only then to develop his King.  
+White tries"
+OK
+
+MOVELIST "Rc8 Rf8 Rc3 Rf7"
+"3.Rc8+ Rf8 4.Rc3 Rf7! "
+OK
+
+DIAGRAM "a2,b2,e3,f2,g2,h2,Rc3,Kf1 v a7,b7,e6,f5,g7,h7,Rf7,Kg8" BLACK
+"and Black is putting up a better defense than before."
+OK
+
+"In beginning this tutorial on pawn skeletons, I started by speaking about 
+Rooks. Why?  Most players have a terrible time learning to use their Rooks."
+OK
+
+"They move them back and forth or don't use them at all."
+OK
+
+"After going through these examples, learning how to use the 'clumsy' Rooks 
+isn't difficult at all. In fact the principles governing Rooks are the 
+easiest of all!"
+OK
+
+DIAGRAM "a2,b2,h2,h3,Rc7,Kg1 v a7,b7,h7,h6,Rg8,Kg5" BLACK
+"Challenge:  White appears to have successfully penetrated to the
+seventh rank and intends to munch some pawns. How should Black play
+to prevent this?"
+CHALLENGE Kf6 "You are correct!"
+OK
+
+"Kf6+"
+OK
+
+"Challenge:  After the White King moves, Kg1-f2, for example,
+what is the continuation?"
+MOVE Kf2
+CHALLENGE Rg7 "That is right!"
+OK
+
+"Rg7."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Six"
+//=======================================================================
+
+BEGIN CHAPTER 5
+
+CLRHIGH
+BOARD 64 WHITE
+
+"This chapter will focus on using pawn skeletons to determine the way to 
+develop the Bishop."
+OK
+
+"The most important principle about Bishops is that they are long range 
+pieces. They hate to be locked into closed positions. Like Rooks, Bishops 
+operate best in open positions."
+OK
+
+DIAGRAM "a2,b2,c4,d5,e4,f2,g2,h2 v a7,b7,c5,d6,e5,f7,g7,h7" WHITE
+"Here we see a position from a Bishop's worst nightmare. 
+The pawn skeleton shows a position which is totally blockaded. The center 
+pawns are locked in place."
+OK
+
+"For a Bishop to become effective in such positions, the players will have 
+to create a few pawn exchanges."
+OK
+
+"Let me show you why closed positions are Bishops worst nightmares.  Let's 
+add a Bishop each to both player's positions."
+OK
+
+DIAGRAM "a2,b2,c4,d5,e4,f2,g2,h2,Bd3 v a7,b7,c5,d6,e5,g7,h7,Be7" WHITE
+"This is a classic example of two bad Bishops. We say a Bishop is bad when 
+its pawns are on the squares of the same color."
+OK
+
+"In this case, White's c4, d5 and e4-pawn completely lock-in White's Bishop. 
+It is reduced to a role of passive defender."
+OK
+
+"Likewise for Black. His central structure of d6, c5 and e5-pawn neutralize 
+his Bishop."
+OK
+
+"More than anything, the players of these armies would love to activate their 
+Bishops to open diagonals."
+OK
+
+"In White's case, he would try to play 1.Be2, 2.Bg4 and 3.Bc8, turning his 
+passive white-squared Bishop into a more active role."
+OK
+
+"Black shouldn't hesitate either. He should also move his Bishop 'around' the 
+blocked center onto an open diagonal by 1...Bg5 and 2...Bc1, activating his 
+Bishop."
+OK
+
+"As this example shows, for a Bishop to be effective it must have an open 
+diagonal!"
+OK
+
+"If you have a Bishop that is blocked in by its own pawns, what to do? 
+The easiest solution is to exchange it for the opposing Bishop, or perhaps a 
+Knight."
+OK
+
+"Sometimes this isn't possible. The next try would be to move the pawns out 
+of the Bishop's way."
+OK
+
+DIAGRAM "a2,b3,c4,e4,f2,g2,h2,Be2 v a7,b7,c6,e5,f7,g7,h7,Nc8" WHITE
+"This diagram features a position of Bishop versus Knight. On the 
+surface, it looks like a pretty bleak future for White's Bishop."
+OK
+
+"His center and Queenside pawns are all on white squares, the same color 
+as the Bishop."
+OK
+
+"However, the pawns are not locked. White can 
+still mobilize his pawns. He begins by"
+OK
+
+MOVE c5
+"1.c5!"
+OK
+
+"A very good move. Black's Knight is prevented from playing ...Nc8-d6 with 
+an attack against the e4-pawn."
+OK
+
+"More importantly, the Bishop is given new life: "
+OK
+
+MOVE Ne7
+MOVE Bc4
+"1...Ne7 2.Bc4"
+OK
+
+"White's Bishop is now bearing down on the f7-pawn. "
+OK
+
+MOVE f6
+MOVE Be6
+"2...f6 3.Be6"
+OK
+
+"In the space of just a few moves, the Bishop has become a powerful piece.  
+Should Black's Knight move, then the idea of Be6-c8 attacking the b7-pawn 
+will be possible."
+OK
+
+DIAGRAM "a2,b3,c4,e4,f2,g2,h2,Be2 v a7,b7,c6,e5,f7,g7,h7,Nc8" BLACK
+"We began with a position that 
+looked terrible for White's Bishop. But, as it was his move, we allowed him 
+to improve his Bishop at once with the move 1.c5!"
+OK
+
+"What if we go back to the example and give Black the first move?"
+OK
+
+"If it were Black's move, he would try to ensure that the pawn structure was 
+locked up and that White's Bishop was encased. He'd play"
+OK
+
+MOVE Nd6
+"1...Nd6 "
+OK
+
+"attacking the e4-pawn and after "
+OK
+
+MOVE f3
+MOVE c5
+"2.f3 c5! "
+OK
+
+"when White would have a truly miserable position."
+OK
+
+"Because Bishops are long range pieces that can attack from afar, they are 
+beloved by aggressive players."
+OK
+
+"They do, however, have some pretty serious drawbacks. The most obvious one 
+is the fact that they can only move around to half the squares on the 
+chessboard."
+OK
+
+"While this drawback may not trouble the Bishop, it can cause you and me a 
+lot of agony."
+OK
+
+"Imagine yourself as the player in the next diagram."
+OK
+
+DIAGRAM "h2,Bd3,Kg1 v Kh8" WHITE
+"You have to be pretty pleased with yourself that you've reached such a 
+position. You are a Bishop and pawn to the good and you have been expecting 
+your opponent to stretch his hand in congratulations."
+OK
+
+"Surprisingly, this hasn't happened yet. Slightly annoyed, you now decide 
+that it is time to force your extra pawn up the board to promotion and 
+checkmate the Black King."
+OK
+
+"Much to your befuddlement, this position is a dead draw!"
+OK
+
+"Black's defense is to keep his King in the corner, moving it back and forth 
+either by ...Kh8-g8-h8 or ...Kh8-g7-h8."
+OK
+
+"White can't force Black out of the corner, because the light-squared Bishop 
+doesn't control the queening square."
+OK
+
+"This rotten piece of luck happens to everyone. With any other pawn the King 
+can be forced out the other side and the White King can escort the pawn home."
+OK
+
+"But with the a- or h-pawn, the stalemate theme shows up and, in order to 
+win, the Bishop must control the promotion square."
+OK
+
+"The Bishop can only control half the squares on the chessboard. This fact 
+should not be forgotten!"
+OK
+
+"Like Rooks, it is possible to create a battery with a Bishop."
+OK
+
+DIAGRAM "b4,c5,f2,g3,h2,Be4,Qe2,Kg1 v a7,c6,f7,g6,h7,Bf6,Qc8,Kg8" WHITE
+"This example features an open position with a split pawn structure. 
+Black has split Queenside pawns. His a7 and c6-pawn are 
+disconnected by a file."
+OK
+
+"This means that they cannot protect each other, making them vulnerable. 
+White has two pawn islands, while Black has three."
+OK
+
+"Black's split pawns are vulnerable. In fact, White's Bishop is greedily 
+eyeing the little c6-morsel. All White has to do to win the c6-pawn is to 
+reinforce the pressure against it."
+OK
+
+"White plays Qf3, creating a battery along the h1-a8 diagonal. Coincidentally, 
+White's Queen also attacks Black's Bishop."
+OK
+
+"The diagram also features a common occurrence known as Bishops of opposite 
+colors. Positions with Bishops of opposite colors favor the attacker."
+OK
+
+"The reason is the defender won't be able to use his Bishop to block the 
+attack. As is the case here. Black cannot defend his c6-pawn with his Bishop."
+OK
+
+"While Bishops of opposite colors favor the player with the attack, such 
+positions can also make a defender rather happy."
+OK
+
+DIAGRAM "e4,d5,Be6,Kd4 v Kd6,Be5" WHITE
+"Here White has a sizable material advantage. He is two 
+connected passed pawns up."
+OK
+
+"But the presence of the Bishops of opposite colors makes the situation a 
+dead draw. Black will happily move his Bishop on the long diagonal a1-h8. 
+White cannot make further progess."
+OK
+
+"Essentially, Bishops of opposite colors allow the players to be the masters 
+of the squares on which their Bishops operate."
+OK
+
+"The outcome of this game would change if the Bishops 
+were of the same colors. Take out a chess board and play it out with the 
+Bishop on e6 changed to a Bishop on e3."
+OK
+
+"In no time, you should be able to force White's connected passed pawns up 
+the board."
+OK
+
+"Earlier, we looked at a battery of Queen and Bishop. Such 
+batteries come in many varieties. The most often seen are the following two 
+examples."
+OK
+
+DIAGRAM "a3,b2,e3,f2,g2,h2,Bd3,Qd1,Kg1 v a7,b6,d5,f7,g7,h7,Nc6,Qd8,Kg8" WHITE
+"Here, White takes advantage of a tactical double threat to 
+play 1.Qc2."
+OK
+
+"Attacking the exposed c6-Knight and by making a battery on the b1-h7 
+diagonal, Black has to choose whether to lose his Knight or the h7-pawn."
+OK
+
+"Before leaving the diagram, two points should be noted. White could also 
+have started with 1.Bxh7+ Kxh7 2.Qc2+, which recovers the piece and wins a 
+pawn."
+OK
+
+"The other point is, did you notice Black's pawn structure?  Black's d5-pawn 
+is called an isolated pawn.  This refers to the fact that the pawn cannot be 
+protected by another pawn."
+OK
+
+"How many pawn islands does Black have?  White?"
+OK
+
+DIAGRAM "a3,b2,e3,f2,g2,h2,h3,Bc2,Qd1,Kg1 v a7,b7,d5,f7,g7,h7,Qd7,Kg8" WHITE
+"In this example, White creates a battery by putting his Queen in 
+front of his Bishop, "
+OK
+
+MOVE Qd3
+"1.Qd3!"
+OK
+
+"White threatens Qd3xh7+ and Black is forced to play either 1...g6 or 1...f5.  
+This battery that White has created doesn't win material, but does force Black 
+to move a pawn, which creates some weak squares."
+OK
+
+"For example, suppose after 1.Qd3, Black chooses "
+OK
+
+"1...f5"
+MOVE f5
+OK
+
+"The result is that Black has weakened the e5-square. White could play"
+OK
+
+"2.Qc3 "
+MOVE Qc3
+OK
+
+"and try to occupy the e5-square, because no Black pawn can protect that 
+square."
+OK
+
+"What about 1...g6?  In that case, the pawn's move has weakened the f6-square."
+OK
+
+"White could use the same move 2.Qc3 and try to occupy the f6-square."
+OK
+
+"This combination of understanding the pawn structure with piece play, such 
+as creating a battery, is what planning is all about."
+OK
+
+"Because a Bishop is a long range piece, it stands to reason that, as the 
+game opens up, its value as a member in our army increases. Perhaps in the 
+opening and early middlegame, our Bishops didn't always find the right 
+diagonals."
+OK
+
+"Not so in the ending. As pawns are exchanged, the Bishops have an easier 
+time taking part in our plans. This principle of the Bishops reaching their 
+potential is best seen in the ending where the position is so open."
+OK
+
+"One thing a Bishop can do very well is to dominate a Knight."
+OK
+
+DIAGRAM "Bd5 v Nd8" WHITE
+"This is a classic example."
+OK
+
+"Note how the Black Knight is solidly rooted to its square. Without protection 
+it cannot move."
+OK
+
+"Let's test the knowledge we have learned by following a game from the big 
+leagues."
+OK
+
+DIAGRAM "a4,b2,c3,f4,g3,h4,Bf3,Kb5 v a5,b6,c5,f5,g6,h5,Ne7,Kc7" WHITE
+"In this game we will see how Bobby Fischer, playing White, methodically uses 
+his Bishop to make inroads on Mark Taimanov's position."
+OK
+
+MOVE Ka6
+"1.Ka6!"
+OK
+
+"This move forces Black to move his Knight, because any King or pawn move 
+would cost material."
+OK
+
+MOVELIST "Ng8 Bd5 Ne7 Bc4"
+"1...Ng8 2.Bd5 Ne7 3.Bc4!"
+OK
+
+"A subtle move that will soon become clear. White wants to achieve a position 
+where it will be Black to move. So, he deliberately makes a waiting move, in 
+order to force his opponent to move. This loss of a move is called losing a 
+tempo."
+OK
+
+DIAGRAM "a4,b2,c3,f4,g3,h4,Bc4,Ka6 v a5,b6,c5,f5,g6,h5,Ne7,Kc7" BLACK
+MOVELIST "Kc6 Bf7 Kc7 Be8"
+"3...Kc6 4.Bf7 Kc7 5.Be8"
+OK
+
+"White has created the maximum position possible."
+OK
+
+DIAGRAM "a4,b2,c3,f4,g3,h4,Be8,Ka6 v a5,b6,c5,f5,g6,h5,Ne7,Kc7" BLACK
+"Clearly, Black is in trouble. His Knight is chained to the defense of the 
+g6-pawn base. If this pawn goes, the whole Kingside structure collapses.  
+The King is also tied to the defense of the b6-base pawn."
+OK
+
+"Any pawn move costs Black that pawn. Black is forced to play 5...Kd8"
+OK
+
+MOVE Kd8
+"and Bobby sacrificed his Bishop:"
+OK
+
+MOVELIST "Bxg6 Nxg6 Kxb6"
+"6.Bxg6! Nxg6 7.Kxb6."
+OK
+
+"White has captured both base pawns. Black's compensation, his extra Knight, 
+is not enough to stop White's Queenside pawns."
+OK
+
+DIAGRAM "a4,b2,c3,f4,g3,h4,Kb6 v a5,c5,f5,h5,Ng6,Kd8" BLACK
+MOVELIST "Kd7 Kxc5 Ne7 b4 axb4 cxb4 Nc8 a5 Nd6 b5 Ne4 Kb6 Kc8 Kc6 Kb8 b6" 
+"7...Kd7 8.Kxc5 Ne7 9.b4 axb4 10.cxb4 Nc8 11.a5 Nd6 12.b5 Ne4+ 13.Kb6 Kc8 
+14.Kc6 Kb8 15.b6" 
+OK
+
+"and Black gave up, since he can't prevent White from queening one of his 
+pawns."
+OK
+
+"These two examples are considered masterpieces of Bishop domination over a 
+Knight."
+OK
+
+"They are worth playing over and over to see how a Bishop and King work 
+together to force through a victory."
+OK
+
+"If a lone Bishop in the ending can be so powerful, it stands to reason that 
+two Bishops working side by side can do major damage."
+OK
+
+"In chess parlance when a player has forced the exchange of a Bishop for one 
+of his Knights, he is said to have won the two Bishops."
+OK
+
+"Operating either at short or long range, the Bishops can construct a variety 
+of mating nets, as the next few examples show."
+OK
+
+DIAGRAM "Be8,Bf8,Kc2 v Ka2" WHITE
+"This diagram shows a King being driven into a corner by two long range 
+Bishops. White begins with"
+OK
+
+MOVELIST "Bf7+ Ka1 Bg7"
+"1.Bf7+ Ka1 2.Bg7 checkmate."
+OK
+
+"In the middlegame, the Bishops can also flex their muscle."
+OK
+
+DIAGRAM "Bc3,Bd3,Qb1 v Rf8,f7,g5,h6,Kg8" WHITE
+"Black's shielding pawns have moved forward. This allows White to use his 
+Bishops to corner Black's King."
+OK
+
+"1.Bh7 Checkmate!"
+SLIDE d3 h7
+OK
+
+"These two checkmating patterns are seen in a variety of ways in many 
+grandmaster games."
+OK
+
+DIAGRAM "Bc2,Qd1,Ke1 v Na6,Kh8" WHITE
+"Challenge:  In this skeletal position, what battery can be formed
+with a double attack?"
+CHALLENGE Qd3 "That's right."
+OK
+
+"Qd3."
+OK
+
+BOARD r2q1rk1/2p2ppp/1pn1p3/p2p4/3P4/3BP3/PP3PPP/1R1Q1RK1 WHITE
+"Challenge:  White is a pawn down. How should he regain the lost
+material?"
+CHALLENGE Bxh7 "Correct!"
+OK
+
+"Bxh7."
+OK
+
+"Challenge:  After the recapture, Kxh7, what is the move?"
+MOVE Kh7
+CHALLENGE Qc2 "That's right!"
+OK
+
+"Qc2."
+OK
+
+BOARD r2q1rk1/2p2ppp/1pn1p3/p2p4/3P4/3BP3/PP3PPP/1R1Q1RK1 WHITE
+MOVE Qc2
+"Challenge:  If White had played the battery-forming move Qd1-c2 first,
+how would Black play to avoid losing material?"
+CHALLENGE Nb4 "Right."
+OK
+
+"Nb4. Then, if White captures, Bd3xh7+ and Black plays the
+forced Kg8-h8, would White be able to save the piece?"
+OK
+
+"No."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Seven"
+//=======================================================================
+
+BEGIN CHAPTER 6
+
+CLRHIGH
+BOARD 64 WHITE
+
+"This Chapter will focus on using the Knight in various pawn skeleton
+situations."
+OK
+
+"Of all the pieces of our army, the Knight is certainly the most difficult
+to master."
+OK
+
+"The Knight is the one piece that is able to jump over friendly and unfriendly
+forces. Its strange L-shaped movement is difficult to get used to."
+OK
+
+"For these reasons and many others, the Knights are unappreciated for all the 
+goodness they can bring to a position."
+OK
+
+"Here are some practical things to keep in mind. Knights are not long-range 
+pieces. To be effective, they have to be close to the action."
+OK
+
+DIAGRAM "Na1" WHITE
+"Here we have a Knight on a1. How many squares does the he control?"
+OK
+
+"Only two. The c2 and b3-squares. Pretty bleak. This is the reason for the 
+witticism, 'A Knight on the rim is dim.'"
+OK
+
+"Imagine that all the action was on the Kingside, say the g8-square. It would 
+cost White five moves to bring his Knight to g8."
+OK
+
+"He would try a tour like Na1-b3-d4-f5-e7-g8. By the time the Knight made the 
+trip, the action might have shifted to the Queenside and the tour has to take 
+place all over again."
+OK
+
+DIAGRAM "Ne5" WHITE
+"This brings us to a crucial understanding:  To be effective, Knights must be 
+centralized."
+OK
+
+ADDHIGH c6d7f7g6g4f3d3c4
+"Here we see White's Knight attacking eight squares. Brilliant! Whether the 
+action is on the Kingside or Queenside, the Knight will have no difficulties 
+making himself a part of the scene."
+OK
+
+CLRHIGH
+"However, this presents a problem. If Knights have to be centralized, it 
+means they will have to be protected, else they will be driven off their 
+squares."
+OK
+
+"This means that Knights must have secured outposts."
+OK
+
+DIAGRAM "a2,b2,c4,e4,f2,g2,h2 v a7,b7,c5,e5,f7,g7,h7" WHITE
+"In this position, White's outposts are the b5, d5 and f5-squares. The reason 
+why is that these are the squares that are protected by White's pawns."
+OK
+
+"The b5 and f5-squares, however, are not secured. That is, Black could drive 
+a Knight away by playing ...a7-a6 or ...g7-g6. The only secured outpost is 
+the d5-square."
+OK
+
+"From Black's perspective, his is exactly the mirror image of White's line 
+of reasoning."
+OK
+
+"Now we add a pair of Knights to the position."
+OK
+
+DIAGRAM "a2,b2,c4,e4,f2,g2,h2,Ng1 v a7,b7,c5,e5,f7,g7,h7,Ng8" WHITE
+"Here, the race is on for both sides to try to bring their Knights to their 
+outposts."
+OK
+
+"White starts with "
+OK
+
+MOVE Ne2
+"1.Ne2!"
+OK
+
+"This is superior to 1.Nf3 which attacks a pawn and is quite attractive. The 
+only problem is that after 1.Nf3 f6! White's Knight hasn't reached one of his 
+outposts."
+OK
+
+"If he continues with 2.Nh4, Black's playing g6! keeps White's Knight out of 
+the f5-square and he will be forced to rethink his path."
+OK
+
+"Black matches White's first move, "
+OK
+
+MOVELIST "Ne7 Nc3 Nc6 Nd5 Nd4"
+"1...Ne7 2.Nc3 Nc6 3.Nd5 Nd4"
+OK
+
+"Both sides have played very well and have moved their Knights to the best 
+outposts available."
+OK
+
+"In this diagram, White has moved his Knight to the d5-outpost when he 
+might have preferred to move it to the f5-outpost, where the Knight could 
+attack the g7-pawn."
+OK
+
+"The reason he didn't do this is that the f5-outpost was unstable. It couldn't 
+be secured. How can an outpost be secured?  The answer is by pawn play."
+OK
+
+DIAGRAM "a2,b2,c4,e4,f3,g2,h4,Na1 v a7,b7,c5,e5,f6,g7,h6,Nh8" WHITE
+"In this diagram, both players have a fairly good idea as to where they want 
+to move their Knights. The problem for White is that the d5-outpost, as nice 
+as it is, doesn't create enough problems for his opponent. He therefore 
+starts the race with"
+OK
+
+MOVE h5
+"1.h5!"
+OK
+
+"The purpose of this move is to stop the response ...g7-g6 when the White 
+Knight plops down on the f5-square. From the f5-square, the Knight will 
+attack the g7-base pawn. Play might continue:"
+OK
+
+MOVELIST "Nf7 Nc2 Ng5 Ne3 Ne6 Nf5"
+"1... Nf7 2.Nc2 Ng5 3.Ne3 Ne6 4.Nf5"
+OK
+
+"White has moved to his outpost before Black could get to the d4-square. As a 
+result, Black's Knight is tied to the defense of the g7-pawn."
+OK
+
+DIAGRAM "e5,d4, v d5,e6" WHITE
+"This example features a locked center pawn struggle."
+OK
+
+"The Knight outposts for both sides are straightforward. White would love to 
+have a Knight on the c5, d6 or f6-squares. For Black, his choices are the f5, 
+e4 or c4 squares."
+OK
+
+"Knights love locked pawn formations. In such situations, they know exactly 
+what squares to go to."
+OK
+
+"What Knights don't like are pawn structures that are in a great deal of 
+flux. What was once an ideal landing square may suddenly be taken away."
+OK
+
+DIAGRAM "a2,b2,c3,d4,e5,f2,g2,h2, v a7,b7,c4,d5,e6,f7,g7,h7" WHITE
+"In this locked pawn formation, White's best outpost is the d6-square. While 
+the c5 and even f6-squares might be nice, the f6-square is covered by the 
+g7-pawn, while the c5-square could be covered by ...b7-b6."
+OK
+
+"From Black's point of view, the d3, e4 and f5-squares would all be nice. If 
+Black plays ...b7-b5, then bringing a Knight to the a4-square would be 
+attractive too."
+OK
+
+"But, Black has to be realistic as well. How to bring a Knight to the 
+d3-square?  Most likely, it would have to traverse through the f4-square."
+OK
+
+"White might prevent this by g2-g3. The e4-square can be blocked by f2-f3. 
+That leaves the f5-outpost. This could be covered by g2-g4."
+OK
+
+"Therefore in such pawn formations, the move ...h7-h5 is often played in 
+order to secure the f5-square."
+OK
+
+"If White plays h2-h3 in order to play g2-g4, Black often continues with 
+h5-h4 in order to prepare en passant."
+OK
+
+"One of the Knight's greatest uses is that of a blockader."
+OK
+
+"If your opponent has a protected passed pawn, the Knight does 
+terrifically as a blockader. The reason is that the Knight not only blocks 
+the pawn, it attacks squares at the same time."
+OK
+
+DIAGRAM "a2,b2,d5,e4,f2,g2,h2,Nc3 v a7,b7,c5,e5,f7,g7,h7,Nd6" WHITE
+"Here we see that White's protected passed d5-pawn is firmly blocked from 
+moving."
+OK
+
+"Not only does the d6-Knight stop the d5-pawn,  it simultaneously attacks the 
+e4-pawn. This makes the d6-Knight a rather powerful piece that White wants to 
+exchange-off."
+OK
+
+"To do this, White would have to move his c3-Knight, which might cost his 
+e4-pawn. White might plan to play 1.a4 and 2.Nb5. But, fearing the loss of 
+his e4-pawn, he starts with"
+OK
+
+MOVE f3
+"1.f3, securing his pawn chain."
+OK
+
+"White has created a new base pawn. His g2-pawn now plays a key role."
+OK
+
+"Black might counter White's strategy in two ways, depending upon the needs 
+of the position. He might play 1...b6 in order to meet 2.a4 with a6, stopping 
+Nc3-b5."
+OK
+
+"Or he might try to transfer White's base pawn forward. The way to do this is 
+to attack White's pawn chain in the middle. Black might try"
+OK
+
+MOVELIST "f5 a4 fxe4 fxe4"
+"1...f5 2.a4 fxe4 3.fxe4"
+OK
+
+"Now the base pawn is no longer the g2-pawn but is now the e4-pawn. Along 
+the pawn chain, base pawns can be moved."
+OK
+
+DIAGRAM "Nd3,Ke1 v a6,b7,Ke8" WHITE
+"Challenge:  What is White's material
+gaining move here?"
+CHALLENGE Nc5 "You are correct, sir!"
+OK
+
+"Nc5."
+OK
+
+DIAGRAM "a3,b4,d4,e3,Nb1,Ke1 v a6,b5,d5,e6,Ke8" WHITE
+"Challenge:  What is a desirable Knight maneuver?"
+CHALLENGE Nd2 "That's right."
+OK
+
+//"Nd2. ..."
+SLIDE d2 b3
+SLIDE b3 c5
+//OK
+
+"Nd2, moving him from b1 to d2, then to b3 and up to c5."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Eight"
+//=======================================================================
+
+BEGIN CHAPTER 7
+
+BOARD 64 WHITE
+CLRHIGH
+
+BOARD 2b3k1/7p/p1n5/1pP1pp2/PP2p1p1/2B1P1P1/4NP1P/6K1 WHITE
+"Although Knights move around slowly, their advantage over Bishops is that
+they do move to both black and white squares. The following example was
+taken from my own practice."
+OK
+
+"A rather difficult position has arisen. White's pawn skeleton tells us
+several things:  1) He has a protected passed pawn. 2) He has a bad Bishop.
+3) His Knight has no chance of finding a good outpost."
+OK
+
+"Black's pawn structure also reveals several things:"
+OK
+
+"1) The doubled e-pawns are usually a grave weakness. While White has a
+passed pawn on the Queenside, I have little chance of creating a passed pawn 
+on the Kingside."
+OK
+
+"2)  Although I have doubled e-pawns, the e5-pawn is magnificent. It denies 
+White's Knight access to the d4-square and closes the a1-h8 diagonal."
+OK
+
+"3) My c6-Knight perfectly blockades White's passed c5-pawn."
+OK
+
+"4)  My c8-Bishop is a bad one as most of my pawns are on light squares."
+OK
+
+"These revelations brought about the following plan."
+OK
+
+"1) I must activate my Bishop, trying to exchange it off for White's Knight."
+OK
+
+"2) I must activate my King, bringing it up the board to keep an eye on 
+White's passed pawn while protecting my important e5-pawn. Finally, I can 
+then move my Knight around the board to the f3-outpost."
+OK
+
+"My opponent, Grandmaster Alex Wojtkiewicz of Poland, now played:  1.Kf1 Be6 
+2.Ke1 Bc4 3.Nc1"
+MOVELIST "Kf1 Be6 Ke1 Bc4 Nc1"
+OK
+
+BOARD 6k1/7p/p1n5/1pP1pp2/PPb1p1p1/2B1P1P1/5P1P/2N1K3 BLACK
+"Alex notes that I am trying to exchange-off my Bishop for Knight and tries 
+to stop me, for now. His problem, however, is that the c4-Bishop dominates 
+the Knight.  3...Kf7 4.Kd1 Ke6 5.Kc2 Nd8"
+MOVELIST "Kf7 Kd1 Ke6 Kc2 Nd8"
+OK
+
+BOARD 3n4/7p/p3k3/1pP1pp2/PPb1p1p1/2B1P1P1/2K2P1P/2N5 WHITE
+MOVELIST "Kd1 Nf7 Ne2 Bxe2+ Kxe2 Kd5"
+"Now that the Black King keeps a watchful eye over the c5-pawn, the Knight 
+begins his journey to the f3-outpost.  6.Kd1 Nf7 7.Ne2 Bxe2+ 8.Kxe2 Kd5"
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h2,Bc3,Ke2 v a6,b5,e5,e4,f5,g4,h7,Nf7,Kd5" WHITE
+"Black is now ready to bring his Knight to f3."
+OK
+
+"9.Kf1"
+MOVE Kf1
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h2,Bc3,Kf1 v a6,b5,e5,e4,f5,g4,h7,Nf7,Kd5" BLACK
+"Anticipating ...Nf7-g5-f3, White prepares to keep his h2-pawn protected."
+OK
+
+"9...Kc4 10.Be1"
+MOVELIST "Kc4 Be1"
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h2,Be1,Kf1 v a6,b5,e5,e4,f5,g4,h7,Nf7,Kc4" BLACK
+MOVELIST "Ng5 Kg2"
+"White is forced to retreat his Bishop in order to protect his b4-pawn base.  
+But now the Bishop is on a defensive diagonal, only with hardly a place to 
+move.  10...Ng5 11.Kg2"
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h2,Be1,Kg2 v a6,b5,e5,e4,f5,g4,h7,Ng5,Kc4" BLACK
+MOVE Kd3
+"If 11.c6 Ne6 and the c6-pawn will be neatly rounded up after ...Kc4-d5xc6 
+and then Kc6-d5-c4 back again."
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h2,Be1,Kg2 v a6,b5,e5,e4,f5,g4,h7,Ng5,Kd3" WHITE
+MOVELIST "h3 Ne6"
+"A very powerful move. White is now reduced to making only King and pawn 
+moves.
+12.h3 Ne6!"
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,h3,Be1,Kg2 v a6,b5,e5,e4,f5,g4,h7,Ne6,Kd3" WHITE
+MOVELIST "hxg4 fxg4 Kf1 Nc7 Kg1 Nd5 Kf1 h6"
+"Avoiding the clever trap 12...gxh3+ 13.Kh2 Nf3+? 14.Kxh3 Nxf1 15.c6! and 
+Black's slow moving Knight cannot return in time to stop the pawn from 
+promotion.  13.hxg4 fxg4 14.Kf1 Nc7! 15.Kg1 Nd5 16.Kf1 h6!"
+OK
+
+DIAGRAM "a5,b4,c5,e3,f2,g3,Be1,Kf1 v a6,b5,e5,e4,g4,h6,Nd5,Kd3" WHITE
+MOVELIST "c6 Nc7 Kg1 Ne6 Kf1 h5 Kg2 Kc4 Kf1 Kd5 Ke2 Kxc6"
+"Losing a tempo so that White has to move. If he moves his King, with 
+16.Kg1 Ke2 wins the White Bishop."
+OK
+
+"White is forced to give up his beautiful passed pawn and Black wraps up 
+the game.  17.c6 Nc7 18.Kg1 Ne6 19.Kf1 h5 20.Kg2 Kc4 21.Kf1 Kd5 22.Ke2 Kxc6"
+OK
+
+DIAGRAM "a5,b4,e3,f2,g3,Be1,Ke2 v a6,b5,e5,e4,g4,h5,Ne6,Kc6"  WHITE
+"Black has realized his objective. He has won White's protected passed pawn, 
+but his doubled e-pawns don't offer a passed pawn of his own."
+OK
+
+"To win the game, Black has to go back to the c4-square with his King. 
+That means coordinating with the Knight to force White's King back."
+OK
+
+"23.Kd2!"
+MOVE Kd2
+OK
+
+DIAGRAM "a5,b4,e3,f2,g3,Be1,Kd2 v a6,b5,e5,e4,g4,h5,Ne6,Kc6" BLACK
+MOVELIST "Ng5 Kc2 Kd5 Kb3 Nf3 Bc3 h4"
+"The best defense. White has to stop the Black King march ...Kc6-d5-c4.  
+23...Ng5 24.Kc2 Kd5 25.Kb3 Nf3 26.Bc3 h4!"
+OK
+
+DIAGRAM "a5,b4,e3,f2,g3,Bc3,Kb3 v a6,b5,e5,e4,g4,h4,Nf3,Kd5" WHITE
+MOVELIST "gxh4 Nxh4 Bd2 Nf3 Bc3"
+"The g3-pawn stops the h5-pawn from going through. Now the f2-pawn not only 
+protects the e3-pawn, it also has to stop the g4-pawn from promoting."
+OK
+
+DIAGRAM "a5,b4,e3,f2,Bc3,Kb3 v a6,b5,e5,e4,g4,h4,Nf3,Kd5" BLACK
+"This spells double trouble for the f2-pawn.  27.gxh4 Nxh4 28.Bd2 Nf3 29.Bc3"
+OK
+
+MOVELIST "Ng1 Bd2 Ne2"
+"White has no choice. If 29.Bc1? Ne1 and ...Ne1-d3 would win the f2-pawn.  
+29...Ng1 30.Bd2 Ne2!"
+OK
+
+DIAGRAM "a5,b4,e3,f2,Bd2,Kb3 v a6,b5,e5,e4,g4,h4,Ne2,Kd5" WHITE
+"which means that White is compelled to make a bad move."
+OK
+
+"White would prefer to 'pass,' but is forced to make a move. However, any 
+move he makes weakens his position. Thus he is in Zugzwang."
+OK
+
+"31.Kc2"
+MOVE Kc2
+OK
+
+DIAGRAM "a5,b4,e3,f2,Bd2,Kc2 v a6,b5,e5,e4,g4,h4,Ne2,Kd5" BLACK
+"Or 31.Be1 Nc1+ 32.Kc3 Nd3 reaching a killer outpost. White would be forced 
+to give up either his f2 or b4-pawn."
+OK
+
+MOVE Kc4
+"31...Kc4"
+OK
+
+DIAGRAM "a5,b4,e3,f2,Bd2,Kc2 v a6,b5,e5,e4,g4,h4,Ne2,Kc4" WHITE
+MOVELIST "Be1 Ng1 Bd2 Nh3 Be1 Ng5"
+"At last, Black has made inroads with his King. Now, using a coordinated 
+attack of King and Knight the b4-pawn must fall.  32.Be1 Ng1 33.Bd2 Nh3 
+34.Be1 Ng5"
+OK
+
+SLIDE g5 e6
+SLIDE e6 c7
+SLIDE c7 d5
+SLIDE d5 b4
+"...and White gave up. He is helpless to prevent ...Ng5-e6-c7-d5xb4. While 
+the winning process was a long one, it showed the way that a Knight can 
+dominate a Bishop and vice versa. A fine example."
+OK
+
+"One of the Knight's specialties is attacking in different directions. A 
+Knight in the middle of the board can attack eight different squares 
+simultaneously."
+OK
+
+"This gives the Knight a great potential for forking the enemy pieces."
+OK
+
+DIAGRAM "Nc7 v Ra8,Ke8" WHITE
+"This example shows the most common type of Knight fork."
+OK
+
+"Black's King is in check and he can kiss his a8-Rook goodbye."
+OK
+
+"Forks in which the King, Queen, and Rook are simultaneously attacked are 
+known as a 'family fork.'"
+OK
+
+DIAGRAM "Nc7 v Ra8,Qd5,Ke8" WHITE
+"By adding a Queen, we get a family fork."
+OK
+
+"All three Black pieces are under attack at once. This ability to jump 
+around the board and fork pieces makes the hostile Knights pieces to watch 
+out for."
+OK
+
+"While Knights and Queens can't work together to form a battery, they do 
+work very well together in a number of circumstances. The best known example 
+is the Smothered Mate."
+OK
+
+DIAGRAM "f2,g2,h2,Qd5,Ng5,Kh1 v g7,h7,Rd8,Rb8,Qb6,Kh8" WHITE
+"White seems to be having it tough. His Queen is under 
+attack and Black has a back rank mate threat."
+OK
+
+MOVELIST "Nf7 Kg8 Nh6"
+"White had better come up with something in a hurry. Fortunately, White is 
+spared defeat by a nifty little mate. White plays 1.Nf7+ Kg8 2.Nh6!++"
+OK
+
+DIAGRAM "f2,g2,h2,Qd5,Nh6,Kh1 v g7,h7,Rd8,Rb8,Qb6,Kg8" BLACK
+"Black is now in double check and must move his King. He can't play 2...Kf8 
+as 3.Qf7# is checkmate. Black goes back to hide in his corner."
+OK
+
+MOVE Kh8
+"2...Kh8"
+OK
+
+"White could now repeat the position with 3.Nf7+ and a perpetual check and a 
+drawn game. But, with a gleam in his eye, White finds the mate."
+OK
+
+DIAGRAM "f2,g2,h2,Qd5,Nh6,Kh1 v g7,h7,Rd8,Rb8,Qb6,Kh8" WHITE
+MOVE Qg8
+"3.Qg8+!!"
+OK
+
+DIAGRAM "f2,g2,h2,Qg8,Nh6,Kh1 v g7,h7,Rd8,Rb8,Qb6,Kh8" BLACK
+"A fine move. Black is forced to take away his King's escape square.  
+3...Rxg8 4.Nf7#"
+MOVELIST "Rxg8 Nf7"
+OK
+
+DIAGRAM "f2,g2,h2,Nf7,Kh1 v g7,h7,Rg8,Rb8,Qb6,Kh8" BLACK
+"A beautiful smothered mate. This Knight smothered mate occurs in a lot 
+of games from a number of positions. It's worth keeping in mind."
+OK
+
+DIAGRAM "b2,Ne5,Kb1,Qh1 v f7,Bh8,Kg8,Qd8" WHITE
+"Challenge:  How should White continue?"
+CHALLENGE Qxh8+ "Good move!"
+OK
+
+"Qxh8+"
+OK
+
+DIAGRAM "b2,Ne5,Kb1,Qh8 v f7,Kg8,Qd8" BLACK
+MOVE Kxh8
+"Challenge:  After Kxh8, what next?"
+CHALLENGE Nxf7+ "Right!"
+OK
+
+"Nxf7+"
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+MOVE d4
+MOVE Nf6 
+MOVE c4
+MOVE e5
+MOVE dxe5
+MOVE Ng4
+MOVE Nf3
+MOVE Nc6
+MOVE Bf4
+MOVE Bb4
+MOVE Nbd2
+MOVE Qe7
+MOVE a3
+MOVE Ngxe5
+"In the opening, after 1.d4 Nf6 2.c4 e5 3.dxe5 Ng4 
+4.Nf3 Nc6 5.Bf4 Bb4+ 6.Nbd2 Qe7 7.a3 Ngxe5.  What prevents 
+White from capturing the Bishop, a3xb4?"
+OK
+
+"Nd3"
+OK
+
+BOARD rnbqkbnr/pppppppp/32/PPPPPPPP/RNBQKBNR WHITE
+MOVE e4
+MOVE c6
+MOVE d4
+MOVE d5
+MOVE Nc3
+MOVE dxe4
+MOVE Nxe4
+MOVE Nd7
+MOVE Qe2
+"Another opening, 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Nd7 5.Qe2.  
+Why can't Black develop, Ng8-f6?"
+OK
+
+"Nd6"
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Nine"
+//=======================================================================
+
+BEGIN CHAPTER 8
+
+BOARD 64 WHITE
+CLRHIGH
+
+"Thus far, the tutorial has focused upon recognizing the various pawn 
+skeletons and relating the pawn position for formulating a plan. This has 
+been done for the Rook, Bishop and Knight."
+OK
+
+"I've avoided using the pawn structure to work with the Queen for the 
+following reasons:"
+OK
+
+"1)  The Queen is so powerful, she needn't necessarily follow the pawn 
+structure to find a course of action. She can create her own."
+OK
+
+"2)  Because the Queen has the combined powers of Rook and Bishop, you can 
+use the same guiding principles to play with the Queen as for these pieces."
+OK
+
+"3)  There are no 'general priniciples' governing the Queen's actions. If 
+told that a Queen operates well in an open position, there are thousands of 
+examples where she's done very well in a closed position! And vice versa."
+OK
+
+"As they say, a Queen does her own thing! Despite point three, the following 
+generalities should govern a Queen's movements in most situations."
+OK
+
+"a)  The Queen is a powerful, long range piece.  She prefers an open position."
+OK
+
+"b)  The Queen is a great attacker. Her ability to move in many directions 
+makes her a real threat to the opposition."
+OK
+
+"c)  The Queen is an excellent support piece. She can 'back up' a Rook or 
+Bishop, easily creating a nice battery."
+OK
+
+"d)  The Queen is a rotten blockader for a passed pawn. Imagine the high 
+Queen having to use her powers to keep watch over a lowly pawn.  Humiliating."
+OK
+
+"So, instead of trying to point out specific do's and don'ts regarding the 
+Queen, I've saved this final chapter to review a lot of what I've said and 
+to show a few different positions, looking at them from the perspectives 
+taught in this tutorial."
+OK
+
+BOARD r2qr1k1/pp1nbppp/2p1p3/8/PPPP4/5N2/3BQPPP/R4RK1 WHITE
+"This diagram was reached in the game Y. Seirawan v. V. Kortchnoi, Monaco 
+1993,"
+OK
+
+"after 1.e4 e6 2.d4 d5 3.Nd2 dxe4 4.Nxe4 Bd7 5.Nf3 Bc6 6.Bd3 Nd7 
+7.Qe2 Ngf6 8.O-O Bxe4 9.Bxe4 Nxe4 10.Qxe4 c6 11.c4 Be7 12.Bd2 O-O 
+13.b4 Nf6 14.Qe2 Re8 15.a4 Nd7"
+OK
+
+"This is a closed position with the battle still ahead. The main feature of 
+the position is the advanced pawns on the queenside."
+OK
+
+"Pushing all your pawns on a flank is known as a pawn storm. The idea is to 
+force some open files in order to penetrate the opponent's position. 
+I hesitantly played"
+OK 
+
+MOVE c5
+"16.c5!"
+OK
+
+"This move considerably sharpens the fight. The d5-square now becomes a 
+perfect outpost for Black's Knight. But White gains his own trumps, the 
+ability to force open the b-file."
+OK
+
+MOVELIST "Nf6 b5 Nd5 bxc6 bxc6 Qa6"
+"16...Nf6 17.b5! Nd5 18.bxc6 bxc6 19.Qa6."
+OK
+
+BOARD r2qr1k1/p3bppp/Q1p1p3/2Pn4/P2P4/5N2/3B1PPP/R4RK1 BLACK
+"It is clear that White is targeting Black's c6-pawn. This move provokes a 
+Queen exchange, after which it will be more difficult for Black to prevent 
+White's b-file penetration, while simultaneously defending the c-pawn."
+OK
+
+MOVELIST "Qc8 Qxc8 Rexc8 Rfb1"
+"19...Qc8 20.Qxc8 Rexc8 21.Rfb1"
+OK
+
+BOARD r1r3k1/p3bppp/2p1p3/2Pn4/P2P4/5N2/3B1PPP/RR4K1 BLACK
+"Grabbing the open b-file. This Rook is used, rather than the a-Rook, because 
+White is preparing to march his King into the center, Kg1-f1."
+OK
+
+MOVE f6
+"21...f6!"
+OK
+                                             
+BOARD r1r3k1/p3b1pp/2p1pp2/2Pn4/P2P4/5N2/3B1PPP/RR4K1 WHITE
+"An excellent defensive move. Black controls the e5-square, White's natural 
+Knight outpost."
+OK
+
+MOVELIST "Rb7 Bd8 Re1 Rc7 Rxc7 Nxc7 Bf4"
+"22.Rb7 Bd8 23.Re1 Rc7 24.Rxc7 Nxc7 25.Bf4!"
+OK
+
+BOARD r2b2k1/p1n3pp/2p1pp2/2P5/P2P1B2/5N2/5PPP/4R1K1 BLACK
+"We know from the d4 and c5 pawns that White has a potentially bad Bishop.  
+Therefore, White is quick to activate this piece."
+OK
+
+"25...Kf7?"
+MOVE Kf7
+OK
+
+"Black defends his e6-pawn by this natural move."
+OK
+
+"Instead, he should have taken this opportunity to sacrifice a pawn for 
+activity. Best was 25...Rb8! taking the open file:  26.Rxe6 Kf7! 27.Re1 Rb4 
+with fair compensation."
+OK
+
+MOVE Rb1
+"26.Rb1!"
+OK
+
+"Having lured Black's King to f7, White's control of the open b-file becomes 
+decisive."
+OK
+
+MOVE Ke8
+"26...Ke8"
+OK
+
+"In order to protect the c7-Knight. After 26...Nd5 27.Rb7+ Be7 28.Bd6, White 
+has a powerful bind."
+OK
+
+MOVE Nd2
+"27.Nd2!"
+OK
+
+"A very good move. The White Knight is denied the e5-outpost. But what about 
+the d6-square?"
+OK
+
+MOVELIST "Nd5 Bd6 Ba5 Nc4 Bb4"
+"27...Nd5 28.Bd6 Ba5 29.Nc4 Bb4"
+OK
+
+BOARD r3k3/p5pp/2pBpp2/2Pn4/PbNP4/8/5PPP/1R4K1 WHITE
+"Black has blocked the b-file with his Bishop. But his Bishop is a little 
+shaky, relying solely upon the d5-Knight for support."
+OK
+
+"If Black could just play ...a7-a5, then the b4-Bishop will have found a 
+wonderful outpost while clogging-up the b-file."
+OK
+
+MOVE a5
+"30.a5!"
+OK
+
+BOARD r3k3/p5pp/2pBpp2/P1Pn4/1bNP4/8/5PPP/1R4K1 BLACK
+"A fine move. White prevents ...a7-a5 and prepares to undermine the b4-Bishop 
+by playing Nc4-e3."
+OK
+
+MOVE Rd8
+"30...Rd8"
+OK
+
+BOARD 3rk3/p5pp/2pBpp2/P1Pn4/1b1P4/4N3/5PPP/1R4K1 WHITE
+"If 30...a6? 31.Nb6 wins."
+OK
+
+MOVELIST "a6 Bc3"
+"31.a6 Bc3"
+OK
+
+BOARD 3rk3/p5pp/P1pBpp2/2Pn4/2NP4/2b5/5PPP/1R4K1 WHITE
+"Black's b-file blockade gives way. If 31...Rd7 32.Ne3 Bc3 33.Nxd5 exd5 
+34.Rb8+ Rd8 35.Rb7 Rd7 36.Bb8 wins."
+OK
+
+MOVELIST "Rb7 Bxd4 Rxa7 f5 Rb7 "
+"32.Rb7 Bxd4 33.Rxa7 f5 34.Rb7 "
+OK
+
+BOARD 3rk3/1R4pp/P1pBp3/2Pn1p2/2Nb4/8/5PPP/6K1 BLACK
+"...and Black gave up. An excellent demonstration of using an effective 
+plan based upon the pawn skeleton."
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER
+
+//=======================================================================
+//Chapter Ten"
+//=======================================================================
+
+BEGIN CHAPTER 9
+
+CLRHIGH
+BOARD 64 WHITE
+
+"Our next game was considered the best game of 1993. This, before the year 
+was up! It was played between the world's two highest rated players, 
+Anatoly Karpov and Garry Kasparov."
+OK
+
+"This was reached after the following moves: 
+1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.f3 O-O 6.Be3 e5 7.Nge2 c6 8.Qd2 Nbd7 
+9.Rd1?! a6 10.dxe5?! Nxe5! 11.b3 b5."
+OK
+
+BOARD r1bq1rk1/5pbp/p1pp1np1/1p2n3/2P1P3/1PN1BP2/P2QN1PP/3RKB1R WHITE
+"White is committing a cardinal sin. He is ignoring his development and 
+leaving his King in the center.  White's best 
+is 12.Qxd6 Qxd6 13.Rxd6 bxc4."
+OK
+
+"Going into an endgame spares White a dangerous middle-game attack. His 
+reason for doing this was to win the d6-pawn."
+OK
+
+MOVELIST "cxb5 axb5 Qxd6 Nfd7"
+"12.cxb5? axb5 13.Qxd6 Nfd7!"
+OK
+
+BOARD r1bq1rk1/3n1pbp/2pQ2p1/1p2n3/4P3/1PN1BP2/P3N1PP/3RKB1R WHITE
+"Black maximizes his piece play. The e5-Knight sits on a fine square. 
+The g7-Bishop is on the long diagonal and is prepared to enter the fray. 
+The a8-Rook, without moving, is active along the a-file."
+OK
+
+"White has to neutralize all of these active pieces, while trying to develop 
+his own. The win of the pawn wasn't worth all of this trouble."
+OK
+
+MOVE f4
+"14.f4?  A completely understandable move. White wants to dislodge the 
+powerful e5-Knight. However, the text has a tactical drawback that Kasparov 
+is quick to exploit."
+OK
+
+"While not ideal, best was 14.Kf2 followed by Kf2-g1, fleeing the center."
+OK
+
+MOVE b4
+"14...b4!  Avoiding 14...Ng4 15.Bd4, when White is well on his way to 
+neutralizing the Black forces."
+OK
+
+MOVE Nb1
+"15.Nb1.  White has no choice. His two alternatives are destroyed:  
+15.Qxb4 c5! 16.Bxc5 Nxc5 17.Qxc5 Nd3+ 18.Rxd3 Qxd3; 15.Na4 Rxa4! 
+16.bxa4 Nxc4 17.Qd3 Nb2 18.Qc2 Nxd1 19.Qxd1 Qe7 20.Ng3 Rd8."
+OK
+
+MOVELIST "Ng4 Bd4 Bxd4 Qxd4 Rxa2"
+"15...Ng4 16.Bd4 Bxd4 17.Qxd4 Rxa2"
+OK
+
+BOARD 2bq1rk1/3n1p1p/2p3p1/8/1p1QPPn1/1P6/r3N1PP/1N1RKB1R WHITE
+"Black crashes through on his half-open 
+a-file. White's lack of development spells his downfall."
+OK
+
+MOVE h3
+"18.h3"
+OK
+
+BOARD 2bq1rk1/3n1p1p/2p3p1/8/1p1QPPn1/1P5P/r3N1P1/1N1RKB1R BLACK
+"The capture Qxb4? Ne3! with the threat of ...Ne3-c2+ wins material."
+OK
+
+MOVELIST "c5 Qg1 Ngf6 e5 Ne4"
+"18...c5! 19.Qg1 Ngf6 20.e5 Ne4.  Black continues to post this Knight 
+aggressively in the center. He now threatens ...Qd8-h4+."
+OK
+
+BOARD 2bq1rk1/3n1p1p/6p1/2p1P3/1p2nP2/1P5P/r3N1P1/1N1RKBQR WHITE
+MOVELIST "h4 c4"
+"21.h4 c4!  A beautiful move. Black's plan is to play ...Qd8-a5 and ...b4-b3+ 
+with decisive effect."
+OK
+
+BOARD 2bq1rk1/3n1p1p/6p1/4P3/1pp1nP1P/1P6/r3N1P1/1N1RKBQR WHITE
+MOVE Nc1
+"22.Nc1.  White has no defense. If 22.bxc4 Qa5 wins, while 22.Qd4 c2 
+24.Rc1 Nc5 and ...Nc5-d3+."
+OK
+
+MOVE c3
+"22...c3.  This sacrifice of the Rook is unnecessary. The straightforward 
+22...Rb2!  23.Qd4 c3 is curtains."
+OK
+
+MOVELIST "Nxa2 c2"
+"23.Nxa2 c2"
+OK
+
+BOARD 2bq1rk1/3n1p1p/6p1/4P3/1p2nP1P/1P6/N1p3P1/1N1RKBQR WHITE
+MOVE Qd4
+"Karpov now played 24.Qd4"
+OK
+
+"His main alternative was 24.Rc1 Nxe5! 25.Rxc2 Bg4 26.Nd2 Qd3! when Black's 
+piece activity proves to be overwhelming."
+OK
+
+MOVELIST "cxd1Q Kxd1"
+"24...cxd1/Q+ 25.Kxd1"
+OK
+
+BOARD 2bq1rk1/3n1p1p/6p1/4P3/1p1QnP1P/1P6/N5P1/1N1K1B1R BLACK
+"Or 25.Qxd1 Qb6 26.Qe2 Qd4 wins."
+OK
+
+MOVE Ndc5
+"25...Ndc5!  Another excellent move. Black seizes the open file and targets 
+the b3-pawn."
+OK
+
+MOVELIST "Qxd8 Rxd8+ Kc2 Nf2"
+"26.Qxd8 Rxd8+ 27.Kc2 Nf2"
+OK
+
+BOARD 2br2k1/5p1p/6p1/2n1P3/1p3P1P/1P6/N1K2nP1/1N3B1R WHITE
+MOVELIST "Rg1 Bf5+ Kb2 Nd1+ Ka1 Nxb3"
+"White now lost on time. The finish is 28.Rg1 Bf5+ 29.Kb2 Nd1+ 30.Ka1 Nxb3 
+mate."
+OK
+
+"Even in this extremely tactical battle, the pawn structure aided both 
+players in determining their plans."
+OK
+
+"Good luck with yours!
+
+GM Yasser Seirawan"
+OK
+
+BOARD 64 WHITE
+CLRHIGH
+
+END CHAPTER

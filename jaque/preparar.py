@@ -39,7 +39,13 @@ def preparar(origen, destino: Path = DESTINO, avisar=print) -> Path:
     tmp.rename(destino)
     avisar(f"   {n} archivos copiados a {destino}")
 
-    # Generar de antemano lo que más tarda en el primer arranque.
+    generar_cache(destino, avisar)
+    return destino
+
+
+def generar_cache(destino: Path = DESTINO, avisar=print):
+    """Recorta las piezas y convierte los sonidos de antemano (no necesita el ISO)."""
+    from .assets import Recursos
     rec = Recursos(destino)
     juegos = rec.juegos_piezas()
     for i, (cod, nombre) in enumerate(juegos, 1):
@@ -51,7 +57,6 @@ def preparar(origen, destino: Path = DESTINO, avisar=print) -> Path:
         avisar("   Sonidos convertidos")
     except Exception as e:  # sin audio no es grave
         avisar(f"   (sonidos: {e})")
-    return destino
 
 
 def main(argv=None):
@@ -60,7 +65,10 @@ def main(argv=None):
         print(__doc__)
         return 2
     try:
-        preparar(argv[0])
+        if argv[0] == "--cache":
+            generar_cache()
+        else:
+            preparar(argv[0])
     except Exception as e:
         print(f"No pude preparar los recursos: {e}")
         return 1
