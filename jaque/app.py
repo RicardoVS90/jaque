@@ -17,12 +17,14 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QDial
                                QDialogButtonBox, QFileDialog, QFormLayout, QFrame, QGridLayout,
                                QGroupBox, QHBoxLayout, QHeaderView, QLabel, QMainWindow,
                                QMessageBox, QProgressBar, QPushButton, QSizePolicy, QSplashScreen,
-                               QSplitter, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+                               QSplitter, QTableWidget, QTableWidgetItem, QTextBrowser, QVBoxLayout,
+                               QWidget)
 
 from . import __version__
 from .assets import FuenteError, Recursos
 from .escalado import FILTROS, pil_a_qimage
 from .motor import Motor, buscar_stockfish
+from .comentarista import COLOR_ANOTACION, NAG, Comentarista
 from .notacion import NOMBRE_PIEZA, evaluacion_es, linea_es, san_es
 from .sonidos import Sonidos
 from .tablero import Tablero
@@ -190,8 +192,17 @@ class VentanaPrincipal(QMainWindow):
         self.incremento = 0
         self.con_reloj = False
 
+        self.anot: dict[int, str] = {}         # ply -> '!', '?!', '?', '??'
+        self.com = Comentarista(ruta_sf)
+        for k in self.com.mostrar:
+            self.com.mostrar[k] = self.cfg.value(f"comentarios/{k}", True, type=bool)
+
         self._construir_ui()
         self._construir_menus()
+        self.com.comentario.connect(self._comentar)
+        self.com.anotacion.connect(self._anotar)
+        self.com.apertura.connect(self._mostrar_apertura)
+        self._visibilidad_comentarios()
         self._aplicar_apariencia()
         self.timer = QTimer(self)
         self.timer.setInterval(100)
@@ -255,6 +266,13 @@ class VentanaPrincipal(QMainWindow):
                                       "border-radius:6px")
         v.addWidget(self.lbl_estado)
 
+        self.lbl_apertura = QLabel()
+        self.lbl_apertura.setAlignment(Qt.AlignCenter)
+        self.lbl_apertura.setWordWrap(True)
+        self.lbl_apertura.setStyleSheet("color:#e8c070; font-style:italic; font-size:14px")
+        self.lbl_apertura.hide()
+        v.addWidget(self.lbl_apertura)
+
         self.capt = {chess.WHITE: QLabel(), chess.BLACK: QLabel()}
         for c in (chess.BLACK, chess.WHITE):
             self.capt[c].setMinimumHeight(52)
@@ -270,6 +288,16 @@ class VentanaPrincipal(QMainWindow):
         self.tabla.setSelectionMode(QAbstractItemView.NoSelection)
         self.tabla.setStyleSheet("font-size:15px")
         v.addWidget(self.tabla, 1)
+
+        self.g_com = QGroupBox("Comentarios")
+        gc = QVBoxLayout(self.g_com)
+        gc.setContentsMargins(6, 6, 6, 6)
+        self.txt_com = QTextBrowser()
+        self.txt_com.setOpenLinks(False)
+        self.txt_com.setMinimumHeight(120)
+        self.txt_com.setStyleSheet("font-size:14px; background:#241a13; border:none")
+        gc.addWidget(self.txt_com)
+        v.addWidget(self.g_com, 1)
 
         g_an = QGroupBox("Análisis")
         ga = QVBoxLayout(g_an)
@@ -377,6 +405,13 @@ class VentanaPrincipal(QMainWindow):
             a.triggered.connect(lambda _=False, c=k: self._set_filtro(c))
             grp.addAction(a)
             sub.addAction(a)
+        sub = m.addMenu("Co&mentarios en vivo")
+        for clave, texto in (("apertura", "Nombre de la &apertura"),
+                             ("evaluar", "&Evaluar mis jugadas"),
+                             ("rival", "Comentarios del &rival"),
+                             ("amenazas", "Avisos de a&menazas")):
+            accion(sub, texto, lambda on, c=clave: self._set_comentario(c, on), None, True,
+                   self.com.mostrar[clave])
         m.addSeparator()
         accion(m, "&Sonido", self._set_sonido, None, True, self.sonidos.activos)
 
@@ -491,6 +526,9 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.orientacion = self.humano
         self.tablero.set_posicion(self.board)
         self.tabla.setRowCount(0)
+        self.anot.clear()
+        self.com.reiniciar()
+        self.txt_com.clear()
         self._actualizar_capturas()
         self.resultado = "*"
         self.lbl_eval.setText("—")
@@ -500,12 +538,16 @@ class VentanaPrincipal(QMainWindow):
 
     def _turno(self):
         self._actualizar_panel()
+        self.com.vigente(self.board)
+        self.com.actualizar_apertura(self.board)
         if self.terminada:
             return
         if self._fin_de_partida():
             return
         if self.board.turn != self.humano:
             self._pedir_motor()
+        else:
+            self.com.amenazas(self.board, self.humano, self.rival)
 
     def _pedir_motor(self):
         if not self.motor or not self.rival:
@@ -545,7 +587,11 @@ class VentanaPrincipal(QMainWindow):
     def _jugada_humano(self, mv):
         if self.terminada or self.pensando:
             return
+        antes = self.board.copy(stack=False)
         self._hacer(mv, animar=False)
+        self.com.vigente(self.board)
+        self.com.jugada_humano(antes, mv, len(self.board.move_stack),
+                               list(self.board.move_stack), self.rival)
         self._turno()
 
     def _jugada_motor(self, uci, info):
@@ -562,7 +608,9 @@ class VentanaPrincipal(QMainWindow):
             self.lbl_eval.setText(f"Evaluación del rival: {evaluacion_es(sc, True)}"
                                   + (f"  ·  prof. {info['depth']}" if info.get("depth") else ""))
             self.lbl_linea.setText("Piensa: " + linea_es(self.board, info.get("pv", [])))
+        antes = self.board.copy()
         self._hacer(mv, animar=True)
+        self.com.jugada_rival(antes, mv, info, self.rival, self.humano)
         self._turno()
 
     def mover_ahora(self):
@@ -584,6 +632,9 @@ class VentanaPrincipal(QMainWindow):
             self.board.pop()
         ultima = self.board.move_stack[-1] if self.board.move_stack else None
         self.tablero.set_posicion(self.board, ultima)
+        n = len(self.board.move_stack)
+        self.anot = {k: v for k, v in self.anot.items() if k <= n}
+        self.com.descartar_desde(n + 1)
         self._reconstruir_tabla()
         self._actualizar_capturas()
         self._turno()
@@ -724,8 +775,52 @@ class VentanaPrincipal(QMainWindow):
             num = QTableWidgetItem(f"{fila + 1}.")
             num.setForeground(QColor(160, 140, 110))
             self.tabla.setItem(fila, 0, num)
-        self.tabla.setItem(fila, 1 if n % 2 == 1 else 2, QTableWidgetItem(texto))
+        self.tabla.setItem(fila, 1 if n % 2 == 1 else 2, self._item_jugada(texto, n))
         self.tabla.scrollToBottom()
+
+    def _item_jugada(self, texto, ply):
+        sim = self.anot.get(ply)
+        it = QTableWidgetItem(texto + (sim or ""))
+        if sim:
+            it.setForeground(QColor(COLOR_ANOTACION[sim]))
+        return it
+
+    def _anotar(self, ply, sim):
+        self.anot[ply] = sim
+        fila, col = (ply - 1) // 2, 1 + (ply - 1) % 2
+        it = self.tabla.item(fila, col)
+        if it is not None:
+            texto = it.text().rstrip("!?")
+            self.tabla.setItem(fila, col, self._item_jugada(texto, ply))
+
+    # ------------------------------------------------------------------ comentarios
+    _ICONO = {"apertura": ("📖", "#e8c070"), "bien": ("✔", "#7fd67f"), "imprecision": ("?!", "#e8d070"),
+              "error": ("✖", "#f0a050"), "grave": ("✖✖", "#ff6b6b"), "rival": ("💬", "#c8b4e8"),
+              "amenaza": ("⚠", "#ff9a6b"), "info": ("•", "#bbb")}
+
+    def _comentar(self, tipo, html, ply=0):
+        icono, color = self._ICONO.get(tipo, ("•", "#ccc"))
+        num = ((ply or len(self.board.move_stack)) + 1) // 2
+        self.txt_com.append(f'<p style="margin:2px 0"><span style="color:#8a7660">{num}.</span> '
+                            f'<span style="color:{color}">{icono}</span> '
+                            f'<span style="color:#eee">{html}</span></p>')
+        sb = self.txt_com.verticalScrollBar()
+        sb.setValue(sb.maximum())
+
+    def _mostrar_apertura(self, texto):
+        self.lbl_apertura.setText(texto)
+        self.lbl_apertura.setVisible(bool(texto))
+
+    def _set_comentario(self, clave, on):
+        self.com.mostrar[clave] = on
+        self.cfg.setValue(f"comentarios/{clave}", on)
+        if clave == "apertura":
+            self.com.actualizar_apertura(self.board)
+        self._visibilidad_comentarios()
+
+    def _visibilidad_comentarios(self):
+        m = self.com.mostrar
+        self.g_com.setVisible(m["apertura"] or m["evaluar"] or m["rival"] or m["amenazas"])
 
     def _reconstruir_tabla(self):
         self.tabla.setRowCount(0)
@@ -736,7 +831,7 @@ class VentanaPrincipal(QMainWindow):
             if self.tabla.rowCount() <= fila:
                 self.tabla.insertRow(fila)
                 self.tabla.setItem(fila, 0, QTableWidgetItem(f"{fila + 1}."))
-            self.tabla.setItem(fila, 1 + i % 2, QTableWidgetItem(san_es(b, mv)))
+            self.tabla.setItem(fila, 1 + i % 2, self._item_jugada(san_es(b, mv), i + 1))
             b.push(mv)
 
     def _actualizar_capturas(self):
@@ -800,6 +895,13 @@ class VentanaPrincipal(QMainWindow):
         g.headers["White"] = "Jugador" if self.humano == chess.WHITE else nombre_r
         g.headers["Black"] = "Jugador" if self.humano == chess.BLACK else nombre_r
         g.headers["Result"] = getattr(self, "resultado", "*") if self.terminada else "*"
+        ap = self.com.aperturas.de_partida(self.board)
+        if ap:
+            g.headers["ECO"] = ap[0]
+            g.headers["Opening"] = ap[1]
+        for ply, nodo in enumerate(g.mainline(), 1):
+            if ply in self.anot:
+                nodo.nags.add(NAG[self.anot[ply]])
         Path(ruta).write_text(str(g) + "\n", encoding="utf-8")
         self.statusBar().showMessage(f"Partida guardada en {ruta}", 5000)
 
@@ -831,6 +933,9 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.orientacion = self.humano
         self.tablero.interactivo = True
         self.tablero.set_posicion(self.board, b.move_stack[-1] if b.move_stack else None)
+        self.anot.clear()
+        self.com.reiniciar()
+        self.txt_com.clear()
         self._reconstruir_tabla()
         self._actualizar_capturas()
         self._turno()
@@ -894,6 +999,8 @@ class VentanaPrincipal(QMainWindow):
                           f"<h3>Jaque {__version__}</h3>"
                           "<p>Ajedrez en español para Linux, de Ricardo.</p>"
                           "<p>Motor: <b>Stockfish</b>. Interfaz: Python y Qt.</p>"
+                          "<p>Nombres de aperturas: base ECO de <i>chess-openings</i> "
+                          "(Guido Flohr, licencia WTFPL), traducida al español.</p>"
                           "<p>Atajos: Ctrl+N nueva partida · Ctrl+T tutor · "
                           "Ctrl+L partidas clásicas · F11 pantalla completa.</p>")
 
@@ -904,6 +1011,7 @@ class VentanaPrincipal(QMainWindow):
                 v.close()
         if self.motor:
             self.motor.apagar()
+        self.com.apagar()
         super().closeEvent(ev)
 
 

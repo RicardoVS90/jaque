@@ -9,7 +9,10 @@ con Qt (PySide6) y con **Stockfish** como motor.
   que eligen entre las jugadas que propone Stockfish.
 - Tutor interactivo con desafíos sobre el tablero y visor de partidas clásicas
   comentadas, con reproducción automática y «Jugar desde aquí».
-- Notación en español (R, D, T, A, C), relojes, sugerencias, PGN.
+- Notación en español (R, D, T, A, C), relojes, sugerencias, deshacer, PGN.
+- Comentarios en vivo: nombre de la apertura (código ECO), evaluación de tus
+  jugadas (!, ?!, ?, ??) con explicación, frases del rival según su estilo y
+  avisos de piezas sin defensa o amenazas de mate.
 - Instaladores autosuficientes: Linux (`.run`) y Windows (`.exe`), con su
   propio Python y bibliotecas adentro.
 
@@ -43,14 +46,14 @@ Comprobar la instalación: `python -m jaque --verificar`
 ```bash
 pip install -r requirements.txt pyinstaller
 empaquetado/linux/construir.sh /ruta/a/tu/cd.iso
-# -> build/Jaque-0.6.0-instalador.run
+# -> build/Jaque-0.7.0-instalador.run
 ```
 
 **Windows 11:**
 
 ```bat
 empaquetado\windows\construir.bat C:\ruta\a\tu\cd.iso
-:: -> salida\Jaque-0.6.0-instalador-windows.exe
+:: -> salida\Jaque-0.7.0-instalador-windows.exe
 ```
 
 El script de Windows instala solo Python 3.13 e Inno Setup (con winget) si
@@ -79,6 +82,7 @@ jaque/
   escalado.py     Scale2x y escalado con Qt
   rivales.py      formato de personalidades y elección de jugadas
   motor.py        Stockfish en un hilo aparte
+  comentarista.py comentarios en vivo (aperturas, evaluación, rival, amenazas)
   tutoriales.py   intérprete de los guiones de lecciones
   clasicas.py     lector de las colecciones de partidas
   ventanas.py     ventanas del Tutor y de Partidas clásicas
@@ -87,13 +91,19 @@ jaque/
   sonidos.py      sonidos (conversión y reproducción)
   rutas.py        carpetas según el sistema (Linux / Windows)
   verificar.py    chequeo completo:  jaque --verificar
-  datos/          portada e ícono (originales de Jaque)
+  datos/          portada, ícono y base de aperturas en español
 empaquetado/
   linux/          instalador .run autosuficiente (PyInstaller + bash)
   windows/        instalador .exe (PyInstaller + Inno Setup)
 ```
 
+## Novedades
+
+El registro de cambios de cada versión está en `CHANGELOG.md`.
+
 ## Licencia
 
 GPL v3 (ver `LICENSE`). Copyright © 2026 Ricardo.
 Stockfish se distribuye bajo GPL v3; PySide6/Qt bajo LGPL v3.
+La base de aperturas (`jaque/datos/aperturas.json`) proviene del paquete
+*chess-openings* de Guido Flohr (licencia WTFPL) y fue traducida al español.
