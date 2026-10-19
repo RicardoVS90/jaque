@@ -1,116 +1,99 @@
-# Jaque 0.4
+# Jaque
 
-Ajedrez en español para Linux, con **Stockfish** como motor, gráficos escalados
-a 1920×1080, 2560×1440 o lo que tenga tu monitor, tutor, partidas clásicas
-comentadas y 40 rivales con personalidad propia.
+Programa de ajedrez en español para **Linux** y **Windows**, escrito en Python
+con Qt (PySide6) y con **Stockfish** como motor.
 
-Proyecto personal de Ricardo, para uso propio.
+- Tableros 2D y 3D (con perspectiva reconstruida), escalados a cualquier
+  resolución: 1080p, 1440p, 4K.
+- 40 rivales con personalidad propia (agresivo, posicional, tablista, novato…)
+  que eligen entre las jugadas que propone Stockfish.
+- Tutor interactivo con desafíos sobre el tablero y visor de partidas clásicas
+  comentadas, con reproducción automática y «Jugar desde aquí».
+- Notación en español (R, D, T, A, C), relojes, sugerencias, PGN.
+- Instaladores autosuficientes: Linux (`.run`) y Windows (`.exe`), con su
+  propio Python y bibliotecas adentro.
 
-## Instalación (Debian 13 / KDE)
+## Importante: el contenido gráfico no está incluido
 
-Todo viene dentro de un solo archivo: programa, gráficos, sonidos, lecciones,
-partidas y traducciones. **No hace falta el ISO.**
+Este repositorio contiene **solo el código**. Los tableros, piezas, sonidos,
+rivales, lecciones y partidas se leen de una copia original del CD de
+*Chessmaster 4000 Turbo* (1995) que tiene que aportar cada usuario. Jaque no
+contiene ni distribuye ningún archivo de ese juego.
+
+Chessmaster es marca registrada de su propietario; este proyecto no tiene
+relación con él.
+
+## Probar desde el código (Linux)
 
 ```bash
-bash Jaque-0.4.0-instalador.run
+sudo apt install stockfish python3-venv
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python -m jaque.preparar /ruta/a/tu/cd.iso    # una sola vez
+.venv/bin/python -m jaque
 ```
 
-El instalador copia todo a `~/.local/share/jaque`, instala Stockfish y
-`python3-venv` si faltan (pide tu contraseña), reutiliza el entorno de Python
-si ya existe (si no, lo crea: esa única parte necesita internet), recorta las
-piezas de antemano y agrega el comando `jaque` y la entrada en el menú de KDE.
-Para actualizar a una versión nueva, se ejecuta el instalador nuevo encima.
+O todo junto: `./instalar.sh /ruta/a/tu/cd.iso`
 
-Para desinstalar:  `bash Jaque-0.4.0-instalador.run --desinstalar`
+Comprobar la instalación: `python -m jaque --verificar`
 
-## Tu propia portada
+## Armar los instaladores
 
-Guardá una imagen como `~/.local/share/jaque/portada.png` (o `.jpg`) y Jaque la
-muestra al arrancar en lugar de la que trae. Se ve bien con proporción 16:10 u
-16:9, por ejemplo 1600×1000. Para volver a la original, borrá ese archivo.
+**Linux** (x86_64, glibc 2.39+):
 
-## Qué trae esta versión
+```bash
+pip install -r requirements.txt pyinstaller
+empaquetado/linux/construir.sh /ruta/a/tu/cd.iso
+# -> build/Jaque-0.6.0-instalador.run
+```
 
-- Tableros 2D del juego (madera grande y chico, mármol verde, mármol azul) y
-  tableros de colores lisos.
-- **Tableros 3D** del juego (madera, mármol verde y azul, ébano y marfil, teca
-  china, metal y el paisaje surrealista de Dalí), con la perspectiva
-  original reconstruida. Con los juegos de piezas 3D, las piezas se paran
-  sobre el tablero.
-- Los 17 juegos de piezas originales (Staunton, fantasía, dinosaurios,
-  insectos, napoleónico, criaturas marinas, tuercas, letras…), recortados
-  automáticamente de los BMP con sus máscaras.
-- Tres modos de escalado: *Mejorado* (Scale2x + suavizado), *Suave* y
-  *Píxel nítido*.
-- Los 40 rivales del juego (Estilo Tal, Estilo Karpov, Kamikaze, Comepeones,
-  Maestro de tablas, Novato…). Se leen sus parámetros reales de los `.CMX`:
-  fuerza, aleatoriedad, ataque o defensa, actitud ante las tablas y el valor
-  que le da a cada pieza. Stockfish propone las mejores jugadas y la
-  personalidad elige entre ellas.
-- Notación en español (R, D, T, A, C), sugerencias con flecha, evaluación y
-  línea que piensa el rival.
-- Relojes (blitz, rápida, clásica, con incremento), deshacer, ofrecer tablas,
-  rendirse, girar el tablero, guardar y abrir PGN.
-- Menú **Aprender**:
-  - **Tutor** (Ctrl+T): las reglas, el curso en 10 niveles y los 10 capítulos
-    de estrategia del juego original, traducidos al español, con diagramas,
-    jugadas animadas y desafíos para resolver en el tablero.
-  - **Partidas clásicas** (Ctrl+L): las 502 partidas comentadas del juego
-    (desde 1790 hasta 1993), con todos los comentarios en español, visor
-    jugada a jugada, reproducción automática y «Jugar desde aquí» contra
-    cualquier rival.
-- Sonidos (convertidos a 16 bits y guardados en `~/.cache/jaque`), portada
-  e ícono propios.
+**Windows 11:**
 
-## Atajos
+```bat
+empaquetado\windows\construir.bat C:\ruta\a\tu\cd.iso
+:: -> salida\Jaque-0.6.0-instalador-windows.exe
+```
 
-| Tecla | Acción |
-|---|---|
-| Ctrl+N | Nueva partida |
-| Ctrl+Z | Deshacer |
-| Ctrl+H | Sugerencia |
-| Ctrl+M | Que el rival juegue por vos (cambia de bando) |
-| F | Girar tablero |
-| F11 | Pantalla completa |
-| Ctrl+S / Ctrl+O | Guardar / abrir PGN |
-| Ctrl+T | Tutor |
-| Ctrl+L | Partidas clásicas |
-| Espacio / → / ← | En el tutor: siguiente página / jugada / anterior |
+El script de Windows instala solo Python 3.13 e Inno Setup (con winget) si
+faltan, descarga Stockfish y arma el instalador.
 
-## Problemas conocidos
+> Los instaladores resultantes llevan adentro el contenido de tu CD: son para
+> uso personal y no deben publicarse (el `.gitignore` ya los excluye).
 
-- El libro de aperturas propio (`.OBK`) no se usa: Stockfish juega la apertura
-  y los rivales con libro varían entre jugadas parejas.
-- Si el audio da problemas, arrancá con `JAQUE_SIN_SONIDO=1 jaque`.
-- Configuración guardada en `~/.config/Jaque/Jaque.conf`; para empezar de
-  cero, borrá ese archivo y `~/.cache/jaque`.
+## Traducciones
 
-## Sobre las traducciones
-
-La carpeta `traducciones/` tiene la traducción al español de los textos del
-tutor y de los comentarios de las partidas clásicas. Esos textos son obra de
-los autores del juego original, así que la traducción es **solo para tu
-uso personal** junto con tu copia del juego: no publiques esa carpeta.
-También se puede poner en `~/.local/share/jaque/traducciones/es.json`.
+Los textos del tutor y los comentarios de las partidas están en inglés en el CD.
+Jaque busca una traducción opcional en `traducciones/es.json` (formato
+`{"texto original": "traducción"}`); si no existe, los muestra en inglés.
+Las traducciones son obra derivada del contenido original, así que tampoco se
+incluyen en el repositorio.
 
 ## Estructura
 
 ```
 jaque/
-  assets.py     lectura de recursos (paquete propio, ISO o carpeta)
-  preparar.py   arma el paquete de recursos una sola vez
-  datos/        portada e ícono propios
-  sprites.py    recorte de juegos de piezas con sus máscaras
-  escalado.py   Scale2x y escalado con Qt
-  tablero.py    widget del tablero (dibujo, clic, arrastre, animación)
-  rivales.py    formato CMX y cómo juega cada personalidad
-  motor.py      Stockfish en un hilo aparte
-  notacion.py   notación y textos en español
-  sonidos.py    sonidos originales
-  app.py        ventana, menús, relojes, PGN
-  tutoriales.py lectura de los guiones de lecciones (.TUT)
-  clasicas.py   lectura de las colecciones de partidas (.CML)
-  traduccion.py carga de traducciones y notación en español
-  ventanas.py   ventanas del Tutor y de Partidas clásicas
+  app.py          ventana principal, menús, relojes, PGN
+  tablero.py      dibujo del tablero 2D/3D, arrastre, animaciones
+  assets.py       lectura de recursos (paquete preparado, ISO o carpeta)
+  preparar.py     arma el paquete de recursos a partir del ISO
+  sprites.py      recorte de piezas a partir de imagen + máscara
+  escalado.py     Scale2x y escalado con Qt
+  rivales.py      formato de personalidades y elección de jugadas
+  motor.py        Stockfish en un hilo aparte
+  tutoriales.py   intérprete de los guiones de lecciones
+  clasicas.py     lector de las colecciones de partidas
+  ventanas.py     ventanas del Tutor y de Partidas clásicas
+  traduccion.py   traducciones y notación en español
+  notacion.py     notación y textos en español
+  sonidos.py      sonidos (conversión y reproducción)
+  rutas.py        carpetas según el sistema (Linux / Windows)
+  verificar.py    chequeo completo:  jaque --verificar
+  datos/          portada e ícono (originales de Jaque)
+empaquetado/
+  linux/          instalador .run autosuficiente (PyInstaller + bash)
+  windows/        instalador .exe (PyInstaller + Inno Setup)
 ```
 
+## Licencia
+
+GPL v3 (ver `LICENSE`). Copyright © 2026 Ricardo.
+Stockfish se distribuye bajo GPL v3; PySide6/Qt bajo LGPL v3.

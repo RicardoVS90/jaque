@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Sonidos del juego original, convertidos a 16 bits / 44,1 kHz en caché."""
 import io
 import wave

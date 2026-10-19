@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Prepara el paquete de recursos de Jaque a partir del ISO o de la carpeta del juego.
 
 Copia una sola vez los archivos de datos (tableros, piezas, sonidos, rivales,
@@ -12,9 +14,8 @@ import shutil
 import sys
 from pathlib import Path
 
-DATOS = Path.home() / ".local" / "share" / "jaque"
-DESTINO = DATOS / "recursos"
-CACHE = Path.home() / ".cache" / "jaque"
+from .rutas import CACHE, DATOS, recursos as _recursos
+DESTINO = _recursos()
 MARCA = "JAQUE.RECURSOS"
 # Solo datos: nada de ejecutables, DLL, ayuda ni la portada original.
 EXTENSIONES = {"INI", "BMP", "WAV", "CMX", "TUT", "CML", "OBK"}

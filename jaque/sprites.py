@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Recorte de juegos de piezas.
 
 Cada juego viene en dos BMP: la imagen (6 piezas x 2 colores) y una mascara

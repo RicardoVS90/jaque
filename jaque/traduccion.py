@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Traducciones locales de los textos del juego original.
 
 Las traducciones viven en un archivo JSON {texto original normalizado: traducción}
@@ -22,7 +24,8 @@ def norm(s: str) -> str:
 
 def rutas_posibles():
     base = Path(__file__).resolve().parent.parent
-    return [Path.home() / ".local" / "share" / "jaque" / "traducciones" / "es.json",
+    from .rutas import DATOS
+    return [DATOS / "traducciones" / "es.json",
             base / "traducciones" / "es.json"]
 
 

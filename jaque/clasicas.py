@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Lectura de las colecciones de partidas clásicas (.CML) del juego original.
 
 Formato deducido del archivo:

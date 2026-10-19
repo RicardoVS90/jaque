@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Widget del tablero: 2D o 3D en perspectiva, a cualquier resolución.
 
 Todo se dibuja en "coordenadas de tablero" (x = columna 0..8, y = fila 0..8,

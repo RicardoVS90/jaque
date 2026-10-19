@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Intérprete de los guiones de lecciones (.TUT) del juego original.
 
 El formato es un pequeño guion: cada capítulo es una secuencia de órdenes

@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Acceso a los recursos del juego original del usuario.
 
 Se leen del paquete de recursos preparado (~/.local/share/jaque/recursos),
@@ -259,7 +261,7 @@ class Recursos:
     def portada():
         """(imagen, es_la_de_jaque). Se puede reemplazar con
         ~/.local/share/jaque/portada.png (o .jpg)."""
-        base = Path.home() / ".local" / "share" / "jaque"
+        from .rutas import DATOS as base
         propia = Path(__file__).resolve().parent / "datos" / "portada.png"
         for p in (base / "portada.png", base / "portada.jpg", base / "portada.jpeg", propia):
             if p.exists():

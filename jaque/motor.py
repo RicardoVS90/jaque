@@ -1,8 +1,11 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Stockfish en un hilo aparte, con la personalidad del rival aplicada encima."""
 from __future__ import annotations
 
 import random
 import shutil
+import sys
 
 import chess
 import chess.engine
@@ -11,11 +14,27 @@ from PySide6.QtCore import QObject, QThread, Signal, Slot
 from .rivales import Rival, config_motor, elegir_jugada
 
 
+def _stockfish_incluido():
+    """Stockfish que viene dentro del instalador (carpeta motor/ junto al programa)."""
+    import sys
+    from pathlib import Path
+    from .rutas import DATOS, WINDOWS
+    bases = [Path(sys.executable).resolve().parent,
+             Path(__file__).resolve().parent.parent,
+             DATOS / "programa"]
+    nombre = "stockfish.exe" if WINDOWS else "stockfish"
+    for b in bases:
+        p = b / "motor" / nombre
+        if p.is_file():
+            return str(p)
+    return None
+
+
 def buscar_stockfish(preferida: str | None = None) -> str | None:
     for c in (preferida, "stockfish", "/usr/games/stockfish", "/usr/bin/stockfish"):
         if c and shutil.which(c):
             return shutil.which(c)
-    return None
+    return _stockfish_incluido()
 
 
 class _Trabajador(QObject):
@@ -30,7 +49,11 @@ class _Trabajador(QObject):
 
     def _motor(self):
         if self.eng is None:
-            self.eng = chess.engine.SimpleEngine.popen_uci(self.ruta)
+            extra = {}
+            if sys.platform.startswith("win"):
+                import subprocess
+                extra["creationflags"] = subprocess.CREATE_NO_WINDOW   # sin ventana negra
+            self.eng = chess.engine.SimpleEngine.popen_uci(self.ruta, **extra)
             try:
                 self.eng.configure({"Threads": 2, "Hash": 64})
             except Exception:

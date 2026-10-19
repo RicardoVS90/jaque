@@ -1,5 +1,22 @@
+# Repositorio PRIVADO de práctica: incluye el material del juego original
+# (recursos/ y traducciones/). Uso personal: no hacerlo público así.
+
+# --- Archivos demasiado grandes para GitHub (van en las Releases) ---------
+*.iso
+*.ISO
+*.run
+Jaque-*-instalador*
+
+# --- Salidas de construcción ----------------------------------------------
+build/
+dist/
+salida/
+motor/
+*.spec
+/lanzar.py
+
+# --- Python ---------------------------------------------------------------
 __pycache__/
 *.pyc
 .venv/
-*.iso
-*.ISO
+venv/

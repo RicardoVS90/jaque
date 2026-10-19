@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Ventana principal de Jaque."""
 from __future__ import annotations
 
@@ -25,7 +27,7 @@ from .notacion import NOMBRE_PIEZA, evaluacion_es, linea_es, san_es
 from .sonidos import Sonidos
 from .tablero import Tablero
 
-CACHE = Path.home() / ".cache" / "jaque"
+from .rutas import CACHE
 
 CONTROLES = [
     ("Sin reloj", 0, 0), ("Blitz 5 min", 300, 0), ("Blitz 3 + 2", 180, 2),
@@ -992,7 +994,8 @@ def main(argv=None):
                 from PySide6.QtGui import QPainter
                 pq = QPainter(q)
                 pq.setRenderHint(QPainter.TextAntialiasing)
-                fv = QFont("DejaVu Serif")
+                fv = QFont()
+                fv.setFamilies(["DejaVu Serif", "Georgia", "Cambria", "Times New Roman", "serif"])
                 fv.setPixelSize(max(12, round(q.height() * 0.036)))
                 fv.setLetterSpacing(QFont.PercentageSpacing, 140)
                 pq.setFont(fv)

@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Notación algebraica en español: R rey, D dama, T torre, A alfil, C caballo."""
 import chess
 

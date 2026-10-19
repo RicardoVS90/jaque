@@ -1,3 +1,5 @@
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Escalado de gráficos de 8 bits a resoluciones actuales."""
 import numpy as np
 from PIL import Image
