@@ -107,6 +107,40 @@ def _colores_linea(p):
     return cols
 
 
+def _lineas_imagen(p):
+    """Filas y columnas de la imagen que son lineas de grilla: {indice: color}."""
+    res = []
+    for arr in (p, p.transpose(1, 0, 2)):
+        d = {}
+        for i, row in enumerate(arr):
+            vals, cnt = np.unique(row.reshape(-1, 3), axis=0, return_counts=True)
+            if cnt.max() > 0.85 * len(row):
+                d[i] = vals[cnt.argmax()]
+        res.append(d)
+    return res  # (filas, columnas)
+
+
+def _quitar_fondo_borde(sub, alpha, bg):
+    """Quita los pixeles del color de fondo conectados con el borde del recorte."""
+    esbg = (np.abs(sub - bg).sum(axis=2) < 9) | ~alpha
+    lab, _ = ndimage.label(esbg)
+    borde = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    if borde:
+        alpha &= ~np.isin(lab, list(borde))
+    return alpha
+
+
+def _sin_restos(alpha):
+    """Descarta fragmentos sueltos chicos (restos de lineas o de la pieza vecina)."""
+    lab, n = ndimage.label(alpha, structure=np.ones((3, 3)))
+    if n <= 1:
+        return alpha
+    tam = ndimage.sum(alpha, lab, range(1, n + 1))
+    grande = tam.max()
+    ok = [i + 1 for i, t in enumerate(tam) if t >= 0.03 * grande]
+    return np.isin(lab, ok)
+
+
 def recortar(pic: Image.Image, mask: Image.Image):
     """Devuelve {('w'|'b', 'P'..'K'): Image RGBA recortada}."""
     p = np.array(pic.convert("RGB")).astype(np.int16)
@@ -116,6 +150,18 @@ def recortar(pic: Image.Image, mask: Image.Image):
     mc = _sin_grilla(m)
     mc[_corte_filas(mc), :] = False
     lineas = _colores_linea(p)
+    filas_l, cols_l = _lineas_imagen(p)
+    vals, cnt = np.unique(p.reshape(-1, 3), axis=0, return_counts=True)
+    fondo = vals[cnt.argmax()]
+    # Algunos juegos traen el dibujo unos pixeles mas chico que la mascara:
+    # se completa con fondo para que la alineacion no quede forzada.
+    H = max(p.shape[0], m.shape[0]) + 6
+    W = max(p.shape[1], m.shape[1]) + 6
+    if p.shape[:2] != (H, W):
+        q = np.empty((H, W, 3), p.dtype)
+        q[...] = fondo
+        q[:p.shape[0], :p.shape[1]] = p
+        p = q
     out = {}
     for color, fila in zip(("w", "b"), filas):
         for letra, (x0, y0, x1, y1) in zip(ORDEN, fila):
@@ -144,6 +190,15 @@ def recortar(pic: Image.Image, mask: Image.Image):
             alpha = mk[:h, :w].copy()
             for c in lineas:
                 alpha &= ~(np.abs(sub - np.array(c)).sum(axis=2) < 6)
+            # lineas de grilla dibujadas en la imagen (aunque no sean de color saturado)
+            for y, c in filas_l.items():
+                if Y0 <= y < Y0 + h:
+                    alpha[y - Y0] &= ~(np.abs(sub[y - Y0] - c).sum(axis=1) < 6)
+            for x, c in cols_l.items():
+                if X0 <= x < X0 + w:
+                    alpha[:, x - X0] &= ~(np.abs(sub[:, x - X0] - c).sum(axis=1) < 6)
+            alpha = _quitar_fondo_borde(sub, alpha, fondo)
+            alpha = _sin_restos(alpha)
             rgba = np.dstack([sub.astype(np.uint8), (alpha * 255).astype(np.uint8)])
             out[(color, letra)] = Image.fromarray(_recortar_bordes(rgba), "RGBA")
     return out

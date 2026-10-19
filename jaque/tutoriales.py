@@ -1,4 +1,4 @@
-"""Intérprete de los tutoriales .TUT de Chessmaster 4000.
+"""Intérprete de los guiones de lecciones (.TUT) del juego original.
 
 El formato es un pequeño guion: cada capítulo es una secuencia de órdenes
 (BOARD, DIAGRAM, MOVELIST, MOVE, SLIDE, CHALLENGE, GHOST, NEWHIGH, …) y

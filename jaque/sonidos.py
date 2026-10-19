@@ -33,6 +33,14 @@ def _convertir(datos: bytes, destino: Path):
         o.writeframes(pcm.tobytes())
 
 
+def convertir_todos(recursos, cache: Path):
+    cache.mkdir(parents=True, exist_ok=True)
+    for arch in EVENTOS.values():
+        dst = cache / arch.lower()
+        if recursos.existe(arch) and not dst.exists():
+            _convertir(recursos.leer(arch), dst)
+
+
 class Sonidos:
     def __init__(self, recursos, cache: Path):
         self.activos = True

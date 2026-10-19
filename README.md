@@ -1,31 +1,39 @@
-# Jaque 0.2
+# Jaque 0.3
 
-Programa de ajedrez para Linux, en español, que usa los **tableros, piezas,
-sonidos y rivales de tu propia copia de Chessmaster 4000 Turbo** y a
-**Stockfish** como motor. Escala los gráficos a 1920×1080, 2560×1440 o lo que
-tenga tu monitor.
+Ajedrez en español para Linux, con **Stockfish** como motor, gráficos escalados
+a 1920×1080, 2560×1440 o lo que tenga tu monitor, tutor, partidas clásicas
+comentadas y 40 rivales con personalidad propia.
 
-Jaque no incluye ningún archivo del juego original: los lee del ISO o de la
-carpeta instalada cada vez que arranca.
+Proyecto personal de Ricardo, para uso propio.
 
 ## Instalación (Debian 13 / KDE)
 
+Poné el ISO del CD en la misma carpeta que `instalar.sh` (o dejalo en
+`~/Descargas`) y ejecutá:
+
 ```bash
 cd jaque
-./instalar.sh
+./instalar.sh                    # busca el ISO solo
+./instalar.sh /ruta/al/cd.iso    # o indicándolo
 ```
 
-Instala Stockfish si falta (con `sudo apt`), crea un entorno de Python en
-`~/.local/share/jaque/venv`, agrega el comando `jaque` y una entrada en el
-menú de aplicaciones.
+El instalador:
 
-Para probar sin instalar nada:
+1. instala Stockfish y `python3-venv` si faltan (pide tu contraseña);
+2. crea (o reutiliza) el entorno de Python en `~/.local/share/jaque/venv`;
+3. **prepara los gráficos y sonidos una sola vez** en
+   `~/.local/share/jaque/recursos` (unos 6 MB) y recorta las piezas de
+   antemano. Después de esto el ISO ya no hace falta: lo podés borrar;
+4. agrega el comando `jaque`, el ícono y la entrada en el menú de KDE.
 
-```bash
-sudo apt install stockfish
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m jaque --recursos /ruta/a/CM4000_WIN95-98.ISO
-```
+Si el instalador no encuentra el ISO, Jaque te lo pide una única vez al abrirlo.
+Para rehacer el paquete: menú Opciones → *Volver a preparar gráficos y sonidos*.
+
+## Tu propia portada
+
+Guardá una imagen como `~/.local/share/jaque/portada.png` (o `.jpg`) y Jaque la
+muestra al arrancar en lugar de la que trae. Se ve bien con proporción 16:10 u
+16:9, por ejemplo 1600×1000. Para volver a la original, borrá ese archivo.
 
 ## Qué trae esta versión
 
@@ -57,8 +65,8 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
     (desde 1790 hasta 1993), con todos los comentarios en español, visor
     jugada a jugada, reproducción automática y «Jugar desde aquí» contra
     cualquier rival.
-- Sonidos originales (convertidos a 16 bits y guardados en `~/.cache/jaque`) y
-  portada de inicio.
+- Sonidos (convertidos a 16 bits y guardados en `~/.cache/jaque`), portada
+  e ícono propios.
 
 ## Atajos
 
@@ -87,7 +95,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 La carpeta `traducciones/` tiene la traducción al español de los textos del
 tutor y de los comentarios de las partidas clásicas. Esos textos son obra de
-los autores del Chessmaster original, así que la traducción es **solo para tu
+los autores del juego original, así que la traducción es **solo para tu
 uso personal** junto con tu copia del juego: no publiques esa carpeta.
 También se puede poner en `~/.local/share/jaque/traducciones/es.json`.
 
@@ -95,7 +103,9 @@ También se puede poner en `~/.local/share/jaque/traducciones/es.json`.
 
 ```
 jaque/
-  assets.py     lectura del ISO/carpeta (CM.INI, BMP, CMX, WAV)
+  assets.py     lectura de recursos (paquete propio, ISO o carpeta)
+  preparar.py   arma el paquete de recursos una sola vez
+  datos/        portada e ícono propios
   sprites.py    recorte de juegos de piezas con sus máscaras
   escalado.py   Scale2x y escalado con Qt
   tablero.py    widget del tablero (dibujo, clic, arrastre, animación)
@@ -110,4 +120,3 @@ jaque/
   ventanas.py   ventanas del Tutor y de Partidas clásicas
 ```
 
-Chessmaster es marca de Ubisoft. Este proyecto no está afiliado con Ubisoft.

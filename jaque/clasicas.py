@@ -1,4 +1,4 @@
-"""Lectura de las colecciones de partidas clásicas (.CML) de Chessmaster 4000.
+"""Lectura de las colecciones de partidas clásicas (.CML) del juego original.
 
 Formato deducido del archivo:
   cabecera: título de la colección (32 bytes), 1A 04, cantidad de partidas

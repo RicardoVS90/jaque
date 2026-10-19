@@ -1,7 +1,7 @@
-"""Acceso a los recursos de una copia original de Chessmaster 4000 Turbo.
+"""Acceso a los recursos del juego original del usuario.
 
-Este programa NO incluye ningun recurso del juego: los lee en tiempo de
-ejecucion desde el ISO o la carpeta de instalacion del propio usuario.
+Se leen del paquete de recursos preparado (~/.local/share/jaque/recursos),
+o directamente del ISO o de la carpeta del juego.
 """
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ class _Iso:
                 self._idx = nombres
                 break
         if self.dir is None:
-            raise FuenteError("El ISO no contiene la carpeta de Chessmaster 4000.")
+            raise FuenteError("Ese ISO no contiene los archivos del juego.")
 
     def listar(self):
         return list(self._idx)
@@ -74,7 +74,7 @@ class _Iso:
 def _buscar_dir(raiz: Path) -> Path | None:
     for dirpath, _dirs, files in os.walk(raiz):
         up = {f.upper() for f in files}
-        if "CM.INI" in up and ("CM4000.EXE" in up or "CMDEFALT.INI" in up):
+        if "CM.INI" in up and ("CM4000.EXE" in up or "CMDEFALT.INI" in up or "JAQUE.RECURSOS" in up):
             return Path(dirpath)
     return None
 
@@ -91,7 +91,7 @@ class Recursos:
         else:
             d = _buscar_dir(ruta)
             if d is None:
-                raise FuenteError("No encontre los archivos de Chessmaster 4000 en esa carpeta.")
+                raise FuenteError("No encontré los archivos del juego en esa carpeta.")
             self.src = _Directorio(d)
         self.ruta = ruta
         self._ini = None
@@ -226,7 +226,7 @@ class Recursos:
         pic, msk = f"256_{codigo}P.BMP", f"256_{codigo}M.BMP"
         claves = [(c, l) for c in "wb" for l in ORDEN]
         if cache is not None:
-            d = Path(cache) / "piezas" / f"{codigo}-v2"
+            d = Path(cache) / "piezas" / f"{codigo}-v4"
             archivos = {k: d / f"{k[0]}_{k[1]}.png" for k in claves}
             if all(p.exists() for p in archivos.values()):
                 out = {}
@@ -255,5 +255,18 @@ class Recursos:
                     pass
         return out
 
-    def portada(self) -> Image.Image | None:
-        return self.imagen("TITLEPIC.BMP").convert("RGB") if self.existe("TITLEPIC.BMP") else None
+    @staticmethod
+    def portada() -> Image.Image | None:
+        """Portada propia de Jaque; se puede reemplazar con
+        ~/.local/share/jaque/portada.png (o .jpg)."""
+        base = Path.home() / ".local" / "share" / "jaque"
+        for p in (base / "portada.png", base / "portada.jpg", base / "portada.jpeg",
+                  Path(__file__).resolve().parent / "datos" / "portada.png"):
+            if p.exists():
+                try:
+                    im = Image.open(p)
+                    im.load()
+                    return im.convert("RGB")
+                except Exception:
+                    pass
+        return None

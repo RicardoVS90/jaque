@@ -11,6 +11,7 @@ import chess.pgn
 from PySide6.QtCore import QLibraryInfo, QSettings, Qt, QTimer, QTranslator
 from PySide6.QtGui import QAction, QActionGroup, QColor, QFont, QKeySequence, QPalette, QPixmap
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QDialog,
+                               QProgressDialog,
                                QDialogButtonBox, QFileDialog, QFormLayout, QFrame, QGridLayout,
                                QGroupBox, QHBoxLayout, QHeaderView, QLabel, QMainWindow,
                                QMessageBox, QProgressBar, QPushButton, QSizePolicy, QSplashScreen,
@@ -50,14 +51,14 @@ def _fmt_reloj(seg):
 class DialogoRecursos(QDialog):
     def __init__(self, parent=None, mensaje=""):
         super().__init__(parent)
-        self.setWindowTitle("Recursos de Chessmaster 4000")
+        self.setWindowTitle("Archivos del juego original")
         self.ruta = None
         lay = QVBoxLayout(self)
         t = QLabel(
-            "<h3>¿Dónde está tu copia de Chessmaster 4000 Turbo?</h3>"
-            "<p>Jaque no incluye gráficos ni sonidos del juego original: los lee "
-            "de tu propio CD. Podés elegir el archivo <b>.ISO</b> del CD o la carpeta "
-            "donde está instalado (la que contiene <tt>CM4000.EXE</tt>).</p>"
+            "<h3>Falta preparar los gráficos y sonidos</h3>"
+            "<p>Elegí la imagen <b>.ISO</b> de tu CD (o la carpeta donde está "
+            "instalado). Jaque va a copiar lo que necesita una sola vez y después "
+            "no te lo vuelve a pedir.</p>"
             + (f"<p style='color:#e66'>{mensaje}</p>" if mensaje else ""))
         t.setWordWrap(True)
         lay.addWidget(t)
@@ -72,7 +73,7 @@ class DialogoRecursos(QDialog):
         bb = QDialogButtonBox(QDialogButtonBox.Cancel)
         bb.rejected.connect(self.reject)
         lay.addWidget(bb)
-        self.resize(520, 240)
+        self.resize(520, 220)
 
     def _iso(self):
         r, _ = QFileDialog.getOpenFileName(self, "Imagen del CD", str(Path.home()),
@@ -82,10 +83,29 @@ class DialogoRecursos(QDialog):
             self.accept()
 
     def _dir(self):
-        r = QFileDialog.getExistingDirectory(self, "Carpeta de Chessmaster 4000", str(Path.home()))
+        r = QFileDialog.getExistingDirectory(self, "Carpeta del juego", str(Path.home()))
         if r:
             self.ruta = r
             self.accept()
+
+
+def _preparar_con_progreso(origen, parent=None) -> Path:
+    """Arma el paquete de recursos mostrando una ventanita de progreso."""
+    from .preparar import preparar
+    dlg = QProgressDialog("Preparando gráficos y sonidos…", None, 0, 0, parent)
+    dlg.setWindowTitle("Jaque")
+    dlg.setMinimumDuration(0)
+    dlg.setWindowModality(Qt.ApplicationModal)
+    dlg.show()
+    QApplication.processEvents()
+
+    def avisar(txt):
+        dlg.setLabelText(txt.strip())
+        QApplication.processEvents()
+    try:
+        return preparar(origen, avisar=avisar)
+    finally:
+        dlg.close()
 
 
 class DialogoNuevaPartida(QDialog):
@@ -363,7 +383,7 @@ class VentanaPrincipal(QMainWindow):
         accion(m, "&Partidas clásicas comentadas…", self.abrir_clasicas, "Ctrl+L")
 
         m = mb.addMenu("&Opciones")
-        accion(m, "Recursos de &Chessmaster…", self._cambiar_recursos)
+        accion(m, "Volver a preparar &gráficos y sonidos…", self._cambiar_recursos)
         accion(m, "Ruta de &Stockfish…", self._cambiar_stockfish)
 
         m = mb.addMenu("A&yuda")
@@ -835,12 +855,11 @@ class VentanaPrincipal(QMainWindow):
         d = DialogoRecursos(self)
         if d.exec() == QDialog.Accepted and d.ruta:
             try:
-                Recursos(d.ruta)
-            except FuenteError as e:
+                _preparar_con_progreso(d.ruta, self)
+            except Exception as e:
                 QMessageBox.warning(self, "Recursos", str(e))
                 return
-            self.cfg.setValue("recursos", d.ruta)
-            QMessageBox.information(self, "Recursos", "Listo. Reiniciá Jaque para usar la nueva copia.")
+            QMessageBox.information(self, "Recursos", "Listo. Reiniciá Jaque para usarlos.")
 
     def _cambiar_stockfish(self):
         r, _ = QFileDialog.getOpenFileName(self, "Ejecutable de Stockfish", "/usr/games")
@@ -851,12 +870,10 @@ class VentanaPrincipal(QMainWindow):
     def _acerca(self):
         QMessageBox.about(self, "Acerca de Jaque",
                           f"<h3>Jaque {__version__}</h3>"
-                          "<p>Programa de ajedrez libre para Linux, inspirado en los clásicos de los 90.</p>"
-                          "<p>Usa <b>Stockfish</b> como motor y, si tenés una copia de "
-                          "<i>Chessmaster 4000 Turbo</i>, sus tableros, piezas, sonidos y "
-                          "personalidades de rivales, leídos directamente de tu CD.</p>"
-                          "<p>Jaque no contiene ni distribuye material del juego original. "
-                          "Chessmaster es marca de Ubisoft; este proyecto no está afiliado.</p>")
+                          "<p>Ajedrez en español para Linux, de Ricardo.</p>"
+                          "<p>Motor: <b>Stockfish</b>. Interfaz: Python y Qt.</p>"
+                          "<p>Atajos: Ctrl+N nueva partida · Ctrl+T tutor · "
+                          "Ctrl+L partidas clásicas · F11 pantalla completa.</p>")
 
     def closeEvent(self, ev):
         self.cfg.setValue("geometria", self.saveGeometry())
@@ -900,6 +917,10 @@ def main(argv=None):
     app.setApplicationName("Jaque")
     app.setOrganizationName("Jaque")
     app.setDesktopFileName("jaque")
+    icono = Path(__file__).resolve().parent / "datos" / "jaque.png"
+    if icono.exists():
+        from PySide6.QtGui import QIcon
+        app.setWindowIcon(QIcon(str(icono)))
     tr = QTranslator(app)
     if tr.load("qtbase_es", QLibraryInfo.path(QLibraryInfo.TranslationsPath)):
         app.installTranslator(tr)
@@ -909,23 +930,36 @@ def main(argv=None):
     app.setFont(f)
 
     cfg = QSettings()
+    from .preparar import DESTINO
     ruta = None
     if "--recursos" in argv:
         ruta = argv[argv.index("--recursos") + 1]
+    if ruta is None and DESTINO.exists():
+        ruta = str(DESTINO)
     ruta = ruta or cfg.value("recursos", None)
     rec, msg = None, ""
     while rec is None:
         if ruta:
             try:
                 rec = Recursos(ruta)
-                cfg.setValue("recursos", str(ruta))
                 break
             except Exception as e:
                 msg = str(e)
         d = DialogoRecursos(None, msg)
         if d.exec() != QDialog.Accepted:
             return 0
-        ruta = d.ruta
+        try:
+            ruta = str(_preparar_con_progreso(d.ruta))
+        except Exception as e:
+            msg, ruta = str(e), None
+    if not DESTINO.exists():
+        # Fuente vieja (ISO guardado en la configuración): armar el paquete para la próxima.
+        try:
+            _preparar_con_progreso(ruta)
+            rec = Recursos(DESTINO)
+        except Exception:
+            pass
+    cfg.remove("recursos")
 
     splash = None
     if "--sin-portada" not in argv:
@@ -935,7 +969,7 @@ def main(argv=None):
             alto = int(scr.height() * 0.55)
             q = pil_a_qimage(portada).scaledToHeight(alto, Qt.SmoothTransformation)
             splash = QSplashScreen(QPixmap.fromImage(q))
-            splash.showMessage("Jaque  ·  cargando…", Qt.AlignBottom | Qt.AlignRight, QColor("white"))
+            splash.showMessage("cargando…  ", Qt.AlignBottom | Qt.AlignRight, QColor(236, 224, 205))
             splash.show()
             app.processEvents()
 
