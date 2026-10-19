@@ -323,18 +323,18 @@ class VentanaPrincipal(QMainWindow):
         sub = m.addMenu("&Tablero")
         grp = QActionGroup(self)
         actual = self.cfg.value("tablero", "2DWDBRD.BMP")
-        opciones = [(a, n) for a, n, *_ in self.rec.tableros_2d()] + \
-                   [(k, v[0]) for k, v in COLORES_PLANOS.items()]
-        for clave, nombre in opciones:
-            a = QAction(nombre, self, checkable=True)
-            a.setChecked(clave == actual)
-            a.triggered.connect(lambda _=False, c=clave: self._set_tablero(c))
-            grp.addAction(a)
-            sub.addAction(a)
-        sub.addSeparator()
-        nota = QAction("(los tableros 3D llegan en la próxima versión)", self)
-        nota.setEnabled(False)
-        sub.addAction(nota)
+        grupos = [[(a, n) for a, n, *_ in self.rec.tableros_2d()],
+                  [(a, n) for a, n in self.rec.tableros_3d()],
+                  [(k, v[0]) for k, v in COLORES_PLANOS.items()]]
+        for i, opciones in enumerate(grupos):
+            if i:
+                sub.addSeparator()
+            for clave, nombre in opciones:
+                a = QAction(nombre, self, checkable=True)
+                a.setChecked(clave == actual)
+                a.triggered.connect(lambda _=False, c=clave: self._set_tablero(c))
+                grp.addAction(a)
+                sub.addAction(a)
 
         sub = m.addMenu("&Piezas")
         grp = QActionGroup(self)
@@ -358,6 +358,10 @@ class VentanaPrincipal(QMainWindow):
         m.addSeparator()
         accion(m, "&Sonido", self._set_sonido, None, True, self.sonidos.activos)
 
+        m = mb.addMenu("&Aprender")
+        accion(m, "&Tutor de ajedrez…", self.abrir_tutor, "Ctrl+T")
+        accion(m, "&Partidas clásicas comentadas…", self.abrir_clasicas, "Ctrl+L")
+
         m = mb.addMenu("&Opciones")
         accion(m, "Recursos de &Chessmaster…", self._cambiar_recursos)
         accion(m, "Ruta de &Stockfish…", self._cambiar_stockfish)
@@ -378,6 +382,12 @@ class VentanaPrincipal(QMainWindow):
             _, cl, osc = COLORES_PLANOS[clave]
             self.tablero.set_tablero_img(None)
             self.tablero.set_colores(cl, osc)
+        elif clave in self.rec.ESQUINAS_3D:
+            try:
+                self.tablero.set_tablero_3d(self.rec.tablero_3d(clave))
+            except Exception as e:
+                self.statusBar().showMessage(f"No pude cargar el tablero 3D: {e}", 8000)
+                self.tablero.set_tablero_img(None)
         else:
             try:
                 self.tablero.set_tablero_img(self.rec.tablero_2d(clave))
@@ -458,6 +468,9 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.humanos = {self.humano}
         self.tablero.orientacion = self.humano
         self.tablero.set_posicion(self.board)
+        self.tabla.setRowCount(0)
+        self._actualizar_capturas()
+        self.resultado = "*"
         self.lbl_eval.setText("—")
         self.lbl_linea.setText("")
         self._actualizar_panel()
@@ -695,7 +708,7 @@ class VentanaPrincipal(QMainWindow):
     def _reconstruir_tabla(self):
         self.tabla.setRowCount(0)
         movs = list(self.board.move_stack)
-        b = chess.Board()
+        b = self.board.root()
         for i, mv in enumerate(movs):
             fila = i // 2
             if self.tabla.rowCount() <= fila:
@@ -758,23 +771,64 @@ class VentanaPrincipal(QMainWindow):
         if g is None:
             QMessageBox.warning(self, "PGN", "No pude leer ninguna partida en ese archivo.")
             return
-        if self.motor:
-            self.motor.cancelar()
         b = g.board()
         for mv in g.mainline_moves():
             b.push(mv)
+        self._cargar_posicion(b)
+        self.statusBar().showMessage("Partida cargada: seguís jugando con el bando que mueve.", 6000)
+
+    def _cargar_posicion(self, b: chess.Board):
+        if self.motor:
+            self.motor.cancelar()
         self.board = b
         self.terminada = False
         self.pensando = False
         self.con_reloj = False
         self.humano = b.turn
         self.tablero.humanos = {self.humano}
+        self.tablero.orientacion = self.humano
         self.tablero.interactivo = True
         self.tablero.set_posicion(self.board, b.move_stack[-1] if b.move_stack else None)
         self._reconstruir_tabla()
         self._actualizar_capturas()
-        self.statusBar().showMessage("Partida cargada: seguís jugando con el bando que mueve.", 6000)
         self._turno()
+
+    # ------------------------------------------------------------------ aprender
+    def _estilizar(self, tb):
+        tb.coordenadas = self.tablero.coordenadas
+        tb.set_filtro(self.tablero.filtro)
+        if self.tablero._piezas_pil:
+            tb.set_piezas(self.tablero._piezas_pil, self.tablero._es_3d_set)
+        if self.tablero._t3d is not None:
+            tb.set_tablero_3d(self.tablero._t3d)
+        else:
+            tb.set_tablero_img(self.tablero._img_tablero)
+            tb.set_colores(self.tablero.claro, self.tablero.oscuro)
+
+    def abrir_tutor(self):
+        from .ventanas import VentanaTutor
+        if getattr(self, "_v_tutor", None) is None:
+            self._v_tutor = VentanaTutor(self.rec, self._estilizar, self.sonidos)
+        self._v_tutor.show()
+        self._v_tutor.raise_()
+        self._v_tutor.activateWindow()
+
+    def abrir_clasicas(self):
+        from .ventanas import VentanaClasicas
+        if getattr(self, "_v_clas", None) is None:
+            self._v_clas = VentanaClasicas(self.rec, self._estilizar, self.sonidos)
+            self._v_clas.jugar_desde.connect(self._jugar_desde_clasica)
+        self._v_clas.show()
+        self._v_clas.raise_()
+        self._v_clas.activateWindow()
+
+    def _jugar_desde_clasica(self, b):
+        self._cargar_posicion(b.copy())
+        self.raise_()
+        self.activateWindow()
+        self.statusBar().showMessage(
+            f"Posición cargada: jugás con las {'blancas' if b.turn else 'negras'} contra "
+            f"{self.rival.nombre}.", 8000)
 
     # ------------------------------------------------------------------ opciones
     def _cambiar_recursos(self):
@@ -806,6 +860,9 @@ class VentanaPrincipal(QMainWindow):
 
     def closeEvent(self, ev):
         self.cfg.setValue("geometria", self.saveGeometry())
+        for v in (getattr(self, "_v_tutor", None), getattr(self, "_v_clas", None)):
+            if v:
+                v.close()
         if self.motor:
             self.motor.apagar()
         super().closeEvent(ev)

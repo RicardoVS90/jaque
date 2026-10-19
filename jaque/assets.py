@@ -158,6 +158,48 @@ class Recursos:
                 return im.crop((round(cx - h), round(cy - h), round(cx + h), round(cy + h)))
         raise KeyError(archivo)
 
+    # Esquinas de las 64 casillas en cada BMP 3D (a1, h1, h8, a8), en píxeles.
+    # Obtenidas ajustando una homografía al damero de cada imagen original.
+    ESQUINAS_3D = {
+        "3DWDBRD.BMP": [(38.0, 264.4), (568.6, 264.7), (516.8, 12.6), (89.2, 12.8)],
+        "3DGRNBRD.BMP": [(27.4, 260.6), (560.0, 260.1), (509.3, 10.5), (77.4, 10.5)],
+        "3DBLUBRD.BMP": [(24.6, 260.2), (558.6, 259.7), (509.2, 10.8), (77.8, 10.4)],
+        "EBNIBRD.BMP": [(49.7, 269.4), (582.1, 269.5), (532.8, 21.2), (100.4, 21.4)],
+        "CHINBRD.BMP": [(39.9, 259.6), (568.3, 259.3), (521.0, 10.9), (88.7, 10.5)],
+        "METALBRD.BMP": [(37.9, 261.2), (566.1, 261.2), (520.3, 14.2), (87.1, 14.0)],
+        "DALIBRD.BMP": [(75.4, 321.0), (613.8, 78.0), (303.1, 0.6), (0.8, 39.1)],
+    }
+
+    def tableros_3d(self):
+        out = []
+        for arch in self.ESQUINAS_3D:
+            if self.existe(arch):
+                out.append((arch, self.NOMBRES_TABLERO.get(arch, arch)))
+        return out
+
+    def tablero_3d(self, archivo: str) -> dict:
+        """Imagen RGBA del tablero (fondo transparente), esquinas y fondo de escena."""
+        arch = archivo.upper()
+        sec = next((s for s in self.ini.sections() if s.upper() == arch), None)
+        cfg = self.ini[sec] if sec else {}
+        im = self.imagen(arch).convert("RGBA")
+        masc = cfg.get("mask", "").strip('"').upper()
+        if masc and self.existe(masc):
+            m = self.imagen(masc).convert("L").resize(im.size)
+            alpha = m.point(lambda v: 255 if v < 128 else 0)
+            im.putalpha(alpha)
+        fondo, modo = None, "estirar"
+        wb = cfg.get("wayback", "").strip('"').upper()
+        if wb and self.existe(wb):
+            fondo = self.imagen(wb).convert("RGB")
+            if fondo.width <= 32:
+                modo = "estirar"          # degradé vertical
+            elif fondo.width >= 600:
+                modo = "cubrir"           # escena completa (Dalí)
+            else:
+                modo = "mosaico"
+        return {"imagen": im, "esquinas": self.ESQUINAS_3D[arch], "fondo": fondo, "modo": modo}
+
     # --- piezas -----------------------------------------------------------
     NOMBRES_PIEZAS = {
         "2DL": "Staunton clasico", "2DM": "Staunton mini", "2DF": "Fantasía",
