@@ -193,6 +193,7 @@ class VentanaPrincipal(QMainWindow):
         self.con_reloj = False
 
         self.anot: dict[int, str] = {}         # ply -> '!', '?!', '?', '??'
+        self.por_rehacer: list[chess.Move] = []  # jugadas deshechas (la próxima, al final)
         self.com = Comentarista(ruta_sf)
         for k in self.com.mostrar:
             self.com.mostrar[k] = self.cfg.value(f"comentarios/{k}", True, type=bool)
@@ -312,16 +313,23 @@ class VentanaPrincipal(QMainWindow):
 
         botones = QGridLayout()
         self.b_nueva = QPushButton("Nueva partida")
-        self.b_deshacer = QPushButton("Deshacer")
+        self.b_deshacer = QPushButton("◀  Deshacer")
+        self.b_rehacer = QPushButton("Rehacer  ▶")
         self.b_sug = QPushButton("Sugerencia")
         self.b_girar = QPushButton("Girar tablero")
         self.b_nueva.clicked.connect(self.nueva_partida)
         self.b_deshacer.clicked.connect(self.deshacer)
+        self.b_rehacer.clicked.connect(self.rehacer)
         self.b_sug.clicked.connect(self.sugerencia)
         self.b_girar.clicked.connect(self.tablero.girar)
-        for i, b in enumerate((self.b_nueva, self.b_deshacer, self.b_sug, self.b_girar)):
+        self.b_deshacer.setToolTip("Deshacer tu última jugada (Ctrl+Z)")
+        self.b_rehacer.setToolTip("Volver a hacer la jugada deshecha (Ctrl+Y)")
+        # fila 1: deshacer | rehacer   ·   fila 2: nueva | sugerencia | girar
+        for b, fila, col, ancho in ((self.b_deshacer, 0, 0, 3), (self.b_rehacer, 0, 3, 3),
+                                    (self.b_nueva, 1, 0, 2), (self.b_sug, 1, 2, 2),
+                                    (self.b_girar, 1, 4, 2)):
             b.setMinimumHeight(36)
-            botones.addWidget(b, i // 2, i % 2)
+            botones.addWidget(b, fila, col, 1, ancho)
         v.addLayout(botones)
 
         sp = QSplitter()
@@ -361,6 +369,8 @@ class VentanaPrincipal(QMainWindow):
 
         m = mb.addMenu("&Jugada")
         accion(m, "&Deshacer", self.deshacer, "Ctrl+Z")
+        self.a_rehacer = accion(m, "&Rehacer", self.rehacer, "Ctrl+Y")
+        self.a_rehacer.setShortcuts([QKeySequence("Ctrl+Y"), QKeySequence("Ctrl+Shift+Z")])
         accion(m, "&Sugerencia", self.sugerencia, "Ctrl+H")
         accion(m, "&Mover ahora (que juegue el rival)", self.mover_ahora, "Ctrl+M")
 
@@ -527,6 +537,7 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.set_posicion(self.board)
         self.tabla.setRowCount(0)
         self.anot.clear()
+        self.por_rehacer.clear()
         self.com.reiniciar()
         self.txt_com.clear()
         self._actualizar_capturas()
@@ -588,6 +599,13 @@ class VentanaPrincipal(QMainWindow):
         if self.terminada or self.pensando:
             return
         antes = self.board.copy(stack=False)
+        if self.por_rehacer:
+            if self.por_rehacer[-1] == mv:            # jugó lo mismo que había deshecho
+                self.por_rehacer.pop()
+            else:
+                self.por_rehacer.clear()
+                n = len(self.board.move_stack)
+                self.anot = {k: v for k, v in self.anot.items() if k <= n}
         self._hacer(mv, animar=False)
         self.com.vigente(self.board)
         self.com.jugada_humano(antes, mv, len(self.board.move_stack),
@@ -609,6 +627,13 @@ class VentanaPrincipal(QMainWindow):
                                   + (f"  ·  prof. {info['depth']}" if info.get("depth") else ""))
             self.lbl_linea.setText("Piensa: " + linea_es(self.board, info.get("pv", [])))
         antes = self.board.copy()
+        if self.por_rehacer:
+            if self.por_rehacer[-1] == mv:
+                self.por_rehacer.pop()
+            else:                                     # el rival eligió otra cosa
+                self.por_rehacer.clear()
+                n = len(self.board.move_stack)
+                self.anot = {k: v for k, v in self.anot.items() if k <= n}
         self._hacer(mv, animar=True)
         self.com.jugada_rival(antes, mv, info, self.rival, self.humano)
         self._turno()
@@ -627,16 +652,36 @@ class VentanaPrincipal(QMainWindow):
         if not self.board.move_stack:
             return
         self.terminada = False
-        self.board.pop()
+        self.por_rehacer.append(self.board.pop())
         while self.board.move_stack and self.board.turn != self.humano:
-            self.board.pop()
+            self.por_rehacer.append(self.board.pop())
         ultima = self.board.move_stack[-1] if self.board.move_stack else None
         self.tablero.set_posicion(self.board, ultima)
         n = len(self.board.move_stack)
-        self.anot = {k: v for k, v in self.anot.items() if k <= n}
+        # las anotaciones de las jugadas deshechas se guardan por si se rehacen
         self.com.descartar_desde(n + 1)
         self._reconstruir_tabla()
         self._actualizar_capturas()
+        self._turno()
+
+    def rehacer(self):
+        """Vuelve a hacer las jugadas deshechas, hasta que te toque de nuevo."""
+        if not self.por_rehacer or self.terminada:
+            return
+        if self.motor:
+            self.motor.cancelar()
+        self.pensando = False
+        self.tablero.interactivo = True
+        while self.por_rehacer:
+            mv = self.por_rehacer[-1]
+            if mv not in self.board.legal_moves:      # no debería pasar; por las dudas
+                self.por_rehacer.clear()
+                break
+            self.por_rehacer.pop()
+            self._hacer(mv, animar=True)
+            if self.board.turn == self.humano or self.board.is_game_over():
+                break
+        self.com.vigente(self.board)
         self._turno()
 
     def sugerencia(self):
@@ -762,6 +807,10 @@ class VentanaPrincipal(QMainWindow):
         nombre_b = "Vos" if self.humano == chess.WHITE else (self.rival.nombre if self.rival else "")
         nombre_n = "Vos" if self.humano == chess.BLACK else (self.rival.nombre if self.rival else "")
         self.setWindowTitle(f"Jaque — {nombre_b} contra {nombre_n}")
+        hay = bool(self.por_rehacer) and not self.terminada
+        self.b_rehacer.setEnabled(hay)
+        if hasattr(self, "a_rehacer"):
+            self.a_rehacer.setEnabled(hay)
         self._pintar_relojes()
 
     def _agregar_a_tabla(self):
@@ -934,6 +983,7 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.interactivo = True
         self.tablero.set_posicion(self.board, b.move_stack[-1] if b.move_stack else None)
         self.anot.clear()
+        self.por_rehacer.clear()
         self.com.reiniciar()
         self.txt_com.clear()
         self._reconstruir_tabla()
@@ -1031,6 +1081,10 @@ def _tema_oscuro(app: QApplication):
     p.setColor(QPalette.ToolTipBase, QColor(60, 45, 33))
     p.setColor(QPalette.ToolTipText, QColor(240, 228, 210))
     p.setColor(QPalette.PlaceholderText, QColor(150, 135, 115))
+    # aspecto apagado para botones y menús deshabilitados (por ejemplo, Rehacer sin nada que rehacer)
+    for rol in (QPalette.ButtonText, QPalette.WindowText, QPalette.Text):
+        p.setColor(QPalette.Disabled, rol, QColor(125, 108, 88))
+    p.setColor(QPalette.Disabled, QPalette.Button, QColor(52, 40, 30))
     app.setPalette(p)
     app.setStyleSheet("QGroupBox{font-weight:bold; border:1px solid #5a4430; border-radius:6px;"
                       "margin-top:12px; padding-top:8px} QGroupBox::title{subcontrol-origin:margin;"

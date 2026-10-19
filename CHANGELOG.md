@@ -1,10 +1,24 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.2): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.3): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.3 — Rehacer
+
+### Nuevo
+- **Rehacer** sin límite: menú *Jugada → Rehacer* (Ctrl+Y o Ctrl+Shift+Z) y
+  botón al costado del tablero. Vuelve a poner tu jugada y la respuesta del
+  rival, con sus marcas.
+- Si después de deshacer jugás la misma jugada que habías deshecho, se
+  conserva el resto para seguir rehaciendo.
+
+### Cambiado
+- Botones reacomodados: arriba **◀ Deshacer | Rehacer ▶**; abajo Nueva
+  partida, Sugerencia y Girar tablero.
+- Los botones y menús deshabilitados se ven apagados (gris).
 
 ## 0.7.2 — Comentarios más precisos
 
