@@ -8,7 +8,8 @@
 #
 #  Uso:  bash Jaque-@VERSION@-instalador.run              instalar / actualizar / reparar
 #        bash Jaque-@VERSION@-instalador.run --verificar  solo revisar la instalación
-#        bash Jaque-@VERSION@-instalador.run --desinstalar
+#        bash Jaque-@VERSION@-instalador.run --desinstalar   (o: jaque --desinstalar,
+#                                                        o clic derecho en el menú → Desinstalar Jaque)
 #
 #  Uso personal.
 # ============================================================================
@@ -22,16 +23,53 @@ titulo() { echo; echo "${c_tit}== $* ==${c_0}"; }
 bien()   { echo "  ${c_ok}✔${c_0} $*"; }
 mal()    { echo "  ${c_mal}✘${c_0} $*"; }
 
+# Desinstalador independiente: queda en ~/.local/share/jaque/desinstalar.sh y lo usan
+# el menú (clic derecho → Desinstalar Jaque), el comando «jaque --desinstalar» y este instalador.
+escribir_desinstalador() {
+  mkdir -p "$DATOS"
+  cat > "$DATOS/desinstalar.sh" <<'DESINST'
+#!/usr/bin/env bash
+# Desinstalador de Jaque. Uso: desinstalar.sh [--si]   (--si = sin preguntar)
+DATOS="$HOME/.local/share/jaque"
+preguntar() {
+  [ "${1:-}" = "--si" ] && return 0
+  local txt="¿Desinstalar Jaque?\n\nSe borran el programa, los gráficos y los accesos directos.\nTus opciones y partidas guardadas no se tocan."
+  if [ -t 0 ]; then
+    printf '%b\n' "$txt"; read -r -p "Escribí s y Enter para confirmar: " r; [ "$r" = s ] || [ "$r" = S ]
+  elif command -v kdialog >/dev/null; then kdialog --title "Jaque" --warningyesno "$(printf '%b' "$txt")"
+  elif command -v zenity >/dev/null; then zenity --question --title "Jaque" --text "$(printf '%b' "$txt")"
+  else return 0; fi
+}
+avisar() {
+  if [ -t 1 ]; then echo "$1"
+  elif command -v kdialog >/dev/null; then kdialog --title "Jaque" --msgbox "$1"
+  elif command -v notify-send >/dev/null; then notify-send "Jaque" "$1"
+  fi
+}
+preguntar "${1:-}" || exit 1
+pkill -f "$DATOS/programa/jaque" 2>/dev/null; sleep 0.5
+escritorio="$(xdg-user-dir DESKTOP 2>/dev/null || true)"
+rm -rf "$DATOS/programa" "$DATOS/recursos" "$DATOS/venv" "$HOME/.cache/jaque"
+rm -f "$HOME/.local/bin/jaque" "$HOME/.local/share/applications/jaque.desktop" \
+      "$HOME/.local/share/icons/hicolor/256x256/apps/jaque.png" "$DATOS/jaque.png" \
+      "$DATOS/verificacion.txt" "$DATOS/instalacion.log" \
+      "${escritorio:-$HOME/Escritorio}/jaque.desktop" "$HOME/Escritorio/jaque.desktop" "$HOME/Desktop/jaque.desktop"
+update-desktop-database "$HOME/.local/share/applications" 2>/dev/null
+gtk-update-icon-cache -q "$HOME/.local/share/icons/hicolor" 2>/dev/null
+for k in kbuildsycoca6 kbuildsycoca5; do command -v "$k" >/dev/null && { "$k" >/dev/null 2>&1; break; }; done
+rm -f "$DATOS/desinstalar.sh"
+rmdir "$DATOS" 2>/dev/null
+avisar "Jaque se desinstaló. Tus opciones quedaron en ~/.config/Jaque (podés borrarlas si querés)."
+exit 0
+DESINST
+  chmod +x "$DATOS/desinstalar.sh"
+}
+
 desinstalar() {
   titulo "Desinstalando Jaque"
-  rm -rf "$PROG" "$DATOS/recursos" "$DATOS/venv" "$HOME/.cache/jaque"
-  rm -f "$HOME/.local/bin/jaque" "$HOME/.local/share/applications/jaque.desktop" \
-        "$HOME/.local/share/icons/hicolor/256x256/apps/jaque.png" \
-        "$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Escritorio")/jaque.desktop" \
-        "$HOME/Escritorio/jaque.desktop" "$HOME/Desktop/jaque.desktop"
-  update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
-  bien "Listo. Tu configuración quedó en ~/.config/Jaque (borrala si querés)."
-  exit 0
+  escribir_desinstalador
+  bash "$DATOS/desinstalar.sh" "${1:-}"
+  exit $?
 }
 
 # Paquete de Debian que provee cada biblioteca del sistema que Qt necesita.
@@ -123,6 +161,7 @@ crear_accesos() {
 # Lanzador de Jaque. Si el programa se cierra de golpe al arrancar (por ejemplo,
 # por un problema de audio), lo vuelve a abrir sin sonido.
 export LANG="\${LANG:-C.UTF-8}"
+if [ "\${1:-}" = "--desinstalar" ]; then exec bash "$DATOS/desinstalar.sh" "\${2:-}"; fi
 inicio=\$(date +%s)
 "$PROG/jaque" "\$@"; codigo=\$?
 if [ \$codigo -ge 128 ] && [ \$((\$(date +%s) - inicio)) -lt 15 ] && [ -z "\${JAQUE_SIN_SONIDO:-}" ]; then
@@ -132,6 +171,7 @@ fi
 exit \$codigo
 LANZ
   chmod +x "$HOME/.local/bin/jaque"
+  escribir_desinstalador
   local entrada
   entrada="[Desktop Entry]
 Type=Application
@@ -145,7 +185,13 @@ Terminal=false
 StartupNotify=true
 StartupWMClass=jaque
 Categories=Game;BoardGame;
-Keywords=ajedrez;chess;"
+Keywords=ajedrez;chess;
+Actions=desinstalar;
+
+[Desktop Action desinstalar]
+Name=Desinstalar Jaque
+Icon=edit-delete
+Exec=$DATOS/desinstalar.sh"
   printf '%s\n' "$entrada" > "$HOME/.local/share/applications/jaque.desktop"
   chmod +x "$HOME/.local/share/applications/jaque.desktop"
   bien "Menú de aplicaciones → Juegos → Jaque"
@@ -178,7 +224,7 @@ Keywords=ajedrez;chess;"
   bien "Comando en la terminal: jaque"
 }
 
-[ "${1:-}" = "--desinstalar" ] && desinstalar
+[ "${1:-}" = "--desinstalar" ] && desinstalar "${2:-}"
 if [ "${1:-}" = "--verificar" ]; then
   verificar_sistema
   [ -x "$PROG/jaque" ] || { mal "Jaque no está instalado."; exit 1; }
@@ -232,6 +278,7 @@ else
 fi
 echo "Registro de la instalación: $REGISTRO"
 echo "Si no ves Jaque en el menú, cerrá sesión y volvé a entrar."
+echo "Para desinstalar: clic derecho en Jaque (menú) → «Desinstalar Jaque», o en la terminal: jaque --desinstalar"
 echo "Guardá este archivo como respaldo: con él reinstalás Jaque sin nada más."
 exit 0
 __CONTENIDO__

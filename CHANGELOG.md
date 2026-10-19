@@ -1,10 +1,24 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.0): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.1): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.1 — Desinstalar desde el menú
+
+### Nuevo
+- **«Desinstalar Jaque»** en el clic derecho de la entrada del menú de
+  aplicaciones, con confirmación en una ventana.
+- Comando `jaque --desinstalar` en la terminal.
+- Desinstalador propio en `~/.local/share/jaque/desinstalar.sh`: borra el
+  programa, los gráficos, la caché, el comando, la entrada del menú y el ícono
+  del escritorio, y conserva tus opciones.
+
+### Nota
+- La opción «Desinstalar o administrar complementos» que agrega KDE no sirve
+  para Jaque, porque Jaque no se instala como paquete del sistema.
 
 ## 0.7.0 — Comentarios en vivo
 
