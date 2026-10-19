@@ -194,6 +194,8 @@ class VentanaPrincipal(QMainWindow):
 
         self.anot: dict[int, str] = {}         # ply -> '!', '?!', '?', '??'
         self.por_rehacer: list[chess.Move] = []  # jugadas deshechas (la próxima, al final)
+        self.hist_com: list[tuple] = []          # (ply, tipo, html) de cada comentario
+        self.hist_an: dict[int, tuple] = {}      # ply -> (evaluación, línea, eval_rival) del rival
         self.com = Comentarista(ruta_sf)
         for k in self.com.mostrar:
             self.com.mostrar[k] = self.cfg.value(f"comentarios/{k}", True, type=bool)
@@ -532,12 +534,15 @@ class VentanaPrincipal(QMainWindow):
         self.terminada = False
         self.pensando = False
         self.eval_rival = 0
+        self.tablero.interactivo = True      # la partida anterior pudo terminar con el tablero bloqueado
         self.tablero.humanos = {self.humano}
         self.tablero.orientacion = self.humano
         self.tablero.set_posicion(self.board)
         self.tabla.setRowCount(0)
         self.anot.clear()
         self.por_rehacer.clear()
+        self.hist_com.clear()
+        self.hist_an.clear()
         self.com.reiniciar()
         self.txt_com.clear()
         self._actualizar_capturas()
@@ -599,13 +604,7 @@ class VentanaPrincipal(QMainWindow):
         if self.terminada or self.pensando:
             return
         antes = self.board.copy(stack=False)
-        if self.por_rehacer:
-            if self.por_rehacer[-1] == mv:            # jugó lo mismo que había deshecho
-                self.por_rehacer.pop()
-            else:
-                self.por_rehacer.clear()
-                n = len(self.board.move_stack)
-                self.anot = {k: v for k, v in self.anot.items() if k <= n}
+        self._seguir_o_descartar(mv)
         self._hacer(mv, animar=False)
         self.com.vigente(self.board)
         self.com.jugada_humano(antes, mv, len(self.board.move_stack),
@@ -627,16 +626,43 @@ class VentanaPrincipal(QMainWindow):
                                   + (f"  ·  prof. {info['depth']}" if info.get("depth") else ""))
             self.lbl_linea.setText("Piensa: " + linea_es(self.board, info.get("pv", [])))
         antes = self.board.copy()
-        if self.por_rehacer:
-            if self.por_rehacer[-1] == mv:
-                self.por_rehacer.pop()
-            else:                                     # el rival eligió otra cosa
-                self.por_rehacer.clear()
-                n = len(self.board.move_stack)
-                self.anot = {k: v for k, v in self.anot.items() if k <= n}
+        self._seguir_o_descartar(mv)
         self._hacer(mv, animar=True)
+        self.hist_an[len(self.board.move_stack)] = (self.lbl_eval.text(), self.lbl_linea.text(),
+                                                    self.eval_rival)
         self.com.jugada_rival(antes, mv, info, self.rival, self.humano)
         self._turno()
+
+    def _seguir_o_descartar(self, mv):
+        """Antes de una jugada nueva: si coincide con la deshecha se conserva el resto para
+        rehacer; si es distinta, se olvida todo lo que venía después (jugadas, marcas,
+        comentarios y análisis)."""
+        if not self.por_rehacer:
+            return
+        if self.por_rehacer[-1] == mv:
+            self.por_rehacer.pop()
+            return
+        self.por_rehacer.clear()
+        n = len(self.board.move_stack)
+        self.anot = {k: v for k, v in self.anot.items() if k <= n}
+        self.hist_com = [c for c in self.hist_com if c[0] <= n]
+        self.hist_an = {k: v for k, v in self.hist_an.items() if k <= n}
+
+    def _mostrar_historial(self):
+        """Muestra comentarios y análisis que corresponden a la posición actual."""
+        n = len(self.board.move_stack)
+        self.txt_com.clear()
+        for ply, tipo, html in sorted((c for c in self.hist_com if c[0] <= n), key=lambda c: c[0]):
+            self._pintar_comentario(tipo, html, ply)
+        previos = [k for k in self.hist_an if k <= n]
+        if previos:
+            ev, linea, self.eval_rival = self.hist_an[max(previos)]
+            self.lbl_eval.setText(ev)
+            self.lbl_linea.setText(linea)
+        else:
+            self.eval_rival = 0
+            self.lbl_eval.setText("—")
+            self.lbl_linea.setText("")
 
     def mover_ahora(self):
         if not self.terminada and not self.pensando and self.board.turn == self.humano:
@@ -658,8 +684,9 @@ class VentanaPrincipal(QMainWindow):
         ultima = self.board.move_stack[-1] if self.board.move_stack else None
         self.tablero.set_posicion(self.board, ultima)
         n = len(self.board.move_stack)
-        # las anotaciones de las jugadas deshechas se guardan por si se rehacen
-        self.com.descartar_desde(n + 1)
+        # marcas, comentarios y análisis de lo deshecho se guardan por si se rehacen
+        self.com.descartar_desde(n + 1, self.board)
+        self._mostrar_historial()
         self._reconstruir_tabla()
         self._actualizar_capturas()
         self._turno()
@@ -682,6 +709,8 @@ class VentanaPrincipal(QMainWindow):
             if self.board.turn == self.humano or self.board.is_game_over():
                 break
         self.com.vigente(self.board)
+        self.com.descartar_desde(len(self.board.move_stack) + 1, self.board)
+        self._mostrar_historial()
         self._turno()
 
     def sugerencia(self):
@@ -848,8 +877,15 @@ class VentanaPrincipal(QMainWindow):
               "amenaza": ("⚠", "#ff9a6b"), "info": ("•", "#bbb")}
 
     def _comentar(self, tipo, html, ply=0):
+        ply = ply or len(self.board.move_stack)
+        if ply > len(self.board.move_stack) or (ply, tipo, html) in self.hist_com:
+            return                       # de una jugada ya deshecha, o repetido al rehacer
+        self.hist_com.append((ply, tipo, html))
+        self._pintar_comentario(tipo, html, ply)
+
+    def _pintar_comentario(self, tipo, html, ply):
         icono, color = self._ICONO.get(tipo, ("•", "#ccc"))
-        num = ((ply or len(self.board.move_stack)) + 1) // 2
+        num = (ply + 1) // 2
         self.txt_com.append(f'<p style="margin:2px 0"><span style="color:#8a7660">{num}.</span> '
                             f'<span style="color:{color}">{icono}</span> '
                             f'<span style="color:#eee">{html}</span></p>')
@@ -984,6 +1020,8 @@ class VentanaPrincipal(QMainWindow):
         self.tablero.set_posicion(self.board, b.move_stack[-1] if b.move_stack else None)
         self.anot.clear()
         self.por_rehacer.clear()
+        self.hist_com.clear()
+        self.hist_an.clear()
         self.com.reiniciar()
         self.txt_com.clear()
         self._reconstruir_tabla()

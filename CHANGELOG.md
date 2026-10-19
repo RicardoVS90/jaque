@@ -1,10 +1,28 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.3): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.4): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.4 — Deshacer y rehacer coherentes
+
+### Arreglado
+- Al **deshacer**, ahora desaparecen los comentarios de las jugadas quitadas
+  (evaluaciones, frases del rival, avisos y aperturas); al **rehacer** vuelven
+  exactamente los mismos, sin repetirse.
+- El recuadro **Análisis** también sigue a deshacer y rehacer: muestra la
+  evaluación y la línea que el rival tenía en ese punto de la partida.
+- Si después de deshacer se juega algo distinto, se descartan las jugadas,
+  marcas, comentarios y análisis de la rama vieja.
+- **Nueva partida** después de una partida terminada dejaba el tablero
+  bloqueado (no se podían mover las piezas hasta tocar «Deshacer»).
+
+### Cambiado
+- Las explicaciones de los errores pasan al condicional, para que no parezca
+  que la jugada ya ocurrió: «el rival **podría responder** Cf6, atacando tu
+  dama».
 
 ## 0.7.3 — Rehacer
 

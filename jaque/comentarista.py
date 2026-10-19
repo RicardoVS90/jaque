@@ -345,14 +345,25 @@ class Comentarista(QObject):
         self._amenaza_diferida = None
         self._cola = []
 
-    def descartar_desde(self, ply: int):
+    def descartar_desde(self, ply: int, board: chess.Board | None = None):
         """Tras deshacer: olvida evaluaciones pendientes de jugadas que ya no existen."""
+        if board is not None:                    # la apertura «ya anunciada» vuelve a la de esta posición
+            r = self.aperturas.de_partida(board)
+            self._ultima_apertura = r[1] if r else None
+            self._ultima_familia = r[1].split(":")[0] if r else None
         self._pendientes = {k: v for k, v in self._pendientes.items() if v[0] < ply}
         self._amenaza_diferida = None
         self._explicada = None
         self._cola = []
         self._ult_wc = None
         self._avisadas = set()
+        if board is not None:
+            # al navegar con deshacer/rehacer no se repiten avisos: lo que ya amenazaba en esta
+            # posición cuenta como avisado (sus avisos originales siguen en el historial)
+            self._avisadas = {(sq, t) for sq, t, *_ in piezas_colgando(board, board.turn)}
+            mate = amenaza_de_mate(board, board.turn)
+            if mate:
+                self._avisadas.add(("mate", mate))
 
     def _arrancar_analista(self):
         if self.hilo or not self.ruta:
@@ -388,9 +399,10 @@ class Comentarista(QObject):
             familia = nombre.split(":")[0]
             if familia != self._ultima_familia:
                 self._ultima_familia = familia
-                self.comentario.emit("apertura", f"Apertura: <b>{nombre}</b> ({eco})", 0)
+                self.comentario.emit("apertura", f"Apertura: <b>{nombre}</b> ({eco})", len(board.move_stack))
             elif ":" in nombre:
-                self.comentario.emit("apertura", f"Variante: <b>{nombre.split(':', 1)[1].strip()}</b> ({eco})", 0)
+                self.comentario.emit("apertura", f"Variante: <b>{nombre.split(':', 1)[1].strip()}</b> ({eco})",
+                                     len(board.move_stack))
 
     # -- jugadas del jugador
     def jugada_humano(self, board_antes: chess.Board, mv: chess.Move, ply: int, prefijo: list, rival):
@@ -509,13 +521,13 @@ class Comentarista(QObject):
         if score.is_mate() and score.mate() < 0:
             n = -score.mate()
             if pv and pv[0] in despues.legal_moves:
-                return f"Ahora {nombre_r} tiene mate en {n}, empezando con <b>{san_es(despues, pv[0])}</b>."
-            return f"Ahora {nombre_r} tiene mate en {n}."
+                return f"Ahora {nombre_r} tendría mate en {n}, empezando con <b>{san_es(despues, pv[0])}</b>."
+            return f"Ahora {nombre_r} tendría mate en {n}."
         if not pv or pv[0] not in despues.legal_moves:
             return ""
         r = pv[0]
         san = san_es(despues, r)
-        mejora = "su posición mejora un poco" if leve else "queda mejor"
+        mejora = "mejorar un poco su posición" if leve else "quedar mejor"
         if despues.is_capture(r):
             sq = r.to_square
             tipo = despues.piece_type_at(sq) or chess.PAWN
@@ -525,22 +537,22 @@ class Comentarista(QObject):
             defendida = bool(despues.attackers(not despues.turn, sq))   # defensores del jugador
             if not defendida:
                 return (f"{TU_PIEZA[tipo].capitalize()} en {casilla} no tiene defensa: "
-                        f"{nombre_r} puede comer{lo} con <b>{san}</b>.")
+                        f"{nombre_r} podría comer{lo} con <b>{san}</b>.")
             if atac < VALOR[tipo]:
-                return (f"{nombre_r} puede comer {TU_PIEZA[tipo]} en {casilla} con <b>{san}</b>, "
+                return (f"{nombre_r} podría comer {TU_PIEZA[tipo]} en {casilla} con <b>{san}</b>, "
                         f"usando una pieza de menos valor.")
             # captura defendida y pareja: es un cambio, no una pieza perdida
-            return f"{nombre_r} puede cambiar en {casilla} con <b>{san}</b> y {mejora}."
+            return f"{nombre_r} podría cambiar en {casilla} con <b>{san}</b> y {mejora}."
         b = despues.copy(stack=False)
         b.push(r)
         colg = piezas_colgando(b, b.turn)      # piezas del jugador atacadas tras la respuesta
         if b.is_check():
-            return f"Permitís <b>{san}</b>, con jaque."
+            return f"{nombre_r} podría responder <b>{san}</b>, con jaque."
         if len(colg) >= 2:
-            return f"{nombre_r} responde <b>{san}</b> y ataca dos piezas a la vez."
+            return f"{nombre_r} podría responder <b>{san}</b>, atacando dos piezas a la vez."
         if colg:
-            return f"{nombre_r} responde <b>{san}</b> y ataca {TU_PIEZA[colg[0][1]]}."
-        return f"{nombre_r} responde <b>{san}</b> y {mejora}."
+            return f"{nombre_r} podría responder <b>{san}</b>, atacando {TU_PIEZA[colg[0][1]]}."
+        return f"{nombre_r} podría responder <b>{san}</b> y {mejora}."
 
     # -- jugadas del rival
     def jugada_rival(self, antes: chess.Board, mv: chess.Move, info: dict, rival, humano: bool):
@@ -598,10 +610,11 @@ class Comentarista(QObject):
             return
         self._ultimo_comentario_rival = n
         html = f"<b>{rival.nombre}:</b> «{frase(clave, rival)}»"
+        ply = len(antes.move_stack) + 1
         if self._pendientes:                     # que primero salga la evaluación de tu jugada
-            self._cola.append(("rival", html, 0))
+            self._cola.append(("rival", html, ply))
         else:
-            self.comentario.emit("rival", html, 0)
+            self.comentario.emit("rival", html, ply)
 
     # -- amenazas, cuando le toca al jugador
     def amenazas(self, board: chess.Board, humano: bool, rival):
@@ -622,7 +635,8 @@ class Comentarista(QObject):
             clave = ("mate", mate)
             if clave not in self._avisadas:
                 self._avisadas = {clave}
-                self.comentario.emit("amenaza", f"¡Cuidado! {nombre_r} amenaza mate con <b>{mate}</b>.", 0)
+                self.comentario.emit("amenaza", f"¡Cuidado! {nombre_r} amenaza mate con <b>{mate}</b>.",
+                                     len(board.move_stack))
             return
         colg = piezas_colgando(board, humano)
         actuales = {(sq, tipo) for sq, tipo, *_ in colg}
@@ -643,4 +657,4 @@ class Comentarista(QObject):
                 textos.append(f"{TU_PIEZA[tipo]} en {chess.square_name(sq)} está {a} y sin defensa")
         txt = "; ".join(textos)
         txt = txt[:1].upper() + txt[1:]
-        self.comentario.emit("amenaza", txt + ".", 0)
+        self.comentario.emit("amenaza", txt + ".", len(board.move_stack))
