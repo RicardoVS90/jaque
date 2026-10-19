@@ -46,14 +46,14 @@ Comprobar la instalación: `python -m jaque --verificar`
 ```bash
 pip install -r requirements.txt pyinstaller
 empaquetado/linux/construir.sh /ruta/a/tu/cd.iso
-# -> build/Jaque-0.7.1-instalador.run
+# -> build/Jaque-0.7.2-instalador.run
 ```
 
 **Windows 11:**
 
 ```bat
 empaquetado\windows\construir.bat C:\ruta\a\tu\cd.iso
-:: -> salida\Jaque-0.7.1-instalador-windows.exe
+:: -> salida\Jaque-0.7.2-instalador-windows.exe
 ```
 
 El script de Windows instala solo Python 3.13 e Inno Setup (con winget) si

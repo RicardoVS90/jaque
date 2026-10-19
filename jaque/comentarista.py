@@ -468,7 +468,7 @@ class Comentarista(QObject):
         if simbolo:
             self.anotacion.emit(ply, simbolo)
             titulo = {GRAVE: "Error grave", ERROR: "Error", IMPRECISION: "Imprecisión"}[simbolo]
-            expl = self._explicar(despues, r["pv_despues"], s_desp, nombre_r, mv)
+            expl = self._explicar(despues, r["pv_despues"], s_desp, nombre_r, mv, simbolo == IMPRECISION)
             if mejor_san and not es_mejor:
                 expl += f" Era mejor <b>{mejor_san}</b>."
             tipo = {GRAVE: "grave", ERROR: "error", IMPRECISION: "imprecision"}[simbolo]
@@ -505,7 +505,7 @@ class Comentarista(QObject):
             return chess.PAWN
         return b.piece_type_at(mv.to_square)
 
-    def _explicar(self, despues: chess.Board, pv, score, nombre_r, mv) -> str:
+    def _explicar(self, despues: chess.Board, pv, score, nombre_r, mv, leve=False) -> str:
         if score.is_mate() and score.mate() < 0:
             n = -score.mate()
             if pv and pv[0] in despues.legal_moves:
@@ -515,14 +515,22 @@ class Comentarista(QObject):
             return ""
         r = pv[0]
         san = san_es(despues, r)
+        mejora = "su posición mejora un poco" if leve else "queda mejor"
         if despues.is_capture(r):
-            tipo = despues.piece_type_at(r.to_square) or chess.PAWN
-            antes_cap = self._capturada(despues, mv)
-            cap_antes = VALOR[antes_cap] if antes_cap else 0
-            if r.to_square != mv.to_square:
-                return f"{nombre_r} puede capturar {TU_PIEZA[tipo]} con <b>{san}</b>."
-            if VALOR[tipo] > cap_antes:
-                return f"{TU_PIEZA[tipo].capitalize()} queda sin defensa: {nombre_r} responde <b>{san}</b>."
+            sq = r.to_square
+            tipo = despues.piece_type_at(sq) or chess.PAWN
+            casilla = chess.square_name(sq)
+            lo = "la" if tipo in FEM else "lo"
+            atac = VALOR[despues.piece_type_at(r.from_square)] or 100
+            defendida = bool(despues.attackers(not despues.turn, sq))   # defensores del jugador
+            if not defendida:
+                return (f"{TU_PIEZA[tipo].capitalize()} en {casilla} no tiene defensa: "
+                        f"{nombre_r} puede comer{lo} con <b>{san}</b>.")
+            if atac < VALOR[tipo]:
+                return (f"{nombre_r} puede comer {TU_PIEZA[tipo]} en {casilla} con <b>{san}</b>, "
+                        f"usando una pieza de menos valor.")
+            # captura defendida y pareja: es un cambio, no una pieza perdida
+            return f"{nombre_r} puede cambiar en {casilla} con <b>{san}</b> y {mejora}."
         b = despues.copy(stack=False)
         b.push(r)
         colg = piezas_colgando(b, b.turn)      # piezas del jugador atacadas tras la respuesta
@@ -532,7 +540,7 @@ class Comentarista(QObject):
             return f"{nombre_r} responde <b>{san}</b> y ataca dos piezas a la vez."
         if colg:
             return f"{nombre_r} responde <b>{san}</b> y ataca {TU_PIEZA[colg[0][1]]}."
-        return f"{nombre_r} responde <b>{san}</b> y queda mejor."
+        return f"{nombre_r} responde <b>{san}</b> y {mejora}."
 
     # -- jugadas del rival
     def jugada_rival(self, antes: chess.Board, mv: chess.Move, info: dict, rival, humano: bool):

@@ -1,10 +1,18 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.1): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.2): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.2 — Comentarios más precisos
+
+### Arreglado
+- El comentarista confundía un **cambio de piezas** con una pieza sin defensa
+  (por ejemplo, un peón en d5 defendido por el peón de e4 y el alfil de c4).
+  Ahora distingue tres casos: pieza sin defensa, pieza defendida pero atacada
+  por algo de menos valor, y cambio parejo.
 
 ## 0.7.1 — Desinstalar desde el menú
 
