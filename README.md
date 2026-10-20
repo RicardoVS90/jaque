@@ -46,14 +46,14 @@ Comprobar la instalación: `python -m jaque --verificar`
 ```bash
 pip install -r requirements.txt pyinstaller
 empaquetado/linux/construir.sh /ruta/a/tu/cd.iso
-# -> build/Jaque-0.7.5-instalador.run
+# -> build/Jaque-0.7.6-instalador.run
 ```
 
 **Windows 11:**
 
 ```bat
 empaquetado\windows\construir.bat C:\ruta\a\tu\cd.iso
-:: -> salida\Jaque-0.7.5-instalador-windows.exe
+:: -> salida\Jaque-0.7.6-instalador-windows.exe
 ```
 
 El script de Windows instala solo Python 3.13 e Inno Setup (con winget) si
@@ -103,7 +103,7 @@ El registro de cambios de cada versión está en `CHANGELOG.md`.
 
 ## Licencia
 
-GPL v3 (ver `LICENSE`). Copyright © 2026 Ricardo.
+GPL v3 (ver `LICENSE`). Copyright © 2026 Ricardo Vera.
 Stockfish se distribuye bajo GPL v3; PySide6/Qt bajo LGPL v3.
 La base de aperturas (`jaque/datos/aperturas.json`) proviene del paquete
 *chess-openings* de Guido Flohr (licencia WTFPL) y fue traducida al español.

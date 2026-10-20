@@ -1,4 +1,4 @@
-# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo Vera.
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Ventana principal de Jaque."""
 from __future__ import annotations
@@ -29,7 +29,7 @@ from .notacion import NOMBRE_PIEZA, evaluacion_es, linea_es, san_es
 from .sonidos import Sonidos
 from .tablero import Tablero
 
-from .rutas import CACHE
+from .rutas import CACHE, WINDOWS
 
 CONTROLES = [
     ("Sin reloj", 0, 0), ("Blitz 5 min", 300, 0), ("Blitz 3 + 2", 180, 2),
@@ -1085,7 +1085,7 @@ class VentanaPrincipal(QMainWindow):
     def _acerca(self):
         QMessageBox.about(self, "Acerca de Jaque",
                           f"<h3>Jaque {__version__}</h3>"
-                          "<p>Ajedrez en español para Linux, de Ricardo.</p>"
+                          f"<p>Versión para {'Windows' if WINDOWS else 'Linux'}, de Ricardo Vera.</p>"
                           "<p>Motor: <b>Stockfish</b>. Interfaz: Python y Qt.</p>"
                           "<p>Nombres de aperturas: base ECO de <i>chess-openings</i> "
                           "(Guido Flohr, licencia WTFPL), traducida al español.</p>"

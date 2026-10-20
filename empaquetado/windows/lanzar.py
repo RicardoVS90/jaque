@@ -1,4 +1,4 @@
-# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo Vera.
 # SPDX-License-Identifier: GPL-3.0-or-later
 import sys
 from jaque.__main__ import arrancar

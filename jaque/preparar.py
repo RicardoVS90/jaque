@@ -1,4 +1,4 @@
-# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo.
+# Jaque — ajedrez en español. Copyright (C) 2026 Ricardo Vera.
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Prepara el paquete de recursos de Jaque a partir del ISO o de la carpeta del juego.
 
