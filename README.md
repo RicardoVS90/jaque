@@ -63,13 +63,7 @@ faltan, descarga Stockfish y arma el instalador.
 > Los instaladores resultantes llevan adentro el contenido de tu CD: son para
 > uso personal y no deben publicarse (el `.gitignore` ya los excluye).
 
-## Traducciones
 
-Los textos del tutor y los comentarios de las partidas están en inglés en el CD.
-Jaque busca una traducción opcional en `traducciones/es.json` (formato
-`{"texto original": "traducción"}`); si no existe, los muestra en inglés.
-Las traducciones son obra derivada del contenido original, así que tampoco se
-incluyen en el repositorio.
 
 ## Estructura
 
