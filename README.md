@@ -16,15 +16,6 @@ con Qt (PySide6) y con **Stockfish** como motor.
 - Instaladores autosuficientes: Linux (`.run`) y Windows (`.exe`), con su
   propio Python y bibliotecas adentro.
 
-## Importante: el contenido gráfico no está incluido
-
-Este repositorio contiene **solo el código**. Los tableros, piezas, sonidos,
-rivales, lecciones y partidas se leen de una copia original del CD de
-*Chessmaster 4000 Turbo* (1995) que tiene que aportar cada usuario. Jaque no
-contiene ni distribuye ningún archivo de ese juego.
-
-Chessmaster es marca registrada de su propietario; este proyecto no tiene
-relación con él.
 
 ## Probar desde el código (Linux)
 
