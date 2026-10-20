@@ -1,10 +1,23 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.6): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.7): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.7 — Armado sin el ISO
+
+### Cambiado
+- `empaquetado/linux/construir.sh` puede armar el instalador **sin el ISO**:
+  sin argumentos usa la carpeta `recursos/` del repositorio, y también acepta
+  cualquier carpeta de recursos ya preparada (por ejemplo, la de una
+  instalación: `~/.local/share/jaque/recursos`). Con un ISO o la carpeta del
+  juego funciona como antes.
+- El instalador armado con ese script incluye ahora la carpeta `licencias/`
+  (Jaque, Stockfish, bibliotecas de Python y base de aperturas), igual que los
+  instaladores oficiales.
+- Mensajes de error más claros si falta Stockfish o PyInstaller.
 
 ## 0.7.6 — Autoría
 

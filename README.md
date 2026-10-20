@@ -44,16 +44,26 @@ Comprobar la instalación: `python -m jaque --verificar`
 **Linux** (x86_64, glibc 2.39+):
 
 ```bash
+sudo apt install stockfish
 pip install -r requirements.txt pyinstaller
 empaquetado/linux/construir.sh /ruta/a/tu/cd.iso
-# -> build/Jaque-0.7.6-instalador.run
+# -> build/Jaque-0.7.7-instalador.run
+```
+
+Si ya tenés los recursos preparados en una carpeta `recursos/` dentro del
+repositorio (por ejemplo, copiados de una instalación anterior desde
+`~/.local/share/jaque/recursos`), no hace falta el ISO:
+
+```bash
+empaquetado/linux/construir.sh               # usa recursos/ del repositorio
+empaquetado/linux/construir.sh /otra/carpeta # o cualquier carpeta de recursos preparada
 ```
 
 **Windows 11:**
 
 ```bat
 empaquetado\windows\construir.bat C:\ruta\a\tu\cd.iso
-:: -> salida\Jaque-0.7.6-instalador-windows.exe
+:: -> salida\Jaque-0.7.7-instalador-windows.exe
 ```
 
 El script de Windows instala solo Python 3.13 e Inno Setup (con winget) si

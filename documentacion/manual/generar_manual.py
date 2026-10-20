@@ -984,6 +984,8 @@ H1("Historial de versiones")
 P("Las novedades principales de cada versión. El detalle completo está en el archivo "
   "<font name='Mono'>CHANGELOG.md</font> del código fuente.")
 T([["Versión", "Novedades principales"],
+   ["<b>0.7.7</b>", "El script para armar el instalador de Linux ya no necesita el ISO: usa la carpeta de "
+    "recursos del repositorio o la de una instalación, e incluye las licencias."],
    ["<b>0.7.6</b>", "«Acerca de Jaque» indica si es la versión para Linux o para Windows, con el nombre completo "
     "del autor. En Windows, Ricardo Vera figura como editor en la lista de aplicaciones instaladas."],
    ["<b>0.7.5</b>", "Permitir un mate siempre es error grave (??) y perder tres peones de material o más es "
