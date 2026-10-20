@@ -474,6 +474,13 @@ class Comentarista(QObject):
             simbolo = ERROR
         elif caida >= 0.10:
             simbolo = IMPRECISION
+        # Con la partida ya decidida la probabilidad de ganar casi no cambia; aun así,
+        # permitir un mate o regalar mucho material no puede quedar como simple imprecisión.
+        if s_desp.is_mate() and s_desp.mate() < 0 and not (s_antes.is_mate() and s_antes.mate() < 0):
+            simbolo = GRAVE
+        elif not s_antes.is_mate() and not s_desp.is_mate() and \
+                s_antes.score() - s_desp.score() >= 300 and simbolo in (None, IMPRECISION):
+            simbolo = ERROR
 
         if simbolo == IMPRECISION and en_libro:
             simbolo = None                           # jugadas de libro: no molestamos por poco

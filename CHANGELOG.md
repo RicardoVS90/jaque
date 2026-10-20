@@ -1,10 +1,21 @@
 # Registro de cambios de Jaque
 
 Todas las novedades de cada versión, de la más nueva a la más vieja.
-Cada número de versión tiene tres partes (0.7.4): la del medio cambia cuando
+Cada número de versión tiene tres partes (0.7.5): la del medio cambia cuando
 hay novedades grandes y la última cuando hay arreglos o mejoras chicas.
 
 ---
+
+## 0.7.5 — Evaluación más justa y manual
+
+### Arreglado
+- Con la partida ya decidida, permitir un mate en una jugada o regalar la dama
+  quedaba marcado apenas como imprecisión. Ahora **permitir un mate** siempre
+  es error grave (??) y **perder tres peones de material o más** es como
+  mínimo error (?).
+
+### Nuevo
+- Manual de usuario en PDF.
 
 ## 0.7.4 — Deshacer y rehacer coherentes
 
